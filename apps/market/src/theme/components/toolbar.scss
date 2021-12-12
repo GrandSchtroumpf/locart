@@ -1,11 +1,13 @@
 @use 'layout';
 
-.mat-toolbar {
-
-}
-
-.connected .mat-toolbar .back {
-  @include layout.bp('gt-md') {
-    display: none;
+@mixin theme() {
+  .mat-toolbar {
+  
+  }
+  
+  .connected .mat-toolbar .back {
+    @include layout.bp('gt-md') {
+      display: none;
+    }
   }
 }

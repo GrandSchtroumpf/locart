@@ -1,6 +1,7 @@
 @use '@angular/material' as mat;
 @use 'generator';
 @use './theme/components/toolbar';
+@use './theme/components/sidenav';
 
 
 @include mat.core();
@@ -11,6 +12,8 @@
 
 @mixin set-theme($theme) {
   @include mat.all-component-themes(( color: $theme ));
+  @include toolbar.theme();
+  @include sidenav.theme();
 }
 
 

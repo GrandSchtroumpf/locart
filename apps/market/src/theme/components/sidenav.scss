@@ -1,0 +1,10 @@
+@use 'space';
+
+@mixin theme() {
+  .mat-sidenav {
+    background-color: transparent;
+    border-right: none;
+    padding: space.$sm;
+    box-sizing: border-box;
+  }
+}
