@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { AuthService } from '@locart/auth';
 
 @Component({
   selector: 'la-root',
@@ -8,4 +9,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 })
 export class AppComponent {
   small = false;
+  user$ = this.auth.user$;
+  constructor(private auth: AuthService) {}
+
+  signout() {
+    this.auth.signout();
+  }
 }

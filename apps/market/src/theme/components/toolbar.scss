@@ -1,9 +1,11 @@
 @use 'layout';
 
 .mat-toolbar {
-  .back {
-    @include layout.bp('gt-md') {
-      display: none;
-    }
+
+}
+
+.connected .mat-toolbar .back {
+  @include layout.bp('gt-md') {
+    display: none;
   }
 }

@@ -1,26 +1,26 @@
 import { NgModule } from '@angular/core';
-import { SearchComponent } from './search.component';
+import { ProfileComponent } from './profile.component';
 import { PageModule } from '@locart/utils';
-import { TRANSLOCO_SCOPE } from '@ngneat/transloco';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { TRANSLOCO_SCOPE } from '@ngneat/transloco';
 
 
 
 @NgModule({
   declarations: [
-    SearchComponent
+    ProfileComponent
   ],
   imports: [
-    PageModule.forChild(SearchComponent),
+    PageModule.forChild(ProfileComponent),
     MatToolbarModule,
     MatButtonModule,
-    MatIconModule,
+    MatIconModule
   ],
   providers: [{
     provide: TRANSLOCO_SCOPE,
-    useValue: 'search'
+    useValue: 'profile'
   }]
 })
-export class SearchModule { }
+export class ProfileModule { }

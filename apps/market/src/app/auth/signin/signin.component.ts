@@ -104,7 +104,7 @@ export class SigninComponent {
     this.signing = true;
     try {
       await this.auth.signin(new GoogleAuthProvider());
-      const redirect = this.auth.redirectUrl || '/s/profile'; // If not seller, guard will redirect
+      const redirect = this.auth.redirectUrl || '/profile';
       this.router.navigate([redirect]);
     } catch (err: any) {
       this.showError(err);
@@ -116,7 +116,7 @@ export class SigninComponent {
   private async signin() {
     const { email, password } = this.form.value;
     await this.auth.signin(email, password);
-    const redirect = this.auth.redirectUrl || '/s/profile'; // If not seller, guard will redirect
+    const redirect = this.auth.redirectUrl || '/profile';
     await this.router.navigate([redirect]);
   }
 

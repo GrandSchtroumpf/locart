@@ -8,7 +8,6 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
-import { SeoModule } from '@locart/utils';
 import { SigninComponent } from './signin.component';
 
 import { PupilPositionPipe } from './pipe';
@@ -20,7 +19,6 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [SigninComponent, PupilPositionPipe],
   imports: [
     PageModule.forChild(SigninComponent),
-    SeoModule,
     ReactiveFormsModule,
     MatButtonModule,
     MatIconModule,

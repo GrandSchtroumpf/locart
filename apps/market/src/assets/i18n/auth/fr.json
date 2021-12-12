@@ -28,10 +28,8 @@
     "mail-resent": "Nouveau mail envoyé"
   },
   "signin": {
-    "seo": {
-      "title": "Se connecter",
-      "description": "Se connecter ou créer une compte sur Kampoy"
-    },
+    "signin": "Se connecter",
+    "signup": "Créer un compte",
     "signin-with": {
       "google": "Se connecter avec Google"
     },
@@ -50,8 +48,10 @@
     },
     "or": "Ou",
     "forgot-password": "Mot de passe oublié ?",
-    "signin": "Se connecter",
-    "signup": "Créer un compte"
+    "seo": {
+      "title": "Se connecter",
+      "description": "Se connecter ou créer une compte sur Kampoy"
+    }
   },
   "snackbar": {
     "signup": "Créer un compte",
