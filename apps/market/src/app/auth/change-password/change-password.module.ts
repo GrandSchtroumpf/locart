@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ImgModule } from '@locart/media/img';
 import { PageModule } from '@locart/utils';
+import { TRANSLOCO_SCOPE } from '@ngneat/transloco';
 
 @NgModule({
   declarations: [ChangePasswordComponent],
@@ -13,5 +14,9 @@ import { PageModule } from '@locart/utils';
     MatButtonModule,
     MatSnackBarModule,
   ],
+  providers: [{
+    provide: TRANSLOCO_SCOPE,
+    useValue: 'auth',
+  }]
 })
 export class ChangePasswordModule {}

@@ -22,11 +22,9 @@ import { TRANSLOCO_SCOPE } from '@ngneat/transloco';
     MatSnackBarModule,
     ImgModule,
   ],
-  providers: [
-    {
-      provide: TRANSLOCO_SCOPE,
-      useValue: 'auth',
-    },
-  ],
+  providers: [{
+    provide: TRANSLOCO_SCOPE,
+    useValue: 'auth',
+  }],
 })
 export class AuthActionModule {}

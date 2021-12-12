@@ -11,8 +11,8 @@ import { AbstractControl, FormControl, FormGroup, FormGroupDirective, NgForm, Va
 import { ActivatedRoute, Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import { AuthService, errorCode } from '@locart/auth';
+import { fade, IconService, Seo } from '@locart/utils';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { fade, IconService } from '@locart/utils';
 import { TranslocoService } from '@ngneat/transloco';
 import { map } from 'rxjs/operators';
 import { ErrorStateMatcher } from '@angular/material/core';
@@ -66,7 +66,7 @@ export class SigninComponent {
 
   constructor(
     icon: IconService,
-    transloco: TranslocoService,
+    seo: Seo,
     private auth: AuthService,
     private route: ActivatedRoute,
     private router: Router,
@@ -75,7 +75,7 @@ export class SigninComponent {
     @Inject(PLATFORM_ID) private platformId: Record<string, unknown>
   ) {
     icon.register('google');
-    this.auth.auth.languageCode = transloco.getActiveLang();
+    seo.setPage('auth.signin');
     const email = this.route.snapshot.queryParamMap.get('email');
     this.form.get('email')?.setValue(email);
   }

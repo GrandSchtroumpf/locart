@@ -133,6 +133,39 @@
             "jestConfig": "apps/market/jest.config.js",
             "passWithNoTests": true
           }
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "market:build:development",
+              "serverTarget": "market:server:development"
+            },
+            "production": {
+              "browserTarget": "market:build:production",
+              "serverTarget": "market:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "market:build:production",
+              "serverTarget": "market:server:production"
+            },
+            "development": {
+              "browserTarget": "market:build:development",
+              "serverTarget": "market:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       },
       "tags": []

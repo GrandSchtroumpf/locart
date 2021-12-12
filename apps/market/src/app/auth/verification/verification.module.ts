@@ -16,11 +16,9 @@ import { PageModule } from '@locart/utils';
     MatButtonModule,
     MatSnackBarModule,
   ],
-  providers: [
-    {
-      provide: TRANSLOCO_SCOPE,
-      useValue: 'auth',
-    },
-  ],
+  providers: [{
+    provide: TRANSLOCO_SCOPE,
+    useValue: 'auth',
+  }],
 })
 export class VerificationModule {}

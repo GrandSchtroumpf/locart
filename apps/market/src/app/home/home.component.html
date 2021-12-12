@@ -1,6 +1,6 @@
-<ng-container *transloco="let t; read 'home'">
+<ng-container *transloco="let t; read 'home'; scope: 'home'">
   <header>
-    <a mat-flat-button color="primary" routerLink="search">{{ t('discover') }}</a>
-    <a mat-flat-button *ngIf="user$ | async" routerLink="auth">{{ t('auth') }}</a>
+    <a mat-flat-button color="primary" routerLink="/search">{{ t('discover') }}</a>
+    <a mat-flat-button *ngIf="(user$ | async) === null" routerLink="/auth">{{ t('auth') }}</a>
   </header>
 </ng-container>

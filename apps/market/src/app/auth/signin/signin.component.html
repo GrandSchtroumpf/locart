@@ -1,18 +1,18 @@
 <ng-container *transloco="let t; read: 'auth.signin'">
-  <seo-meta [title]="t('seo.title')" [description]="t('seo.description')"></seo-meta>
-  <a fxHide.lt-lg routerLink="/" mat-icon-button class="back">
-    <mat-icon>arrow_back</mat-icon>
-  </a>
-
   <ng-container *ngIf="mode$ | async as mode">
-    <form [formGroup]="form" (ngSubmit)="submit(mode)" fxLayout="column" fxLayoutGap="16px" autocomplete="on">
+    <mat-toolbar>
+      <a routerLink="/" mat-icon-button>
+        <mat-icon>arrow_back</mat-icon>
+      </a>
+      <h1>{{ t(mode) }}</h1>
+    </mat-toolbar>
 
-      <header fxLayout fxLayoutAlign="center center">
-        <button type="button" e2e="with-google" mat-flat-button (click)="signinWithGoogle()" [disabled]="signing">
-          <mat-icon svgIcon="google" *ngIf="isBrowser"></mat-icon>
-          <span>{{ t("signin-with.google") }}</span>
-        </button>
-      </header>
+    <form [formGroup]="form" (ngSubmit)="submit(mode)"  autocomplete="on">
+
+      <button type="button" e2e="with-google" mat-flat-button (click)="signinWithGoogle()" [disabled]="signing">
+        <mat-icon svgIcon="google" *ngIf="isBrowser"></mat-icon>
+        <span>{{ t("signin-with.google") }}</span>
+      </button>
         
       <!-- email -->
       <mat-form-field>
@@ -73,13 +73,13 @@
     </form>
   </ng-container>
 
-  <div class="divider" fxLayout fxLayoutAlign="center center" fxLayoutGap="16px">
+  <div class="divider">
     <mat-divider fxFlex></mat-divider>
     <span>{{ t("or") }}</span>
     <mat-divider fxFlex></mat-divider>
   </div>
 
-  <div fxLayout="column" fxLayoutGap="16px">
+  <footer>
     <ng-container *ngIf="nextMode$ | async as nextMode">
       <a mat-button routerLink="." [queryParams]="{mode: nextMode}" [disabled]="signing" e2e="creationLink">
         <!-- t(signin, signup) -->
@@ -89,7 +89,7 @@
     <button mat-button (click)="resetPassword()" [disabled]="signing">
       <span>{{ t("forgot-password") }}</span>
     </button>
-  </div>
+  </footer>
 </ng-container>
 
 <ng-container *transloco="let t; read: 'auth.snackbar'">
