@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'locart-root',
+  selector: 'la-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })

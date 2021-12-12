@@ -39,3 +39,11 @@ testem.log
 Thumbs.db
 
 .angular
+
+
+# Firebase
+.firebase/firestore
+.firebase/hosting.**.cache
+
+# Logs
+*.log
