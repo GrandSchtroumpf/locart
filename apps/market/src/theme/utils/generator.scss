@@ -1,0 +1,147 @@
+@use 'sass:map';
+@use 'sass:color';
+@use '@angular/material' as mat;
+
+@function define-color($base, $contrast) {
+  @return (
+    default: $base,
+    lighter: color.scale($base, $lightness: 10%),
+    darker: color.scale($base, $lightness: -10%),
+    text: $base,
+    default-contrast: $contrast,
+    lighter-contrast: $contrast,
+    darker-contrast: $contrast,
+  );
+}
+
+//////////
+// DARK //
+//////////
+
+@function dark($color) {
+  $primary-text: white;
+  $secondary-text: rgba(white, 0.7);
+  $disabled-text: rgba(white, 0.5);
+  $dividers: rgba(white, 0.12);
+  $focused: rgba(white, 0.12);
+  
+  $background: (
+    status-bar: black,
+    app-bar:    color.scale($color, $lightness: -10%),
+    background: $color,
+    hover:      rgba(white, 0.05),
+    card:       color.scale($color, $lightness: 10%),
+    dialog:     color.scale($color, $lightness: 20%),
+    disabled-button: rgba(white, 0.12),
+    raised-button: color.scale($color, $lightness: 15%),
+    focused-button: $focused,
+    selected-button: color.scale($color, $lightness: -15%),
+    selected-disabled-button: color.scale($color, $lightness: 15%),
+    disabled-button-toggle: black,
+    unselected-chip: rgba(white, 0.3),
+    disabled-list-option: black,
+    tooltip: color.scale($color, $lightness: 20%),
+  );
+  
+  
+  $foreground: (
+    base:              white,
+    divider:           $dividers,
+    dividers:          $dividers,
+    disabled:          $disabled-text,
+    disabled-button:   rgba(white, 0.3),
+    disabled-text:     $disabled-text,
+    elevation:         black,
+    hint-text:         $disabled-text,
+    secondary-text:    $secondary-text,
+    icon:              white,
+    icons:             white,
+    text:              white,
+    slider-min:        white,
+    slider-off:        rgba(white, 0.3),
+    slider-off-active: rgba(white, 0.3),
+  );
+  
+  $primary: color.adjust($color, $hue: -180deg, $saturation: 60%, $lightness: 45%);
+  $accent: color.adjust($color, $hue: 90deg, $saturation: 80%, $lightness: 45%);
+  $warn: (
+    default: #B00020,
+    lighter: color.scale(#B00020, $lightness: 10%),
+    darker: color.scale(#B00020, $lightness: -10%),
+    text: color.scale(#B00020, $lightness: 40%),
+    default-contrast: white,
+    lighter-contrast: white,
+    darker-contrast: white,
+  );
+  
+  @return (
+    primary: define-color($primary, black),
+    accent: define-color($accent, black),
+    warn: $warn,
+    is-dark: true,
+    foreground: $foreground,
+    background: $background,
+  );
+}
+
+///////////
+// LIGHT //
+///////////
+
+@function light($color) {
+  $primary-text: rgba(black, 0.87);
+  $secondary-text: rgba(black, 0.54);
+  $disabled-text: rgba(black, 0.38);
+  $dividers: rgba(black, 0.12);
+  $focused: rgba(black, 0.12);
+  
+  $background: (
+    status-bar: white,
+    app-bar:    color.scale($color, $lightness: 30%),
+    background: $color,
+    hover:      rgba(black, 0.05),
+    card:       color.scale($color, $lightness: 60%),
+    dialog:     color.scale($color, $lightness: 20%),
+    disabled-button: rgba(black, 0.12),
+    raised-button: color.scale($color, $lightness: 75%),
+    focused-button: $focused,
+    selected-button: color.scale($color, $lightness: -15%),
+    selected-disabled-button: color.scale($color, $lightness: 15%),
+    disabled-button-toggle: white,
+    unselected-chip: rgba(white, 0.8),
+    disabled-list-option: white,
+    tooltip: color.scale($color, $lightness: -20%),
+  );
+  
+  
+  $foreground: (
+    base:              black,
+    divider:           $dividers,
+    dividers:          $dividers,
+    disabled:          $disabled-text,
+    disabled-button:   rgba(black, 0.26),
+    disabled-text:     $disabled-text,
+    elevation:         black,
+    hint-text:         $disabled-text,
+    secondary-text:    $secondary-text,
+    icon:              rgba(black, 0.54),
+    icons:             rgba(black, 0.54),
+    text:              rgba(black, 0.87),
+    slider-min:        rgba(black, 0.87),
+    slider-off:        rgba(black, 0.26),
+    slider-off-active: rgba(black, 0.38),
+  );
+  
+  
+  $primary-base: color.adjust($color, $hue: -180deg, $saturation: 30%, $lightness: -65%);
+  $accent-base: color.adjust($color, $hue: 90deg, $saturation: 20%, $lightness: -65%);
+  
+  @return (
+    primary: define-color($primary-base, white),
+    accent: define-color($accent-base, white),
+    warn: define-color(#B00020, white),
+    is-dark: false,
+    foreground: $foreground,
+    background: $background,
+  );
+}
