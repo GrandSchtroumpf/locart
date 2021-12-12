@@ -1,0 +1,124 @@
+{
+  "version": 1,
+  "projects": {
+    "market": {
+      "projectType": "application",
+      "root": "apps/market",
+      "sourceRoot": "apps/market/src",
+      "prefix": "locart",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/market",
+            "index": "apps/market/src/index.html",
+            "main": "apps/market/src/main.ts",
+            "polyfills": "apps/market/src/polyfills.ts",
+            "tsConfig": "apps/market/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": ["apps/market/src/favicon.ico", "apps/market/src/assets"],
+            "styles": ["apps/market/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/market/src/environments/environment.ts",
+                  "with": "apps/market/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "market:build:production"
+            },
+            "development": {
+              "browserTarget": "market:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "market:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/market/src/**/*.ts",
+              "apps/market/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/market"],
+          "options": {
+            "jestConfig": "apps/market/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "market-e2e": {
+      "root": "apps/market-e2e",
+      "sourceRoot": "apps/market-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/market-e2e/cypress.json",
+            "devServerTarget": "market:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "market:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/market-e2e/**/*.{js,ts}"]
+          }
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["market"]
+    }
+  }
+}
