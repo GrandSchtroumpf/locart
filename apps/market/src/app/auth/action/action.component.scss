@@ -1,5 +1,6 @@
-@use '~@angular/material' as mat;
-@import "~@angular/flex-layout/mq";
+@use '@angular/material' as mat;
+@use "layout";
+
 :host {
   height: 100%;
   display: block;
@@ -27,7 +28,7 @@ section {
   padding: 16px;
 }
 
-@include layout-bp(lt-md) {
+@include layout.bp(lt-md) {
   canvas {
     width: 300px;
     height: 300px;

@@ -1,4 +1,4 @@
-@import "~@angular/flex-layout/mq";
+@use "layout";
 
 :host {
   display: block;
@@ -62,7 +62,7 @@ article {
   }
 }
 
-@include layout-bp(gt-xs) {
+@include layout.bp(gt-xs) {
   .selected {
     aside {
       width: 40%;

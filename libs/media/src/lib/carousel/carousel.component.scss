@@ -1,4 +1,4 @@
-@use '~@angular/material' as mat;
+@use '@angular/material' as mat;
 :host {
   display: block;
   position: relative;
@@ -38,30 +38,30 @@ button {
   }
 }
 
-@import "~@angular/flex-layout/mq";
+@use "layout";
 
 // Desktop
-@include layout-bp(gt-md) {
+@include layout.bp(gt-md) {
   li {
     width: calc((100% - (16px * 3)) / 4);
   }
 }
 // Tablet
-@include layout-bp(md) {
+@include layout.bp(md) {
   li {
     width: calc((100% - (16px * 2)) / 3);
   }
 }
 
 // Tablet
-@include layout-bp(sm) {
+@include layout.bp(sm) {
   li {
     width: calc((100% - (16px * 2)) / 3);
   }
 }
 
 // Mobile
-@include layout-bp(xs) {
+@include layout.bp(xs) {
   li {
     width: 100%;
   }

@@ -56,7 +56,8 @@
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "apps/market/src/theme/utils"
+                "apps/market/src/theme/utils",
+                "node_modules"
               ]
             },
             "scripts": [],
@@ -79,8 +80,8 @@
               ],
               "fileReplacements": [
                 {
-                  "replace": "apps/market/src/environments/environment.ts",
-                  "with": "apps/market/src/environments/environment.prod.ts"
+                  "replace": "env/env.ts",
+                  "with": "env/env.prod.ts"
                 }
               ],
               "outputHashing": "all"

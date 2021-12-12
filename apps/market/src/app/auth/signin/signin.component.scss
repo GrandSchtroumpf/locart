@@ -28,9 +28,9 @@ header {
   padding: 0 24px;
 }
 
-@import "~@angular/flex-layout/mq";
+@use "layout";
 
-@include layout-bp(gt-sm) {
+@include layout.bp(gt-sm) {
   .back {
     left: calc(25% + 16px);
   }
@@ -44,7 +44,7 @@ header {
   }
 }
 
-@include layout-bp(lt-md) {
+@include layout.bp(lt-md) {
   canvas {
     width: 150px;
     height: 150px;
@@ -62,7 +62,7 @@ header {
   }
 }
 
-@include layout-bp(xs) {
+@include layout.bp(xs) {
   .back {
     left: 16px;
   }
