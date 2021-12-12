@@ -1,0 +1,6 @@
+<mat-list dense>
+  <mat-list-item *ngFor="let task of tasks; trackBy: trackByIndex">
+    <mat-icon mat-list-icon>perm_media</mat-icon>
+    <mat-progress-bar mat-line [value]="task | progress | async"></mat-progress-bar>
+  </mat-list-item>
+</mat-list>

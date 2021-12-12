@@ -1,0 +1,84 @@
+:host {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.back {
+  position: absolute;
+  top: 16px;
+}
+
+canvas {
+  width: 200px;
+  height: 200px;
+  margin: auto;
+  border-radius: 50%;
+  border: solid 1px var(--divider);
+}
+
+header {
+  margin-bottom: 16px;
+}
+
+.divider {
+  width: 100%;
+  padding: 0 24px;
+}
+
+@import "~@angular/flex-layout/mq";
+
+@include layout-bp(gt-sm) {
+  .back {
+    left: calc(25% + 16px);
+  }
+  form {
+    width: 50%;
+    padding: 24px;
+  }
+  .divider {
+    width: 50%;
+    margin-bottom: 24px;
+  }
+}
+
+@include layout-bp(lt-md) {
+  canvas {
+    width: 150px;
+    height: 150px;
+  }
+  .back {
+    left: calc(20% + 16px);
+  }
+  form {
+    width: 60%;
+    padding: 16px;
+  }
+  .divider {
+    width: 60%;
+    margin-bottom: 16px;
+  }
+}
+
+@include layout-bp(xs) {
+  .back {
+    left: 16px;
+  }
+  form {
+    width: 100%;
+  }
+}
+
+@media (max-height: 600px) {
+  .back {
+    position: relative;
+    align-self: flex-start;
+    left: 8px;
+    top: 8px;
+  }
+  canvas {
+    display: none;
+  }
+}

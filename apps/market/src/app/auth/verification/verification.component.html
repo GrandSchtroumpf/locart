@@ -1,0 +1,19 @@
+<ng-container *transloco="let t; read: 'auth.verification'">
+  <seo-meta></seo-meta>
+  <ng-container *ngIf="user$ | async as user">
+    <header>
+      <h1>{{ t("title") }}</h1>
+      <h3>{{ user?.email }}</h3>
+    </header>
+    <section @slideListUp>
+      <img width="300" height="300" asset="send_mail.svg" alt="sheep starting to run with mail in mouth" />
+      <p>{{ t("text") }}</p>
+      <button mat-flat-button (click)="resend()">{{ t("resend") }}</button>
+      <button mat-button (click)="signout()">{{ t("signout") }}</button>
+    </section>
+  </ng-container>
+
+  <ng-template #success>
+    {{ t("success") }}
+  </ng-template>
+</ng-container>

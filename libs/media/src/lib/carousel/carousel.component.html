@@ -1,0 +1,15 @@
+<ul #slides>
+  <li *ngFor="let img of imgs; let i = index">
+    <img [id]="img.path! | pathToId" [path]="img" asset="empty_carousel.svg" loading="lazy"/>
+  </li>
+</ul>
+<ng-container *ngIf="imgs.length >= rowSize">
+  <ng-container *rxLet="index$; let index">
+    <button *ngIf="index > 0" @fade class="previous" mat-mini-fab color="primary" (click)="previous(index)">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+    <button *ngIf="index < maxIndex" @fade class="next" mat-mini-fab color="primary" (click)="next(index)">
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
+  </ng-container>
+</ng-container>

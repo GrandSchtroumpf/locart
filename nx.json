@@ -42,11 +42,13 @@
       "style": "scss",
       "linter": "eslint",
       "unitTestRunner": "jest",
+      "prefix": "la",
       "strict": true
     },
     "@nrwl/angular:component": {
       "style": "scss",
       "changeDetection": "OnPush",
+      "prefix": "la",
       "skipTests": true,
       "displayBlock": true
     }

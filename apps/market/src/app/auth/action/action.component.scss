@@ -1,0 +1,35 @@
+@use '~@angular/material' as mat;
+@import "~@angular/flex-layout/mq";
+:host {
+  height: 100%;
+  display: block;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  background-color: var(--surface);
+  border-radius: 4px;
+  @include mat.elevation(2);
+
+  mat-form-field {
+    margin-bottom: 16px;
+  }
+}
+
+.primary {
+  color: var(--primary);
+}
+
+section {
+  height: 100%;
+  padding: 16px;
+}
+
+@include layout-bp(lt-md) {
+  canvas {
+    width: 300px;
+    height: 300px;
+  }
+}

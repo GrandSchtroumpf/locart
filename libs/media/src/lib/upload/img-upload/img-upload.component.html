@@ -1,0 +1,92 @@
+<ng-container *transloco="let t; read: 'media'">
+  <ng-container [ngSwitch]="state$ | async">
+    <!-- Loading -->
+    <ng-container *ngSwitchCase="'loading'"> </ng-container>
+
+    <!-- Idle -->
+    <ng-container *ngSwitchCase="'idle'">
+      <article class="idle">
+        <img matRipple (click)="fileInput.click()" asset="upload.svg" alt="Drag and drop file" />
+        <footer fxLayout fxLayoutAlign="center center" fxLayoutGap="16px">
+          <button type="button" mat-button (click)="fileInput.click()">
+            <mat-icon>perm_media</mat-icon>
+            <span>{{ t("file") }}</span>
+            <input #fileInput hidden (change)="file($event)" type="file" [accept]="types" />
+          </button>
+        </footer>
+      </article>
+    </ng-container>
+
+    <!-- Hover -->
+    <ng-container *ngSwitchCase="'hover'">
+      <article class="hover">
+        <img asset="drop.svg" alt="Drop file" />
+      </article>
+    </ng-container>
+
+    <!-- Selected -->
+    <ng-container *ngSwitchCase="'selected'">
+      <article fxLayout class="selected">
+        <div class="img-container">
+          <img *ngIf="preview" [ngClass]="{ rounded: ratio === 1 }" [src]="preview" />
+          <img *ngIf="base64 && !preview" [ngClass]="{ rounded: ratio === 1 }" [src]="base64" />
+          <img *ngIf="!base64 && !preview" [ngClass]="{ rounded: ratio === 1 }" [path]="img" season="fallback_product.svg"/>
+        </div>
+        <mat-divider fxHide.lt-sm vertical></mat-divider>
+        <aside fxLayout="column" fxLayoutAlign="space-around start">
+          <button type="button" mat-button (click)="openCropper()">
+            <mat-icon>crop</mat-icon>
+            <span fxHide.lt-sm>{{ t("crop") }}</span>
+          </button>
+          <button type="button" mat-button (click)="fileInput.click()">
+            <mat-icon>perm_media</mat-icon>
+            <span fxHide.lt-sm>{{ t("file") }}</span>
+            <input #fileInput hidden (change)="file($event)" type="file" [accept]="types" />
+          </button>
+          <button type="button" mat-button (click)="remove()">
+            <mat-icon>delete</mat-icon>
+            <span fxHide.lt-sm>{{ t("delete") }}</span>
+          </button>
+        </aside>
+      </article>
+    </ng-container>
+  </ng-container>
+
+
+  <ng-template #cropperDialog>
+    <article class="cropping">
+      <ng-container *ngIf="rawFile || orginalFile; else original">
+        <image-cropper #cropper
+          [autoCrop]="false"
+          [imageFile]="rawFile || orginalFile!"
+          [maintainAspectRatio]="true"
+          [aspectRatio]="ratio"
+          [roundCropper]="ratio === 1"
+        ></image-cropper>
+        <footer fxLayout fxLayoutAlign="center center" fxLayoutGap="16px">
+          <button type="button" mat-button (click)="cancelCrop()">{{ t("cancel") }}</button>
+          <button type="button" mat-flat-button (click)="crop(cropper)" color="primary">
+            {{ t("save") }}
+          </button>
+        </footer>
+      </ng-container>
+      <ng-template #original>
+        <ng-container *ngIf="img.path">
+          <image-cropper #cropper
+            [autoCrop]="false"
+            [imageFile]="$any(img.path | original | async)"
+            [maintainAspectRatio]="true"
+            [aspectRatio]="ratio"
+            [roundCropper]="ratio === 1"
+          ></image-cropper>
+          <footer fxLayout fxLayoutAlign="center center" fxLayoutGap="16px">
+            <button type="button" mat-button (click)="cancelCrop()">{{ t("cancel") }}</button>
+            <button type="button" mat-flat-button (click)="crop(cropper)" color="primary">
+              {{ t("save") }}
+            </button>
+          </footer>
+        </ng-container>
+      </ng-template>
+    </article>
+  </ng-template>
+</ng-container>

@@ -1,0 +1,71 @@
+@import "~@angular/flex-layout/mq";
+
+:host {
+  display: block;
+}
+
+article {
+  height: 100%;
+  width: 100%;
+}
+
+.idle {
+  display: flex;
+  flex-direction: column;
+  img {
+    min-height: 0;
+    max-width: 100%;
+    height: auto;
+    flex: 1;
+    cursor: pointer;
+  }
+}
+
+.hover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px dotted white;
+  img {
+    min-height: 0;
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+
+.uploading {
+  align-items: center;
+  justify-content: center;
+}
+
+.selected {
+  padding: 8px;
+  .img-container {
+    display: grid;
+    place-items: center;
+    flex: 1;
+    height: 100%;
+
+    img {
+      min-height: 0;
+      max-width: 100%;
+      max-height: 80%;
+    }
+    img.rounded {
+      border-radius: 50%;
+    }
+  }
+  aside {
+    button {
+      text-align: left;
+    }
+  }
+}
+
+@include layout-bp(gt-xs) {
+  .selected {
+    aside {
+      width: 40%;
+    }
+  }
+}

@@ -16,6 +16,10 @@
     "baseUrl": ".",
     "paths": {
       "@env": ["./env/env.ts"],
+      "@locart/auth": ["libs/auth/src/index.ts"],
+      "@locart/media": ["libs/media/src/index.ts"],
+      "@locart/media/*": ["libs/media/src/lib/*"],
+      "@locart/model": ["libs/model/src/index.ts"],
       "@locart/utils": ["libs/utils/src/index.ts"]
     }
   },

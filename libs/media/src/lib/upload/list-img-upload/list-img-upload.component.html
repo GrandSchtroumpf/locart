@@ -1,0 +1,59 @@
+<ng-container *transloco="let t; read: 'media'">
+
+  <article class="empty" *ngIf="currentIndex < 0">
+    <p *ngIf="form.value?.length" class="mat-caption">{{ t("list.selection") }}</p>
+    <p *ngIf="!form.value?.length" class="mat-caption">{{ t("list.empty") }}</p>
+  </article>
+
+  <ng-container *ngFor="let control of form.controls; let i = index">
+    <ng-container *ngIf="i === currentIndex">
+      <img-upload
+        [formControl]="$any(control)"
+        [path]="path"
+        [field]="field + '/' + i"
+        [ratio]="ratio"
+        [(orginalFile)]="files[i]"
+        [(preview)]="preview[i]"
+        (delete)="remove(i)"
+      ></img-upload>
+    </ng-container>
+  </ng-container>
+
+  <section>
+    <button class="add" type="button" (click)="fileInput.click()">
+      <mat-icon>add</mat-icon>
+      <input #fileInput hidden (change)="openCropper($event)" type="file" [accept]="types" />
+    </button>
+    <ng-container *ngFor="let file of form.value; let i = index">
+      <div class="img-container"  [ngClass]="{ selected: currentIndex === i }">
+        <button @fade type="button" *ngIf="currentIndex === i" (click)="uploader?.remove()">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <ng-container *ngIf="preview[i] else usePath">
+          <img [src]="preview[i]" (click)="select(i)"/>
+        </ng-container>
+        <ng-template #usePath>
+          <img [path]="file" asset="empty_carousel.svg" (click)="select(i)"/>
+        </ng-template>
+      </div>
+    </ng-container>
+  </section>
+
+  <ng-template #cropperDialog let-file>
+    <article class="cropping">
+      <image-cropper #cropper
+        [autoCrop]="false"
+        [imageFile]="file"
+        [maintainAspectRatio]="true"
+        [aspectRatio]="ratio"
+        [roundCropper]="ratio === 1"
+      ></image-cropper>
+      <footer fxLayout fxLayoutAlign="center center" fxLayoutGap="16px">
+        <button type="button" mat-button mat-dialog-close>{{ t("cancel") }}</button>
+        <button type="button" mat-flat-button mat-dialog-close (click)="crop()" color="primary">
+          {{ t("save") }}
+        </button>
+      </footer>
+    </article>
+  </ng-template>
+</ng-container>

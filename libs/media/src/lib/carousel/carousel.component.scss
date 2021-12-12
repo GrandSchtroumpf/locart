@@ -1,0 +1,72 @@
+@use '~@angular/material' as mat;
+:host {
+  display: block;
+  position: relative;
+}
+
+ul{
+  scroll-snap-stop: always;
+  list-style-type: none;
+  display: flex;
+  overflow-x: auto;
+  padding: 16px 0;
+  margin: 0;
+}
+
+img{
+  width: 100%;
+  border-radius: 4px;
+  @include mat.elevation(2);
+}
+
+li {
+  flex-shrink: 0;
+}
+
+li:not(:last-child) {
+  margin-right: 16px;
+}
+
+button {
+  position: absolute;
+  top: calc(50% - 27px);
+  &.previous{
+    left: 4px;
+  }
+  &.next{
+    right: 4px;
+  }
+}
+
+@import "~@angular/flex-layout/mq";
+
+// Desktop
+@include layout-bp(gt-md) {
+  li {
+    width: calc((100% - (16px * 3)) / 4);
+  }
+}
+// Tablet
+@include layout-bp(md) {
+  li {
+    width: calc((100% - (16px * 2)) / 3);
+  }
+}
+
+// Tablet
+@include layout-bp(sm) {
+  li {
+    width: calc((100% - (16px * 2)) / 3);
+  }
+}
+
+// Mobile
+@include layout-bp(xs) {
+  li {
+    width: 100%;
+  }
+}
+
+::-webkit-scrollbar {
+  height: 8px;
+}

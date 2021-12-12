@@ -1,0 +1,63 @@
+<ng-container *transloco="let t; read: 'auth.action'">
+  <seo-meta></seo-meta>
+  <!-- Reset Password -->
+  <ng-container *ngIf="mode === 'resetPassword'">
+    <section fxLayout="column" fxLayoutAlign="center center">
+      <form (submit)="resetPassword($event)">
+        <h1>{{ t("reset-password.title") }}</h1>
+        <p>{{ t("reset-password.description") }}</p>
+        <mat-form-field>
+          <mat-label>{{ t("new-password.label") }}</mat-label>
+          <input
+            matInput
+            [formControl]="newPassword"
+            autofocus
+            autocomplete="new-password"
+            [type]="showPwd ? 'text' : 'password'"
+            required
+          />
+          <button type="button" matSuffix mat-icon-button (click)="showPwd = !showPwd" tabindex="-1">
+            <mat-icon *ngIf="!showPwd">visibility</mat-icon>
+            <mat-icon *ngIf="showPwd">visibility_off</mat-icon>
+          </button>
+          <mat-hint>{{ t("new-password.hint") }}</mat-hint>
+          <mat-error>{{ t("new-password.required") }}</mat-error>
+        </mat-form-field>
+        <button type="submit" mat-flat-button color="primary">
+          {{ t("reset-password.submit") }}
+        </button>
+      </form>
+    </section>
+  </ng-container>
+
+  <!-- Verify Email -->
+  <ng-container *ngIf="mode === 'verifyEmail'">
+    <ng-container *ngIf="emailVerified">
+      <section fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
+        <h1 class="primary">{{ t("verify-email.title") }}</h1>
+        <h2>{{ t("verify-email.subtitle") }}</h2>
+        <img asset="email_verified.svg" width="300" height="300" alt="email verified" />
+        <a mat-flat-button color="primary" routerLink="/profile">
+          {{ t("verify-email.link") }}
+        </a>
+      </section>
+    </ng-container>
+  </ng-container>
+
+  <!-- Error -->
+  <ng-container *ngIf="mode === 'error'">
+    <section fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
+      <h1>{{ t("error.title") }}</h1>
+      <canvas riv="404" width="500" height="500">
+        <riv-player name="animation_saiyan" play></riv-player>
+      </canvas>
+      <a routerLink="/auth" mat-flat-button>{{ t("error.back") }}</a>
+    </section>
+  </ng-container>
+</ng-container>
+
+<ng-template #error let-err>
+  <ng-container *transloco="let t; read: 'auth.snackbar'">
+    {{ t("errors." + err) }}
+  </ng-container>
+</ng-template>
