@@ -1,0 +1,9 @@
+@use 'space';
+
+:host {
+  display: block;
+}
+
+header {
+  border-radius: space.$lg;
+}

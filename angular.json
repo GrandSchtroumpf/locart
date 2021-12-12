@@ -45,6 +45,9 @@
             "inlineStyleLanguage": "scss",
             "assets": ["apps/market/src/favicon.ico", "apps/market/src/assets"],
             "styles": ["apps/market/src/styles.scss"],
+            "stylePreprocessorOptions": {
+              "includePaths": ["apps/market/src/theme/utils"]
+            },
             "scripts": []
           },
           "configurations": {

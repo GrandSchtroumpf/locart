@@ -48,9 +48,6 @@
   <ng-container *ngIf="mode === 'error'">
     <section fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
       <h1>{{ t("error.title") }}</h1>
-      <canvas riv="404" width="500" height="500">
-        <riv-player name="animation_saiyan" play></riv-player>
-      </canvas>
       <a routerLink="/auth" mat-flat-button>{{ t("error.back") }}</a>
     </section>
   </ng-container>

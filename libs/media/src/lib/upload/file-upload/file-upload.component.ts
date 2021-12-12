@@ -7,8 +7,6 @@ import {
   HostListener,
   Input,
   Output,
-  Pipe,
-  PipeTransform,
   ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -19,7 +17,6 @@ import { animState } from '../animation';
 import { TRANSLOCO_SCOPE } from '@ngneat/transloco';
 import { AuthService } from '@locart/auth';
 import { Image, ImageMetadata } from '@locart/model';
-import env from '@env';
 
 type ImgState = 'loading' | 'idle' | 'hover' | 'cropping' | 'uploading' | 'selected';
 
@@ -261,14 +258,5 @@ export class FileUploadValueAccessor implements ControlValueAccessor {
 
   registerOnTouched(fn: () => void): void {
     this.ontouch = fn;
-  }
-}
-
-@Pipe({ name: 'original' })
-export class GetOriginalPipe implements PipeTransform {
-  transform(path: string) {
-    const imgixSource = env.firebase.options.projectId;
-    const url = `https://${imgixSource}.imgix.net/${path}`;
-    return fetch(url).then(res => res.blob());
   }
 }

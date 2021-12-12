@@ -7,6 +7,8 @@ import { TranslocoRootModule } from './transloco.module';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
+import { FIREBASE_CONFIG } from 'ngfire';
+import env from '@env';
 
 @NgModule({
   declarations: [AppComponent],
@@ -14,10 +16,20 @@ import { RouterModule } from '@angular/router';
     BrowserModule,
     BrowserAnimationsModule,
     TranslocoRootModule,
-    RouterModule.forRoot([]),
+    RouterModule.forRoot([{
+      path: '',
+      redirectTo: 'home',
+      pathMatch: 'full'
+    }, {
+      path: 'home',
+      loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+    }, {
+      path: 'auth',
+      loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+    }]),
     MatSidenavModule
   ],
-  providers: [],
+  providers: [{ provide: FIREBASE_CONFIG, useValue: env.firebase }],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

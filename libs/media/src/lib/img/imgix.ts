@@ -71,7 +71,7 @@ export function formatParameters(parameters: ImageParameters = {}): string {
 export function getImgIxUrl(path?: string | null, parameters?: ImageParameters) {
   if (!path) return '';
   const query = formatParameters(parameters);
-  const imgixSource = env.firebaseConfig.options.projectId;
+  const imgixSource = env.firebase.options.projectId;
   const encodedPath = encodeURI(path);
   return `https://${imgixSource}.imgix.net/${encodedPath}?${query}`;
 }

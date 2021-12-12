@@ -1,0 +1,6 @@
+<ng-container *transloco="let t; read 'home'">
+  <header>
+    <a mat-flat-button color="primary" routerLink="search">{{ t('discover') }}</a>
+    <a mat-flat-button *ngIf="user$ | async" routerLink="auth">{{ t('auth') }}</a>
+  </header>
+</ng-container>

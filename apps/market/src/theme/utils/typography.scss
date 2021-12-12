@@ -1,0 +1,135 @@
+
+@mixin display-l {
+  // font-family: Roboto;
+  font-size: 54px;
+  font-weight: 400;
+  line-height: 64px;
+  letter-spacing: -0.5px;
+  text-indent: 0px;
+}
+
+@mixin display-m {
+  // font-family: Roboto;
+  font-size: 45px;
+  font-weight: 400;
+  line-height: 52px;
+  letter-spacing: -0.25px;
+  text-indent: 0px;
+}
+
+@mixin display-s {
+  // font-family: Roboto;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 44px;
+  letter-spacing: 0px;
+  text-indent: 0px;
+}
+
+@mixin headline-l {
+  // font-family: Roboto;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 40px;
+  letter-spacing: 0px;
+  text-indent: 0px;
+}
+
+@mixin headline-m {
+  // font-family: Roboto;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 36px;
+  letter-spacing: 0px;
+  text-indent: 0px;
+}
+
+@mixin headline-s {
+  // font-family: Roboto;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: 0px;
+  text-indent: 0px;
+}
+
+@mixin title-l {
+  // font-family: Roboto;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0px;
+  text-indent: 0px;
+}
+
+@mixin title-m {
+  // font-family: Roboto;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+  text-indent: 0px;
+}
+
+@mixin title-s {
+  // font-family: Roboto;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+  text-indent: 0px;
+}
+
+@mixin label-l {
+  // font-family: Roboto;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+  text-indent: 0px;
+}
+
+@mixin label-m {
+  // font-family: Roboto;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+  text-indent: 0px;
+}
+
+@mixin label-s {
+  // font-family: Roboto;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+  text-indent: 0px;
+}
+
+@mixin body-l {
+  // font-family: Roboto;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+  text-indent: 0px;
+}
+
+@mixin body-m {
+  // font-family: Roboto;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+  text-indent: 0px;
+}
+
+@mixin body-s {
+  // font-family: Roboto;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0.4px;
+  text-indent: 0px;
+}

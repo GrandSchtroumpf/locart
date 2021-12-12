@@ -1,9 +1,9 @@
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Injectable, Injector } from '@angular/core';
-import { UploadMedia, FileMetadata } from '@model';
+import { UploadMedia, FileMetadata } from '@locart/model';
 import { UploadWidgetComponent } from './upload-widget/upload-widget.component';
-import { FireStorage } from '@ngfire/storage';
+import { FireStorage } from 'ngfire';
 import { deleteObject, uploadBytesResumable, UploadTask } from 'firebase/storage';
 
 @Injectable()
@@ -63,7 +63,7 @@ export class MediaService {
 
   async upload<Meta extends FileMetadata>(
     onUploaded?: (meta: Meta, path: string) => void,
-    onError?: (err: any, meta: Meta, path: string) => void
+    onError?: (err: unknown, meta: Meta, path: string) => void
   ) {
     this.uploading = [];
     for (const [path, media] of Object.entries(this.queue)) {
@@ -75,7 +75,7 @@ export class MediaService {
         const task = uploadBytesResumable(ref, media.file, { customMetadata: media.meta });
         this.tasks.push(task);
         if (onUploaded) task.then(() => onUploaded(media.meta, path));
-        if (onError) task.catch((err: any) => onError(err, media.meta, path));
+        if (onError) task.catch((err: unknown) => onError(err, media.meta, path));
       }
     }
 

@@ -1,0 +1,35 @@
+@use 'sass:color';
+@use 'sass:map';
+
+
+@function state($base, $layer, $opacity) {
+  $weight: (1 - $opacity) * 100;
+  @return color.mix($base, $layer, $weight);
+}
+
+@function hover($base, $layer) {
+  @return state($base, $layer, 0.08);
+}
+@function focus($base, $layer) {
+  @return state($base, $layer, 0.12);
+}
+@function press($base, $layer) {
+  @return state($base, $layer, 0.12);
+}
+@function drag($base, $layer) {
+  @return state($base, $layer, 0.16);
+}
+
+$surface-levels: (
+  1: 0.05,
+  2: 0.08,
+  3: 0.11,
+  4: 0.12,
+  5: 0.14,
+);
+
+@function surface($theme, $level) {
+  $opacity: 1 - map.get($surface-levels, $level);
+  $primary: map.get($theme, 'primary');
+  @return color.adjust($primary, $alpha: -$opacity);
+}

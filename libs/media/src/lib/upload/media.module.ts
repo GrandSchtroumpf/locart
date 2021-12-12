@@ -14,7 +14,6 @@ import { FileUploadValueAccessor } from './file-upload/file-upload.component';
 
 import { ImageCropperModule } from 'ngx-image-cropper';
 
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -28,7 +27,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MediaService } from './service';
 import { ImgModule } from '../img';
-import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -46,8 +44,6 @@ import { HttpClientModule } from '@angular/common/http';
     TranslocoModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule,
-    FlexLayoutModule,
     ImageCropperModule,
     MatFormFieldModule,
     MatInputModule,
