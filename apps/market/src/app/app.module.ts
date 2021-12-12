@@ -9,6 +9,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
 import { FIREBASE_CONFIG } from 'ngfire';
 import env from '@env';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,7 +28,13 @@ import env from '@env';
       path: 'auth',
       loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
     }]),
-    MatSidenavModule
+    MatSidenavModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000',
+      enabled: env.production,
+    })
   ],
   providers: [{ provide: FIREBASE_CONFIG, useValue: env.firebase }],
   bootstrap: [AppComponent],

@@ -6,4 +6,7 @@
 
 header {
   border-radius: space.$lg;
+  padding: space.$xl;
+  display: grid;
+  place-self: center;
 }

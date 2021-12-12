@@ -9,7 +9,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/auth"],
+          "outputs": [
+            "coverage/libs/auth"
+          ],
           "options": {
             "jestConfig": "libs/auth/jest.config.js",
             "passWithNoTests": true
@@ -35,7 +37,9 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/market",
             "index": "apps/market/src/index.html",
@@ -43,12 +47,21 @@
             "polyfills": "apps/market/src/polyfills.ts",
             "tsConfig": "apps/market/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["apps/market/src/favicon.ico", "apps/market/src/assets"],
-            "styles": ["apps/market/src/styles.scss"],
+            "assets": [
+              "apps/market/src/favicon.ico",
+              "apps/market/src/assets"
+            ],
+            "styles": [
+              "apps/market/src/styles.scss"
+            ],
             "stylePreprocessorOptions": {
-              "includePaths": ["apps/market/src/theme/utils"]
+              "includePaths": [
+                "apps/market/src/theme/utils"
+              ]
             },
-            "scripts": []
+            "scripts": [],
+            "serviceWorker": true,
+            "ngswConfigPath": "apps/market/ngsw-config.json"
           },
           "configurations": {
             "production": {
@@ -112,7 +125,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/market"],
+          "outputs": [
+            "coverage/apps/market"
+          ],
           "options": {
             "jestConfig": "apps/market/jest.config.js",
             "passWithNoTests": true
@@ -140,14 +155,20 @@
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/market-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/market-e2e/**/*.{js,ts}"
+            ]
           }
         }
       },
       "tags": [],
-      "implicitDependencies": ["market"]
+      "implicitDependencies": [
+        "market"
+      ]
     },
     "media": {
       "projectType": "library",
@@ -157,7 +178,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/media"],
+          "outputs": [
+            "coverage/libs/media"
+          ],
           "options": {
             "jestConfig": "libs/media/jest.config.js",
             "passWithNoTests": true
@@ -183,7 +206,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/model"],
+          "outputs": [
+            "coverage/libs/model"
+          ],
           "options": {
             "jestConfig": "libs/model/jest.config.js",
             "passWithNoTests": true
@@ -209,7 +234,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/utils"],
+          "outputs": [
+            "coverage/libs/utils"
+          ],
           "options": {
             "jestConfig": "libs/utils/jest.config.js",
             "passWithNoTests": true
