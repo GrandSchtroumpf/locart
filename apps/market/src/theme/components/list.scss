@@ -1,0 +1,7 @@
+@use 'space';
+
+@mixin theme($theme) {
+  .mat-list-item {
+    border-radius: space.$sm;
+  }
+}

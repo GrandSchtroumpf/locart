@@ -3,7 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { GetOriginalPipe } from './original.pipe';
-import { ImgUploadValueAccessor } from './img-upload/img-upload.component';
+import { ImgUploaderComponent } from './img-upload/img-upload.component';
 import {
   UploadWidgetComponent,
   TaskProgressPipe,
@@ -30,7 +30,7 @@ import { ImgModule } from '../img';
 
 @NgModule({
   declarations: [
-    ImgUploadValueAccessor,
+    ImgUploaderComponent,
     UploadWidgetComponent,
     GetOriginalPipe,
     TaskProgressPipe,
@@ -38,7 +38,7 @@ import { ImgModule } from '../img';
     ListImgUploadComponent,
     FileUploadValueAccessor
   ],
-  exports: [ImgUploadValueAccessor, UploadWidgetComponent, ListImgUploadComponent],
+  exports: [ImgUploaderComponent, UploadWidgetComponent, ListImgUploadComponent],
   imports: [
     CommonModule,
     TranslocoModule,

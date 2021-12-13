@@ -8,7 +8,7 @@ import { imgixRect, getFilename } from '../../utils'
 import { TRANSLOCO_SCOPE } from '@ngneat/transloco';
 import { fade } from '@locart/utils';
 import { ImageCropperComponent } from 'ngx-image-cropper';
-import { acceptTypes, ImgUploadValueAccessor } from '../img-upload/img-upload.component';
+import { acceptTypes, ImgUploaderComponent } from '../img-upload/img-upload.component';
 
 @Component({
   selector: 'list-img-upload',
@@ -24,7 +24,7 @@ import { acceptTypes, ImgUploadValueAccessor } from '../img-upload/img-upload.co
 export class ListImgUploadComponent {
   @ViewChild('cropperDialog') cropperDialog?: TemplateRef<unknown>;
   @ViewChild(ImageCropperComponent) cropper?: ImageCropperComponent;
-  @ViewChild(ImgUploadValueAccessor) uploader?: ImgUploadValueAccessor;
+  @ViewChild(ImgUploaderComponent) uploader?: ImgUploaderComponent;
   @Input() form = new FormArray([]);
   @Input() path!: string;
   @Input() field!: string;

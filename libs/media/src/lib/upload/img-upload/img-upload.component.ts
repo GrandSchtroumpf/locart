@@ -15,7 +15,8 @@ import { BehaviorSubject } from 'rxjs';
 import { MediaService } from '../service';
 import { TRANSLOCO_SCOPE } from '@ngneat/transloco';
 import { AuthService } from '@locart/auth';
-import { getFilename, Image, ImageMetadata, imgixRect } from '@model';
+import { Image, ImageMetadata } from '@locart/model';
+import { getFilename, imgixRect } from '../../utils';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 type ImgState = 'loading' | 'idle' | 'hover' | 'cropping' | 'uploading' | 'selected';
@@ -37,7 +38,7 @@ function createImg(img: Partial<Image> = {}) {
   styleUrls: ['./img-upload.component.scss'],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => ImgUploadValueAccessor),
+    useExisting: forwardRef(() => ImgUploaderComponent),
     multi: true,
   },
   {
@@ -46,7 +47,7 @@ function createImg(img: Partial<Image> = {}) {
   }],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ImgUploadValueAccessor implements ControlValueAccessor {
+export class ImgUploaderComponent implements ControlValueAccessor {
 
   private state = new BehaviorSubject<ImgState>('loading');
   private cropperRef?: MatDialogRef<any, void>;

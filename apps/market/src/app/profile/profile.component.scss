@@ -1,3 +1,25 @@
+@use 'space';
+
 :host {
-  display: block;
+  display: grid;
+  grid-auto-flow: row;
+  gap: space.$lg;
+}
+
+form {
+  padding: space.$md;
+  display: grid;
+  gap: space.$md;
+  grid-template-columns: minmax(300px, 50%) auto;
+}
+
+img-upload {
+  padding: space.$md;
+  border-radius: space.$sm;
+  background-color: var(--surface);
+  outline: dashed 1px var(--outline);
+  outline-offset: calc(-1 * space.$sm);
+  grid-column: 1 / span 1;
+  grid-row: 1 / span 2;
+  height: 200px;
 }

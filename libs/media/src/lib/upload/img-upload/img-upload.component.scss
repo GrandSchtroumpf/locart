@@ -1,4 +1,5 @@
 @use "layout";
+@use "space";
 
 :host {
   display: block;
@@ -21,6 +22,14 @@ article {
   }
 }
 
+.selected {
+  display: flex;
+
+  mat-divider, button span {
+    @include layout.hide('lt-sm');
+  }
+}
+
 .hover {
   display: flex;
   align-items: center;
@@ -33,21 +42,6 @@ article {
   }
 }
 
-.cropping {
-  display: flex;
-  flex-direction: column;
-  image-cropper {
-    height: 100%;
-  }
-  footer {
-    padding: 8px;
-  }
-}
-
-.uploading {
-  align-items: center;
-  justify-content: center;
-}
 
 .selected {
   padding: 8px;
@@ -78,11 +72,36 @@ article {
       max-height: 80%;
     }
   }
+  aside {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+  }
 }
 @include layout.bp(gt-xs) {
   .selected {
     aside {
       width: 40%;
     }
+  }
+}
+
+
+.cropping {
+  display: flex;
+  flex-direction: column;
+  image-cropper {
+    height: 100%;
+  }
+}
+
+footer {
+  padding: space.$sm;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  button:first-child {
+    margin-right: space.$sm;
   }
 }

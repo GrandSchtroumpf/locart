@@ -1,3 +1,10 @@
 {
-  "title": "Missing value for 'profile.title'"
+  "title": "Missing value for 'profile.title'",
+  "name": {
+    "label": "Missing value for 'profile.name.label'"
+  },
+  "tel": {
+    "label": "Missing value for 'profile.tel.label'",
+    "placeholder": "Missing value for 'profile.tel.placeholder'"
+  }
 }

@@ -1,8 +1,14 @@
 @use 'space';
+@use 'generator';
+@use 'sass:color';
+@use 'sass:map';
+@use '@angular/material' as mat;
 
-@mixin theme() {
+@mixin theme($theme) {
+  $primary: generator.primary($theme);
+ 
   .mat-sidenav {
-    background-color: transparent;
+    background-color: color.adjust($primary, $alpha: -(1 - 0.012));
     border-right: none;
     padding: space.$sm;
     box-sizing: border-box;

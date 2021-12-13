@@ -60,3 +60,10 @@ $overlapping-lt: (
     @media (max-width: $max) { @content; }
   }
 }
+
+
+@mixin hide($bp) {
+  @include bp($bp) {
+    display: none;
+  }
+}

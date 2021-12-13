@@ -1,6 +1,6 @@
 @use 'layout';
 
-@mixin theme() {
+@mixin theme($theme) {
   .mat-toolbar {
   
   }

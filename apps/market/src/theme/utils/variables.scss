@@ -1,0 +1,29 @@
+@use '@angular/material' as mat;
+@use 'sass:map';
+
+
+@mixin theme($theme) {
+  $config: mat.get-color-config($theme);
+  $primary: map.get($config, 'primary');
+  $accent: map.get($config, 'accent');
+  $warn: map.get($config, 'warn');
+  $background: map.get($config, 'background');
+  $foreground: map.get($config, 'foreground');
+
+  --primary: #{map.get($primary, 'default')};
+  --on-primary: #{map.get($primary, 'default-contrast')};
+
+  --accent: #{map.get($accent, 'default')};
+  --on-accent: #{map.get($accent, 'default-contrast')};
+
+  --warn: #{map.get($warn, 'default')};
+  --on-warn: #{map.get($warn, 'default-contrast')};
+
+  --background: #{map.get($background, 'background')};
+  --on-background: #{map.get($foreground, 'text')};
+
+  --surface: #{map.get($background, 'card')};
+  --on-surface: #{map.get($foreground, 'text')};
+
+  --outline: #{map.get($foreground, 'divider')};
+}

@@ -5,4 +5,18 @@
     </a>
     <h1>{{ t('title') }}</h1>
   </mat-toolbar>
+
+  <form [formGroup]="form">
+    <mat-form-field>
+      <mat-label>{{ t('name.label') }}</mat-label>
+      <input matInput type="text" formControlName="name">
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-label>{{ t('tel.label') }}</mat-label>
+      <input matInput type="tel" formControlName="name" [placeholder]="t('tel.placeholder')">
+    </mat-form-field>
+
+    <img-upload formControlName="avatar" path="avatar" field="avatar"></img-upload>
+  </form>
 </ng-container>

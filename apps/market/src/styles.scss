@@ -1,7 +1,10 @@
 @use '@angular/material' as mat;
 @use 'generator';
+@use 'variables';
 @use './theme/components/toolbar';
 @use './theme/components/sidenav';
+@use './theme/components/list';
+@use './theme/components/dialog';
 
 
 @include mat.core();
@@ -12,8 +15,19 @@
 
 @mixin set-theme($theme) {
   @include mat.all-component-themes(( color: $theme ));
-  @include toolbar.theme();
-  @include sidenav.theme();
+
+  // Used for specifity
+  body {
+    @include toolbar.theme($theme);
+    @include sidenav.theme($theme);
+    @include list.theme($theme);
+    @include dialog.theme($theme);
+  }
+
+  :root {
+    @include variables.theme($theme);
+    --cropper-overlay-color: var(--background);
+  }
 }
 
 

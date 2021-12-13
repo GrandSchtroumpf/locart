@@ -9,6 +9,7 @@ import { TranslocoRootModule } from './transloco.module';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
 
 import { FIREBASE_CONFIG } from 'ngfire';
 import { IsConnectedGuard } from '@locart/auth';
@@ -23,6 +24,7 @@ import env from '@env';
     TranslocoRootModule,
     MatSidenavModule,
     MatListModule,
+    MatIconModule,
     RouterModule.forRoot([{
       path: '',
       redirectTo: 'home',
