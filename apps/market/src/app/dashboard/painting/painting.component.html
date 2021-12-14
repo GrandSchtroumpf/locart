@@ -1,4 +1,4 @@
-<ng-container *transloco="let t; read: 'dashbord.painting'">
+<ng-container *transloco="let t; read: 'dashboard.painting'">
   <mat-toolbar>
     <a mat-icon-button routerLink="../.." class="back">
       <mat-icon>arrow_back</mat-icon>
@@ -14,6 +14,16 @@
       <input matInput type="text" formControlName="name" />
     </mat-form-field>
 
+    <mat-form-field>
+      <mat-label>{{ t('size.label') }}</mat-label>
+      <mat-select formControlName="size">
+        <ng-container *ngFor="let size of sizes; trackBy: trackByIndex">
+          <!-- t(size.1, size.2, size.3, size.4) -->
+          <mat-option [value]="size">{{ t('size.' + size) }}</mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+
     <list-img-upload [form]="form.carousel" field="carousel" path="carousel"></list-img-upload>
 
     <footer>
@@ -21,15 +31,6 @@
       <button type="submit" mat-flat-button color="primary">{{ t('save') }}</button>
     </footer>
   </form>
-
-  <ng-template #confirm>
-    <h2 mat-dialog-title>{{ t('confirm.title') }}</h2>
-    <mat-dialog-content>{{ t('confirm.content') }}</mat-dialog-content>
-    <mat-dialog-actions>
-      <button mat-button mat-dialog-close>{{ t('confirm.cancel') }}</button>
-      <button mat-flat-button color="warn" [mat-dialog-close]="true">{{ t('confirm.exit') }}</button>
-    </mat-dialog-actions>
-  </ng-template>
 
   <ng-template #success>
     {{ t('snackbar.success') }}

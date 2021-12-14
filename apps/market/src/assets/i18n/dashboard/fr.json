@@ -1,1 +1,33 @@
-{}
+{
+  "home": {
+    "title": "Mon Atelier",
+    "painting": {
+      "title": "Mes Peintures",
+      "add": "Ajouter une peinture"
+    }
+  },
+  "painting": {
+    "size": {
+      "1": "A4'",
+      "2": "A3",
+      "3": "A2",
+      "4": "A1",
+      "label": "Taille"
+    },
+    "title": "Peinture",
+    "name": {
+      "label": "Nom"
+    },
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "snackbar": {
+      "success": "Missing value for 'dashboard.painting.snackbar.success'"
+    },
+    "confirm": {
+      "title": "Changements non sauvegardés",
+      "content": "Si vous quittez maintenant les changements ne seront pas pris en compte.",
+      "leave": "Quitter",
+      "save": "Sauvegarder et quitter"
+    }
+  }
+}

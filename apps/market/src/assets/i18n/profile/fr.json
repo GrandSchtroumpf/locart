@@ -1,11 +1,12 @@
 {
-  "title": "Missing value for 'profile.title'",
-  "become-seller": "Missing value for 'profile.become-seller'",
+  "title": "Mon Profil",
+  "become-seller": "Louer mes oeuvres",
   "name": {
-    "label": "Missing value for 'profile.name.label'"
+    "label": "Nom",
+    "placeholder": "GrandSchtroumpf"
   },
   "tel": {
-    "label": "Missing value for 'profile.tel.label'",
-    "placeholder": "Missing value for 'profile.tel.placeholder'"
+    "label": "Numéro de téléphone",
+    "placeholder": "0123456789"
   }
 }

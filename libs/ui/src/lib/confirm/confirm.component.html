@@ -1,0 +1,15 @@
+<ng-container *transloco="let t; read: read">
+  <header>
+    <h1 mat-dialog-title>{{ t("title") }}</h1>
+    <button mat-icon-button [matDialogClose]="undefined">
+      <mat-icon>close</mat-icon>
+    </button>
+  </header>
+  <mat-dialog-content>
+    <p>{{ t("content") }}</p>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button [matDialogClose]="false">{{ t("leave") }}</button>
+    <button mat-flat-button [color]="color" [matDialogClose]="true">{{ t("save") }}</button>
+  </mat-dialog-actions>
+</ng-container>

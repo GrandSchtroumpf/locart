@@ -1,0 +1,20 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  button {
+    margin-left: 8px;
+  }
+}
+
+mat-dialog-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}

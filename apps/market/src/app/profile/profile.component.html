@@ -13,7 +13,7 @@
   <form [formGroup]="form">
     <mat-form-field>
       <mat-label>{{ t('name.label') }}</mat-label>
-      <input matInput type="text" formControlName="name">
+      <input matInput type="text" formControlName="name" [placeholder]="t('name.placeholder')">
     </mat-form-field>
     
     <mat-form-field>

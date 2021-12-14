@@ -1,0 +1,14 @@
+{
+  "valid": {
+    "title": "Changements non sauvegardés",
+    "content": "Si vous quittez maintenant les changements ne seront pas pris en compte.",
+    "leave": "Quitter",
+    "save": "Sauvegarder et quitter"
+  },
+  "invalid": {
+    "title": "Formulaire incomplet",
+    "content": "Des informations sont manquantes ou invalides. En quittant maintenant, les changements ne seront pas sauvegardés.",
+    "leave": "Rester",
+    "save": "Quitter"
+  }
+}

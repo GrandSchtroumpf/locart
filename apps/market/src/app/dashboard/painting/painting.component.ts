@@ -1,14 +1,14 @@
 import { Component, ChangeDetectionStrategy, OnInit, ViewChild, TemplateRef } from '@angular/core';
-import { FormArray, FormControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@locart/auth';
 import { MediaService } from '@locart/media/upload';
-import { Painting } from '@locart/model';
+import { Painting, paintingSizes } from '@locart/model';
 import { PaintingService } from '@locart/painting';
-import { FormEntity, FormList } from '@locart/utils';
-import { FormComponent } from '../guard';
+import { FormEntity, FormList, trackByIndex } from '@locart/utils';
+import type { FormComponent } from '@locart/ui/confirm';
 
 class FormPainting extends FormEntity<Painting> {
   constructor() {
@@ -38,14 +38,18 @@ export class PaintingComponent implements OnInit, FormComponent {
   current?: Painting;
   form = new FormPainting();
 
+  sizes = paintingSizes;
+
+  trackByIndex = trackByIndex;
+
   constructor(
     private routes: ActivatedRoute,
     private router: Router,
     private auth: AuthService,
     private service: PaintingService,
     private mediaService: MediaService,
-    private dialog: MatDialog,
     private snackbar: MatSnackBar,
+    public dialog: MatDialog,
   ) {}
 
   async ngOnInit() {
@@ -72,9 +76,5 @@ export class PaintingComponent implements OnInit, FormComponent {
     this.form.markAsPristine();
     this.snackbar.openFromTemplate(this.success, { duration: 3000 });
     this.router.navigate(['../..'], { relativeTo: this.routes });
-  }
-
-  confirmExit() {
-    return this.dialog.open(this.confirm).afterClosed();
   }
 }

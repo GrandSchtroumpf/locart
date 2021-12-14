@@ -6,17 +6,16 @@ import { PaintingComponent } from './painting.component';
 import { TRANSLOCO_SCOPE } from '@ngneat/transloco';
 import { MediaModule } from '@locart/media/upload';
 import { PageModule } from '@locart/utils';
+import { ConfirmExitModule } from '@locart/ui/confirm';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { FormGuard } from '../guard';
-
-
+import { ConfirmGuard } from '@locart/ui/confirm';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -26,17 +25,18 @@ import { FormGuard } from '../guard';
     PageModule,
     RouterModule.forChild([{
       path: '',
-      canDeactivate: [FormGuard],
+      canDeactivate: [ConfirmGuard],
       component: PaintingComponent,
     }]),
     ReactiveFormsModule,
+    ConfirmExitModule,
     MediaModule,
     MatFormFieldModule,
     MatInputModule,
     MatToolbarModule,
     MatButtonModule,
+    MatSelectModule,
     MatIconModule,
-    MatDialogModule,
     MatSnackBarModule,
   ],
   providers: [{
