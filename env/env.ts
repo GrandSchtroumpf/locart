@@ -15,7 +15,7 @@ export default {
       storageBucket: 'default-bucket',
     },
     firestore: (firestore: Firestore) => connectFirestoreEmulator(firestore, 'localhost', 8000),
-    storage: (storage: FirebaseStorage) => connectStorageEmulator(storage, 'localhost', 8000),
+    storage: (storage: FirebaseStorage) => connectStorageEmulator(storage, 'localhost', 9199),
     auth: (auth: Auth) => connectAuthEmulator(auth, 'http://localhost:9099', { disableWarnings: true }),
   }
 };

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '@locart/auth';
 
 @Component({
@@ -10,9 +11,10 @@ import { AuthService } from '@locart/auth';
 export class AppComponent {
   small = false;
   profile$ = this.auth.profile$;
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private router: Router) {}
 
-  signout() {
-    this.auth.signout();
+  async signout() {
+    await this.auth.signout();
+    this.router.navigate(['/']);
   }
 }

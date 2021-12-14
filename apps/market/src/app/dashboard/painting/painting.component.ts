@@ -51,7 +51,7 @@ export class PaintingComponent implements OnInit, FormComponent {
   async ngOnInit() {
     if (this.id === 'create') return;
     this.current = await this.service.load(this.id, { userId: this.uid });
-    this.reset();
+    this.form.reset(this.current);
   }
 
   reset() {

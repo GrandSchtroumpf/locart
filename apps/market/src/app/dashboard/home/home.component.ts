@@ -1,4 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { AuthService } from '@locart/auth';
+import { PaintingService } from '@locart/painting';
 
 @Component({
   selector: 'la-home',
@@ -6,11 +8,13 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomeComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+export class HomeComponent {
+  uid = this.auth.user!.uid;
+  paintings$ = this.paintingService.valueChanges({ userId: this.uid });
+  
+  constructor(
+    private auth: AuthService,
+    private paintingService: PaintingService
+  ) { }
 
 }

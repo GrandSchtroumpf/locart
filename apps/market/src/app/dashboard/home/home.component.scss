@@ -26,4 +26,10 @@ article {
     justify-content: space-between;
     align-items: center;
   }
+
+  .card-list {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: space.$md;
+  }
 }

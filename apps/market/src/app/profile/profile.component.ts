@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from '@locart/auth';
 import { Profile } from '@locart/model';
@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit {
     avatar: new FormControl(),
   });
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private cdr: ChangeDetectorRef) { }
 
   async ngOnInit() {
     this.current = await firstValueFrom(this.auth.profile$);
@@ -33,5 +33,6 @@ export class ProfileComponent implements OnInit {
     if (!this.current || this.current.isSeller) return;
     await this.auth.update({ isSeller: true });
     this.current.isSeller = true;
+    this.cdr.markForCheck();
   }
 }

@@ -3,14 +3,26 @@
     <h1>{{ t('title') }}</h1>
   </header>
   <section>
-    <article>
+    <article *ngIf="paintings$ | async as paintings">
       <header>
         <h3>{{ t('painting.title') }}</h3>
         <a mat-flat-button color="primary" routerLink="../painting/create">
           {{ t('painting.add') }}
         </a>
       </header>
-      
+      <div class="card-list">
+        <ng-container *ngFor="let painting of paintings">
+          <mat-card>
+            <img mat-card-image [path]="painting.image"/>
+            <mat-card-title>{{ painting.name }}</mat-card-title>
+            <mat-card-actions>
+              <a mat-icon-button [routerLink]="['../painting', painting.id]">
+                <mat-icon>edit</mat-icon>
+              </a>
+            </mat-card-actions>
+          </mat-card>
+        </ng-container>
+      </div>
     </article>
   </section>
 </ng-container>
