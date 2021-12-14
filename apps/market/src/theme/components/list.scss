@@ -1,6 +1,8 @@
 @use 'space';
+@use 'easing';
 
 @mixin theme($theme) {
+
   .mat-list-item {
     border-radius: space.$sm;
   }

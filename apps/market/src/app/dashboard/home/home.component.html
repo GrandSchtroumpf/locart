@@ -1,0 +1,16 @@
+<ng-container *transloco="let t; read: 'dashbord.home'">
+  <header class="main">
+    <h1>{{ t('title') }}</h1>
+  </header>
+  <section>
+    <article>
+      <header>
+        <h3>{{ t('painting.title') }}</h3>
+        <a mat-flat-button color="primary" routerLink="../painting">
+          {{ t('painting.add') }}
+        </a>
+      </header>
+      
+    </article>
+  </section>
+</ng-container>

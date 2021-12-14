@@ -1,0 +1,29 @@
+@use 'space';
+
+:host {
+  display: grid;
+  grid-auto-flow: row;
+  gap: space.$lg;
+}
+
+header.main {
+  padding: space.$lg;
+}
+
+section {
+  display: grid;
+  grid-auto-flow: row;
+  gap: space.$md;
+  padding: space.$md;
+}
+
+article {
+  display: grid;
+  grid-auto-flow: row;
+  gap: space.$sm;
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

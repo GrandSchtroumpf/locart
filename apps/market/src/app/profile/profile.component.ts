@@ -11,7 +11,7 @@ import { firstValueFrom } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfileComponent implements OnInit {
-  private current?: Profile;
+  current?: Profile;
   form = new FormGroup({
     name: new FormControl(),
     tel: new FormControl(),
@@ -27,5 +27,11 @@ export class ProfileComponent implements OnInit {
 
   reset() {
     this.form.reset(this.current);
+  }
+
+  async becomeSeller() {
+    if (!this.current || this.current.isSeller) return;
+    await this.auth.update({ isSeller: true });
+    this.current.isSeller = true;
   }
 }

@@ -1,6 +1,6 @@
 <mat-sidenav-container>
-  <mat-sidenav [opened]="!!(user$ | async)" [ngClass]="{ small: small }" mode="side">
-    <aside *ngIf="user$ | async as user">
+  <mat-sidenav [opened]="!!(profile$ | async)" [ngClass]="{ small: small }" mode="side">
+    <aside *ngIf="profile$ | async as profile">
       <header>
         <a routerLink="profile">
           <p>Profile</p>
@@ -15,6 +15,15 @@
           <mat-icon mat-list-icon>search</mat-icon>
           <p matLine>Search</p>  
         </a>
+
+        <ng-container *ngIf="profile.isSeller">
+          <mat-divider></mat-divider>
+          <a mat-list-item routerLink="/dashboard" routerLinkActive="active">
+            <mat-icon mat-list-icon>palette</mat-icon>
+            <p matLine>Dashboard</p>  
+          </a>
+        </ng-container>
+
       </mat-nav-list>
       <footer>
         <button (click)="signout()">Signout</button>
@@ -22,7 +31,7 @@
     </aside>
   </mat-sidenav>
   
-  <mat-sidenav-content [ngClass]="{ connected: user$ | async }">
+  <mat-sidenav-content [ngClass]="{ connected: profile$ | async }">
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

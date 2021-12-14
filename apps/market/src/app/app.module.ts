@@ -42,6 +42,10 @@ import env from '@env';
       path: 'profile',
       canActivate: [IsConnectedGuard],
       loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)
+    }, {
+      path: 'dashboard',
+      canActivate: [IsConnectedGuard],
+      loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
     }]),
     ServiceWorkerModule.register('ngsw-worker.js', {
       // Register the ServiceWorker as soon as the app is stable

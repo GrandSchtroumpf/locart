@@ -1,1 +1,13 @@
-{}
+{
+  "dashbord": {
+    "home": {
+      "painting": {
+        "title": "Missing value for 'dashbord.home.painting.title'",
+        "add": "Missing value for 'dashbord.home.painting.add'"
+      }
+    },
+    "painting": {
+      "title": "Missing value for 'dashbord.painting.title'"
+    }
+  }
+}

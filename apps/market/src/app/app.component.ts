@@ -9,7 +9,7 @@ import { AuthService } from '@locart/auth';
 })
 export class AppComponent {
   small = false;
-  user$ = this.auth.user$;
+  profile$ = this.auth.profile$;
   constructor(private auth: AuthService) {}
 
   signout() {
