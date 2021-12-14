@@ -14,11 +14,6 @@ form {
 }
 
 img-upload {
-  padding: space.$md;
-  border-radius: space.$sm;
-  background-color: var(--surface);
-  outline: dashed 1px var(--outline);
-  outline-offset: calc(-1 * space.$sm);
   height: 200px;
 }
 

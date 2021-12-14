@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, TemplateRef, ViewChild } from '@angular/core';
-import { FormArray, FormControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '@locart/auth';
 import { MediaService } from '../service';
 import { ImageMetadata } from '@locart/model';
 import { imgixRect, getFilename } from '../../utils'
 import { TRANSLOCO_SCOPE } from '@ngneat/transloco';
-import { fade } from '@locart/utils';
+import { fade, FormList } from '@locart/utils';
 import { ImageCropperComponent } from 'ngx-image-cropper';
 import { acceptTypes, ImgUploaderComponent } from '../img-upload/img-upload.component';
 
@@ -25,11 +25,11 @@ export class ListImgUploadComponent {
   @ViewChild('cropperDialog') cropperDialog?: TemplateRef<unknown>;
   @ViewChild(ImageCropperComponent) cropper?: ImageCropperComponent;
   @ViewChild(ImgUploaderComponent) uploader?: ImgUploaderComponent;
-  @Input() form = new FormArray([]);
+  @Input() form = new FormList<string>();
   @Input() path!: string;
   @Input() field!: string;
   @Input() ratio: number = 4/3;
-  currentIndex = -1
+  activeIndex = -1
   files: File[] = [];
   preview: string[] = [];
   types = acceptTypes.join();
@@ -46,14 +46,19 @@ export class ListImgUploadComponent {
     return this.form.at(this.currentIndex) as FormControl;
   }
 
+  get currentIndex() {
+    if (!this.form.controls.length) return -1;
+    return this.activeIndex;
+  }
+
   select(index: number) {
-    this.currentIndex = index;
+    this.activeIndex = index;
   }
   
   remove(index: number) {
     this.preview.splice(index, 1);
     this.form.removeAt(index);
-    this.currentIndex = -1;
+    this.activeIndex = -1;
   }
 
   reset() {

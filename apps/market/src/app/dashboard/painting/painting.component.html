@@ -1,10 +1,11 @@
 <ng-container *transloco="let t; read: 'dashbord.painting'">
   <mat-toolbar>
-    <a mat-icon-button routerLink=".." class="back">
+    <a mat-icon-button routerLink="../.." class="back">
       <mat-icon>arrow_back</mat-icon>
     </a>
     <h1>{{ t('title') }}</h1>
   </mat-toolbar>
+
   <form [formGroup]="form" (ngSubmit)="save()">
     <img-upload formControlName="image" field="image" path="image"></img-upload>
 
@@ -13,11 +14,24 @@
       <input matInput type="text" formControlName="name" />
     </mat-form-field>
 
-    <list-img-upload [form]="form.carousel"></list-img-upload>
+    <list-img-upload [form]="form.carousel" field="carousel" path="carousel"></list-img-upload>
 
     <footer>
       <button type="button" mat-button (click)="reset()">{{ t('cancel') }}</button>
       <button type="submit" mat-flat-button color="primary">{{ t('save') }}</button>
     </footer>
   </form>
+
+  <ng-template #confirm>
+    <h2 mat-dialog-title>{{ t('confirm.title') }}</h2>
+    <mat-dialog-content>{{ t('confirm.content') }}</mat-dialog-content>
+    <mat-dialog-actions>
+      <button mat-button mat-dialog-close>{{ t('confirm.cancel') }}</button>
+      <button mat-flat-button color="warn" [mat-dialog-close]="true">{{ t('confirm.exit') }}</button>
+    </mat-dialog-actions>
+  </ng-template>
+
+  <ng-template #success>
+    {{ t('snackbar.success') }}
+  </ng-template>
 </ng-container>

@@ -14,7 +14,7 @@ const PAGE_DEPS = [CommonModule, RouterModule, TranslocoModule, QuicklinkModule,
   exports: PAGE_DEPS,
 })
 export class PageModule {
-  static forChild(component: Type<any>, children?: Route[]): ModuleWithProviders<PageModule> {
+  static forChild(component: Type<unknown>, children?: Route[]): ModuleWithProviders<PageModule> {
     const providers = children
       ? [provideRoutes([{ path: '', component, children }])]
       : [provideRoutes([{ path: '', component }])];

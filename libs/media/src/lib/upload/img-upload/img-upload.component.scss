@@ -3,6 +3,12 @@
 
 :host {
   display: block;
+  padding: space.$md;
+  box-sizing: border-box;
+  border-radius: space.$sm;
+  background-color: var(--surface);
+  outline: dashed 1px var(--outline);
+  outline-offset: calc(-1 * space.$sm);
 }
 
 article {

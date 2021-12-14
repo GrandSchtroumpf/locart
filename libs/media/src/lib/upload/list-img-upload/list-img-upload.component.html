@@ -3,6 +3,11 @@
   <article class="empty" *ngIf="currentIndex < 0">
     <p *ngIf="form.value?.length" class="mat-caption">{{ t("list.selection") }}</p>
     <p *ngIf="!form.value?.length" class="mat-caption">{{ t("list.empty") }}</p>
+    <button mat-flat-button type="button" (click)="fileInput.click()">
+      <span>{{ t("list.add") }}</span>
+      <mat-icon>add</mat-icon>
+      <input #fileInput hidden (change)="openCropper($event)" type="file" [accept]="types" />
+    </button>
   </article>
 
   <ng-container *ngFor="let control of form.controls; let i = index">
@@ -24,7 +29,7 @@
       <mat-icon>add</mat-icon>
       <input #fileInput hidden (change)="openCropper($event)" type="file" [accept]="types" />
     </button>
-    <ng-container *ngFor="let file of form.value; let i = index">
+    <ng-container *ngFor="let file of form.value$ | async; let i = index">
       <div class="img-container"  [ngClass]="{ selected: currentIndex === i }">
         <button @fade type="button" *ngIf="currentIndex === i" (click)="uploader?.remove()">
           <mat-icon>delete</mat-icon>
@@ -48,7 +53,7 @@
         [aspectRatio]="ratio"
         [roundCropper]="ratio === 1"
       ></image-cropper>
-      <footer fxLayout fxLayoutAlign="center center" fxLayoutGap="16px">
+      <footer>
         <button type="button" mat-button mat-dialog-close>{{ t("cancel") }}</button>
         <button type="button" mat-flat-button mat-dialog-close (click)="crop()" color="primary">
           {{ t("save") }}

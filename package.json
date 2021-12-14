@@ -35,7 +35,7 @@
     "@nrwl/angular": "13.3.1",
     "express": "^4.15.2",
     "firebase": "^9.6.1",
-    "ngfire": "0.0.7",
+    "ngfire": "0.0.8",
     "ngx-image-cropper": "^5.0.1",
     "ngx-quicklink": "^0.2.7",
     "rxjs": "~7.4.0",

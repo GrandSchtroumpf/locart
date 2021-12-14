@@ -1,4 +1,5 @@
 @use '@angular/material' as mat;
+@use 'space';
 
 $height: 64px;
 
@@ -14,19 +15,20 @@ $height: 64px;
   align-items: center;
   justify-content: center;
   text-align: center;
-  border: 1px dashed var(--divider);
-  border-radius: 4px;
+  border-radius: space.$xs;
   background-color: var(--surface);
+  outline: dashed 1px var(--outline);
+  outline-offset: calc(-1 * space.$sm);
 }
 
 section{
   display: flex;
   overflow:auto;
-  margin-top: 16px;
+  margin-top: space.$md;
 }
 
 .img-container:not(:last-of-type), .add {
-  margin-right: 16px;
+  margin-right: space.$md;
 }
 
 button {
@@ -39,17 +41,17 @@ button {
     position: absolute;
     top: 1px;
     right: 1px;
-    border-radius: 4px;
+    border-radius: space.$xs;
     border: 1px solid var(--divider);
     mat-icon {
-      width: 16px;
-      height: 16px;
-      font-size: 16px;
+      width: space.$md;
+      height: space.$md;
+      font-size: space.$md;
     }
   }
   img {
     height: $height;
-    border-radius: 4px;
+    border-radius: space.$xs;
     cursor: pointer;
     box-sizing: border-box;
   }
@@ -68,7 +70,7 @@ button.add{
   align-items: center;
   justify-content: center;
   border: 1px dashed var(--divider);
-  border-radius: 4px;
+  border-radius: space.$xs;
   background-color: var(--surface);
 }
 
@@ -87,10 +89,16 @@ img-upload {
     flex: 1;
   }
   footer {
-    padding: 8px;
+    padding: space.$sm;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    button:first-child {
+      margin-right: space.$sm;
+    }
   }
 }
 
 ::-webkit-scrollbar {
-  height: 8px;
+  height: space.$sm;
 }

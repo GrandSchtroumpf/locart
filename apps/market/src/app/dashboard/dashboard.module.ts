@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { DashboardGuard } from './guard';
+import { DashboardGuard, FormGuard } from './guard';
 
 
 
@@ -15,7 +15,7 @@ import { DashboardGuard } from './guard';
       path: 'home',
       loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
     }, {
-      path: 'painting',
+      path: 'painting/:paintingId',
       loadChildren: () => import('./painting/painting.module').then(m => m.PaintingModule)
     }])
   ],

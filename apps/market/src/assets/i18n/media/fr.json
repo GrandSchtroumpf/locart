@@ -7,6 +7,7 @@
   "camera": "Appareil Photo",
   "list" : {
     "selection": "Cliquez sur + pour ajouter une photo, ou sur une existante pour la modifier.",
-    "empty": "Cliquez sur le + pour ajouter une photo."
+    "empty": "Cliquez sur le + pour ajouter une photo.",
+    "add": "Ajouter"
   }
 }
