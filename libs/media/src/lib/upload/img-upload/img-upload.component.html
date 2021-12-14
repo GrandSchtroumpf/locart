@@ -30,7 +30,7 @@
         <div class="img-container">
           <img *ngIf="preview" [ngClass]="{ rounded: ratio === 1 }" [src]="preview" />
           <img *ngIf="base64 && !preview" [ngClass]="{ rounded: ratio === 1 }" [src]="base64" />
-          <img *ngIf="!base64 && !preview" [ngClass]="{ rounded: ratio === 1 }" [path]="img" season="fallback_product.svg"/>
+          <img *ngIf="!base64 && !preview" [ngClass]="{ rounded: ratio === 1 }" [path]="img" asset="fallback_uploader.svg"/>
         </div>
         <mat-divider vertical></mat-divider>
         <aside fxLayout="column" fxLayoutAlign="space-around start">

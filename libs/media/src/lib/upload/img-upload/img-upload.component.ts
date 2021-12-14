@@ -139,7 +139,11 @@ export class ImgUploaderComponent implements ControlValueAccessor {
   //////////
 
   openCropper() {
-    this.cropperRef = this.dialog.open(this.cropperDialog, { maxHeight: '80vh', maxWidth: '80vw' });
+    this.cropperRef = this.dialog.open(this.cropperDialog, {
+      minHeight: '50vh',  // Avoid large jump
+      maxHeight: '80vh',
+      maxWidth: '80vw'
+    });
   }
 
   cancelCrop() {

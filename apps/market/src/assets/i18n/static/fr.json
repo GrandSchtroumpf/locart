@@ -1,0 +1,31 @@
+{
+  "painting": {
+    "size": {
+      "1": "A4",
+      "2": "A3",
+      "3": "A2",
+      "4": "A1"
+    },
+    "style": {
+      "modernism": "Modernisme",
+      "impressionism": "Impressionisme",
+      "abstract": "Abstrait",
+      "expressionism": "Expressionisme",
+      "cubism": "Cubisme",
+      "surrealism": "Surrealisme"
+    },
+    "type": {
+      "oil": "Huile",
+      "acrylic": "Acrylic",
+      "pencil": "Crayon",
+      "watercolor": "Aquarelle",
+      "charcoal": "Fusain",
+      "spray": "Graff",
+      "gouache": "Gouache",
+      "digital": "Numérique",
+      "pastel": "Pastel",
+      "ink": "Encre",
+      "collage": "Collage"
+    }
+  }
+}

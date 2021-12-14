@@ -1,0 +1,19 @@
+<ng-container *transloco="let t; read: read">
+  <mat-form-field *ngIf="control">
+    <mat-label>
+      <ng-content select="mat-label"></ng-content>
+    </mat-label>
+    <mat-select [formControl]="control" [multiple]="multiple">
+      <ng-container *ngFor="let value of static; trackBy: trackByIndex">
+        <!-- Force value to be a string -->
+        <mat-option [value]="value">{{ t('' + value) }}</mat-option>
+      </ng-container>
+    </mat-select>
+    <mat-hint>
+      <ng-content select="mat-hint"></ng-content>
+    </mat-hint>
+    <mat-error>
+      <ng-content select="mat-error"></ng-content>
+    </mat-error>
+  </mat-form-field>
+</ng-container>

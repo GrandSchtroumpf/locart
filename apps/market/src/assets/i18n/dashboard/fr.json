@@ -7,21 +7,23 @@
     }
   },
   "painting": {
+    "mainTitle": "Peinture",
+    "title": {
+      "label": "Titre de l'oeuvre"
+    },
     "size": {
-      "1": "A4'",
-      "2": "A3",
-      "3": "A2",
-      "4": "A1",
       "label": "Taille"
     },
-    "title": "Peinture",
-    "name": {
-      "label": "Nom"
+    "style": {
+      "label": "Style"
+    },
+    "type": {
+      "label": "Type de peinture"
     },
     "cancel": "Annuler",
     "save": "Enregistrer",
     "snackbar": {
-      "success": "Missing value for 'dashboard.painting.snackbar.success'"
+      "success": "Votre peinture est enregistrée ! 🥳"
     },
     "confirm": {
       "title": "Changements non sauvegardés",

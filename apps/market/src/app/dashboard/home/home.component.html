@@ -13,8 +13,8 @@
       <div class="card-list">
         <ng-container *ngFor="let painting of paintings">
           <mat-card>
-            <img mat-card-image [path]="painting.image"/>
-            <mat-card-title>{{ painting.name }}</mat-card-title>
+            <img mat-card-image [path]="painting.image" asset="fallback_painting"/>
+            <mat-card-title>{{ painting.title }}</mat-card-title>
             <mat-card-actions>
               <a mat-icon-button [routerLink]="['../painting', painting.id]">
                 <mat-icon>edit</mat-icon>

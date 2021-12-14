@@ -7,6 +7,7 @@ import { TRANSLOCO_SCOPE } from '@ngneat/transloco';
 import { MediaModule } from '@locart/media/upload';
 import { PageModule } from '@locart/utils';
 import { ConfirmExitModule } from '@locart/ui/confirm';
+import { StaticSelectModule } from '@locart/ui/static-select';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -31,6 +32,7 @@ import { MatSelectModule } from '@angular/material/select';
     ReactiveFormsModule,
     ConfirmExitModule,
     MediaModule,
+    StaticSelectModule,
     MatFormFieldModule,
     MatInputModule,
     MatToolbarModule,

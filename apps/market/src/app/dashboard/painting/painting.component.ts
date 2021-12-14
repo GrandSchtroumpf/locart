@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@locart/auth';
 import { MediaService } from '@locart/media/upload';
-import { Painting, paintingSizes } from '@locart/model';
+import { Painting, paintingSizes, paintingStyles, paintingTypes } from '@locart/model';
 import { PaintingService } from '@locart/painting';
 import { FormEntity, FormList, trackByIndex } from '@locart/utils';
 import type { FormComponent } from '@locart/ui/confirm';
@@ -14,8 +14,11 @@ class FormPainting extends FormEntity<Painting> {
   constructor() {
     super({
       image: new FormControl(),
-      name: new FormControl(),
+      title: new FormControl(),
       carousel: new FormList<string>(),
+      size: new FormControl(),
+      style: new FormControl(),
+      type: new FormControl(),
     })
   }
 
@@ -31,14 +34,15 @@ class FormPainting extends FormEntity<Painting> {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaintingComponent implements OnInit, FormComponent {
-  @ViewChild('confirm') confirm!: TemplateRef<unknown>;
   @ViewChild('success') success!: TemplateRef<unknown>;
   uid = this.auth.user!.uid;
   id = this.routes.snapshot.paramMap.get('paintingId')!;
   current?: Painting;
   form = new FormPainting();
 
-  sizes = paintingSizes;
+  readonly sizes = paintingSizes;
+  readonly styles = paintingStyles;
+  readonly types = paintingTypes;
 
   trackByIndex = trackByIndex;
 

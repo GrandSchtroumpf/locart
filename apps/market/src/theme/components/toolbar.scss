@@ -2,7 +2,9 @@
 
 @mixin theme($theme) {
   .mat-toolbar {
-  
+    h1 {
+      margin-right: auto;
+    }
   }
   
   .connected .mat-toolbar .back {

@@ -3,26 +3,31 @@
     <a mat-icon-button routerLink="../.." class="back">
       <mat-icon>arrow_back</mat-icon>
     </a>
-    <h1>{{ t('title') }}</h1>
+    <h1>{{ t('mainTitle') }}</h1>
+    <button mat-icon-button>
+      <mat-icon>delete</mat-icon>
+    </button>
   </mat-toolbar>
 
   <form [formGroup]="form" (ngSubmit)="save()">
     <img-upload formControlName="image" field="image" path="image"></img-upload>
 
     <mat-form-field>
-      <mat-label>{{ t('name.label') }}</mat-label>
-      <input matInput type="text" formControlName="name" />
+      <mat-label>{{ t('title.label') }}</mat-label>
+      <input matInput type="text" formControlName="title" />
     </mat-form-field>
 
-    <mat-form-field>
+    <static-select name="size" scope="painting.size" [static]="$any(sizes)">
       <mat-label>{{ t('size.label') }}</mat-label>
-      <mat-select formControlName="size">
-        <ng-container *ngFor="let size of sizes; trackBy: trackByIndex">
-          <!-- t(size.1, size.2, size.3, size.4) -->
-          <mat-option [value]="size">{{ t('size.' + size) }}</mat-option>
-        </ng-container>
-      </mat-select>
-    </mat-form-field>
+    </static-select>
+
+    <static-select name="style" scope="painting.style" [static]="styles">
+      <mat-label>{{ t('style.label') }}</mat-label>
+    </static-select>
+
+    <static-select name="type" scope="painting.type" [static]="types">
+      <mat-label>{{ t('type.label') }}</mat-label>
+    </static-select>
 
     <list-img-upload [form]="form.carousel" field="carousel" path="carousel"></list-img-upload>
 

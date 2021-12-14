@@ -41,24 +41,8 @@ function hasImageDiff(
   return a.path !== b.rect || a.path !== b.path;
 }
 
-// Duplicated from index.html
-function getSeason() {
-  const year = new Date().getFullYear();
-  const today = new Date();
-  const spring = new Date(`${year} 03 20`);
-  const summer = new Date(`${year} 06 21`);
-  const fall = new Date(`${year} 09 22`);
-  const winter = new Date(`${year} 12 01`);
 
-  if (today < spring) return "winter";
-  if (today < summer) return "spring";
-  if (today < fall) return "summer";
-  if (today < winter) return "fall";
-  return "winter";
-}
-export const currentSeason = getSeason();
-
-@Directive({ selector: 'img[path], img[asset], img[season]' })
+@Directive({ selector: 'img[path], img[asset]' })
 export class ImgDirective implements OnInit, OnDestroy {
   private sub?: Subscription;
   private pathId = new BehaviorSubject<Image | string | undefined | null>(null);
@@ -85,10 +69,6 @@ export class ImgDirective implements OnInit, OnDestroy {
     if (assetId && this.assetId.getValue() !== assetId) {
       this.assetId.next(assetId);
     }
-  }
-
-  @Input() set season(assetId: string) {
-    this.asset = `season/${currentSeason}/${assetId}`
   }
 
   constructor(
