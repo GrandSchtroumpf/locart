@@ -1,8 +1,11 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild, TemplateRef } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '@locart/auth';
+import { MediaService } from '@locart/media/upload';
 import { Profile } from '@locart/model';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'la-profile',
@@ -18,17 +21,33 @@ export class ProfileComponent implements OnInit {
     avatar: new FormControl(),
   });
 
-  constructor(private auth: AuthService, private cdr: ChangeDetectorRef) { }
+  @ViewChild('success') success!: TemplateRef<unknown>;
+
+  constructor(
+    private auth: AuthService,
+    private mediaService: MediaService,
+    private cdr: ChangeDetectorRef,
+    private snackbar: MatSnackBar,
+    public dialog: MatDialog
+  ) { }
 
   async ngOnInit() {
     this.current = await firstValueFrom(this.auth.profile$);
-    this.form.reset();
+    this.form.reset(this.current);
   }
 
   reset() {
     this.form.reset(this.current);
   }
 
+  async save() {
+    if (this.form.invalid) return this.form.markAsTouched();
+    await this.mediaService.upload();
+    await this.auth.update(this.form.value);
+    this.form.markAsPristine();
+    this.snackbar.openFromTemplate(this.success, { duration: 3000 });
+  }
+  
   async becomeSeller() {
     if (!this.current || this.current.isSeller) return;
     await this.auth.update({ isSeller: true });

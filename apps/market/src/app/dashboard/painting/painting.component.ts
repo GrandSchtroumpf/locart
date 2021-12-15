@@ -64,7 +64,6 @@ export class PaintingComponent implements OnInit, FormComponent {
 
   async ngOnInit() {
     if (this.isCreateForm) return;
-    // TODO: relove seems not to work. Check why
     this.current = await this.service.load(this.id, { userId: this.uid });
     this.form.reset(this.current);
   }

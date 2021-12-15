@@ -8,5 +8,10 @@
   "tel": {
     "label": "Numéro de téléphone",
     "placeholder": "0123456789"
+  },
+  "cancel": "Annuler",
+  "save": "Enregistrer",
+  "snackbar": {
+    "success": "Votre profil est à jour 🥸"
   }
 }

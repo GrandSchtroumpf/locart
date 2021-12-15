@@ -24,3 +24,13 @@ img-upload {
   grid-row: 1 / span 2;
   height: 200px;
 }
+
+footer {
+  grid-column: 1 / span 2;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  button {
+    margin-left: space.$sm;
+  }
+}

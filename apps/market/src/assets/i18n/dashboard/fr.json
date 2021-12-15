@@ -23,7 +23,8 @@
     "cancel": "Annuler",
     "save": "Enregistrer",
     "snackbar": {
-      "success": "Votre peinture est enregistrée ! 🥳"
+      "success": "Votre peinture est enregistrée ! 🥳",
+      "removed": "Votre peinture à été retiré de votre atelier 👌"
     },
     "confirm": {
       "title": "Changements non sauvegardés",
