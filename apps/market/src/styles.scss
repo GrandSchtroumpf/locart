@@ -5,12 +5,19 @@
 @use './theme/components/sidenav';
 @use './theme/components/list';
 @use './theme/components/dialog';
+@use './theme/components/surface';
 
 
 @include mat.core();
 
 :root {
   --space: 8px;
+  --sidenav-width: 0;
+}
+
+// Enable calculation for grid
+.connected {
+  --sidenav-width: 230px;
 }
 
 @mixin set-theme($theme) {
@@ -22,6 +29,7 @@
     @include sidenav.theme($theme);
     @include list.theme($theme);
     @include dialog.theme($theme);
+    @include surface.theme($theme);
   }
 
   :root {

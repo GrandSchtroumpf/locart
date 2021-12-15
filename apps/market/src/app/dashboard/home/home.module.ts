@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { HomeComponent } from './home.component';
-import { PageModule } from '@locart/utils';
 import { TRANSLOCO_SCOPE } from '@ngneat/transloco';
+import { PageModule } from '@locart/utils';
+import { ImgModule } from '@locart/media/img';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
-import { ImgModule } from '@locart/media/img';
+import { MatRippleModule } from '@angular/material/core';
 
 
 
@@ -20,6 +21,7 @@ import { ImgModule } from '@locart/media/img';
     MatButtonModule,
     MatIconModule,
     MatCardModule,
+    MatRippleModule,
   ],
   providers: [{
     provide: TRANSLOCO_SCOPE,

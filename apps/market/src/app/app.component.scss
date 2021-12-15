@@ -10,7 +10,7 @@ mat-sidenav-container {
 }
 
 mat-sidenav {
-  width: 200px;
+  width: var(--sidenav-width);
 }
 
 aside {
@@ -28,6 +28,22 @@ aside {
     border-radius: space.$xs;
     &:hover {
       background-color: var(--surface);
+    }
+  }
+  header a {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: 40px 1fr;
+    gap: space.$xs space.$sm;
+    padding: space.$sm space.$md;
+    img {
+      grid-row: 1 / span 2;
+      place-self: center;
+    }
+    p {
+      margin: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 }

@@ -1,0 +1,33 @@
+@use '@angular/material' as mat;
+@use 'generator';
+@use 'space';
+@use 'sass:color';
+
+@function set-alpha($color, $alpha) {
+  $opacity: 1 - $alpha;
+  @return color.adjust($color, $alpha: -$opacity);
+}
+
+@mixin theme($theme) {
+  $background: generator.get-color($theme, 'foreground', 'text');
+  .surface-1 {
+    border-radius: space.$xs;
+    background-color: set-alpha($background, 0.05);
+  }
+  .surface-2 {
+    border-radius: space.$xs;
+    background-color: set-alpha($background, 0.08);
+  }
+  .surface-3 {
+    border-radius: space.$xs;
+    background-color: set-alpha($background, 0.11);
+  }
+  .surface-4 {
+    border-radius: space.$xs;
+    background-color: set-alpha($background, 0.12);
+  }
+  .surface-5 {
+    border-radius: space.$xs;
+    background-color: set-alpha($background, 0.14);
+  }
+}

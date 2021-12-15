@@ -1,1 +1,9 @@
-{}
+{
+  "sidenav": {
+    "profile": "Profil",
+    "home": "Locart",
+    "search": "Trouver une oeuvre",
+    "dashboard": "Mon atelier",
+    "signout": "Se déconnecter"
+  }
+}

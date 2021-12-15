@@ -14,14 +14,14 @@
   );
 }
 
-@function get-colors($theme, $name, $value: default) {
+@function get-color($theme, $name, $value: default) {
   $config: mat.get-color-config($theme);
   $color: map.get($config, $name);
   @return map.get($color, $value);
 }
 
 @function primary($theme) {
-  @return get-colors($theme, 'primary');
+  @return get-color($theme, 'primary');
 }
 
 //////////

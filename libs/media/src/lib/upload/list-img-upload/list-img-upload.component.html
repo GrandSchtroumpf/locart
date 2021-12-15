@@ -38,7 +38,7 @@
           <img [src]="preview[i]" (click)="select(i)"/>
         </ng-container>
         <ng-template #usePath>
-          <img [path]="file" asset="empty_carousel.svg" (click)="select(i)"/>
+          <img [path]="file" asset="fallback_carousel.svg" (click)="select(i)"/>
         </ng-template>
       </div>
     </ng-container>

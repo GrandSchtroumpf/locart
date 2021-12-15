@@ -1,37 +1,43 @@
-<mat-sidenav-container>
+<mat-sidenav-container [ngClass]="{ connected: profile$ | async }">
   <mat-sidenav [opened]="!!(profile$ | async)" [ngClass]="{ small: small }" mode="side">
     <aside *ngIf="profile$ | async as profile">
-      <header>
-        <a routerLink="profile">
-          <p>Profile</p>
-        </a>
-      </header>
-      <mat-nav-list>
-        <a mat-list-item routerLink="/home" routerLinkActive="active">
-          <mat-icon mat-list-icon>home</mat-icon>
-          <p matLine>Home</p>
-        </a>
-        <a mat-list-item routerLink="/search" routerLinkActive="active">
-          <mat-icon mat-list-icon>search</mat-icon>
-          <p matLine>Search</p>  
-        </a>
-
-        <ng-container *ngIf="profile.isSeller">
-          <mat-divider></mat-divider>
-          <a mat-list-item routerLink="/dashboard" routerLinkActive="active">
-            <mat-icon mat-list-icon>palette</mat-icon>
-            <p matLine>Dashboard</p>  
+      <ng-container *transloco="let t; read: 'sidenav'">
+        <header>
+          <a routerLink="profile">
+            <img [path]="profile.avatar" asset="fallback_avatar" width="40" height="40"/>
+            <p>{{ profile.name ?? t('profile') }}</p>
+            <p class="mat-caption">{{ profile.email }}</p>
           </a>
-        </ng-container>
-
-      </mat-nav-list>
-      <footer>
-        <button (click)="signout()">Signout</button>
-      </footer>
+        </header>
+        <mat-nav-list>
+          <a mat-list-item routerLink="/home" routerLinkActive="active">
+            <mat-icon mat-list-icon>home</mat-icon>
+            <p matLine>{{ t('home') }}</p>
+          </a>
+          <a mat-list-item routerLink="/search" routerLinkActive="active">
+            <mat-icon mat-list-icon>search</mat-icon>
+            <p matLine>{{ t('search') }}</p>  
+          </a>
+  
+          <ng-container *ngIf="profile.isSeller">
+            <mat-divider></mat-divider>
+            <a mat-list-item routerLink="/dashboard" routerLinkActive="active">
+              <mat-icon mat-list-icon>palette</mat-icon>
+              <p matLine>{{ t('dashboard') }}</p>  
+            </a>
+          </ng-container>
+  
+        </mat-nav-list>
+        <footer>
+          <button (click)="signout()">
+            {{ t('signout') }}
+          </button>
+        </footer>
+      </ng-container>
     </aside>
   </mat-sidenav>
   
-  <mat-sidenav-content [ngClass]="{ connected: profile$ | async }">
+  <mat-sidenav-content>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

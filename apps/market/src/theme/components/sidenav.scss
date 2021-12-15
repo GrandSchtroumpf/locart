@@ -1,4 +1,3 @@
-@use 'space';
 @use 'generator';
 @use 'sass:color';
 @use 'sass:map';
@@ -10,7 +9,6 @@
   .mat-sidenav {
     background-color: color.adjust($primary, $alpha: -(1 - 0.012));
     border-right: none;
-    padding: space.$sm;
     box-sizing: border-box;
   }
 }

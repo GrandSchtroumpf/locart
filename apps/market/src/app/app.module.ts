@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { TranslocoRootModule } from './transloco.module';
+import { ImgModule } from '@locart/media/img';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
@@ -22,6 +23,7 @@ import env from '@env';
     BrowserAnimationsModule,
     BrowserTransferStateModule,
     TranslocoRootModule,
+    ImgModule,
     MatSidenavModule,
     MatListModule,
     MatIconModule,

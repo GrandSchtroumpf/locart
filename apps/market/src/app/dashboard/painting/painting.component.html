@@ -4,7 +4,7 @@
       <mat-icon>arrow_back</mat-icon>
     </a>
     <h1>{{ t('mainTitle') }}</h1>
-    <button mat-icon-button>
+    <button *ngIf="!isCreateForm" mat-icon-button (click)="remove()">
       <mat-icon>delete</mat-icon>
     </button>
   </mat-toolbar>
@@ -37,7 +37,6 @@
     </footer>
   </form>
 
-  <ng-template #success>
-    {{ t('snackbar.success') }}
-  </ng-template>
+  <ng-template #success>{{ t('snackbar.success') }}</ng-template>
+  <ng-template #removed>{{ t('snackbar.removed') }}</ng-template>
 </ng-container>

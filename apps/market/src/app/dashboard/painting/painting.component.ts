@@ -34,18 +34,20 @@ class FormPainting extends FormEntity<Painting> {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaintingComponent implements OnInit, FormComponent {
-  @ViewChild('success') success!: TemplateRef<unknown>;
-  uid = this.auth.user!.uid;
-  id = this.routes.snapshot.paramMap.get('paintingId')!;
-  current?: Painting;
+  private id = this.routes.snapshot.paramMap.get('paintingId')!;
+  private uid = this.auth.user!.uid;
+  private current?: Painting;
+  
   form = new FormPainting();
-
   readonly sizes = paintingSizes;
   readonly styles = paintingStyles;
   readonly types = paintingTypes;
-
+  
+  @ViewChild('success') success!: TemplateRef<unknown>;
+  @ViewChild('removed') removed!: TemplateRef<unknown>;
+  
   trackByIndex = trackByIndex;
-
+  
   constructor(
     private routes: ActivatedRoute,
     private router: Router,
@@ -56,8 +58,13 @@ export class PaintingComponent implements OnInit, FormComponent {
     public dialog: MatDialog,
   ) {}
 
+  get isCreateForm() {
+    return this.id === 'create';
+  }
+
   async ngOnInit() {
-    if (this.id === 'create') return;
+    if (this.isCreateForm) return;
+    // TODO: relove seems not to work. Check why
     this.current = await this.service.load(this.id, { userId: this.uid });
     this.form.reset(this.current);
   }
@@ -69,16 +76,24 @@ export class PaintingComponent implements OnInit, FormComponent {
   }
 
   async save() {
-    if (this.form.invalid) this.form.markAsTouched();
+    if (this.form.invalid) return this.form.markAsTouched();
     const params = { userId: this.uid };
     await this.mediaService.upload();
-    if (this.id === 'create') {
+    if (this.isCreateForm) {
       await this.service.add(this.form.value, { params });
     } else {
       await this.service.update(this.id, this.form.value, { params });
     }
     this.form.markAsPristine();
     this.snackbar.openFromTemplate(this.success, { duration: 3000 });
+    this.router.navigate(['../..'], { relativeTo: this.routes });
+  }
+
+  async remove() {
+    if (this.isCreateForm) return;
+    await this.service.remove(this.id);
+    this.form.markAsPristine();
+    this.snackbar.openFromTemplate(this.removed, { duration: 3000 });
     this.router.navigate(['../..'], { relativeTo: this.routes });
   }
 }

@@ -6,4 +6,5 @@ import { FireSubCollection } from "ngfire";
 @Injectable({ providedIn: 'root' })
 export class PaintingService extends FireSubCollection<Painting> {
   readonly path = 'users/:userId/paintings';
+  readonly memorize = true;
 }
