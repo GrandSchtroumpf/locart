@@ -1,39 +1,38 @@
 <ng-container *transloco="let t; read: 'search.painting.view'">
-  <header>
-    <a mat-button routerLink="..">
-      <mat-icon>arrow_back</mat-icon>
-      <span>{{ t('back') }}</span>
-    </a>
-  </header>
   <ng-container *ngIf="painting$ | async as painting">
-    <section id="main">
-      <img [path]="painting.image" asset="fallback_painting" />
+    <header>
+      <a mat-button routerLink="..">
+        <mat-icon>arrow_back</mat-icon>
+        <span>{{ t('back') }}</span>
+      </a>
+      <form [formGroup]="form" (ngSubmit)="rent(painting)">
+        <p>{{ t('rent.title') }} </p>
+        <mat-form-field>
+          <mat-label>{{ t('rent.label') }}</mat-label>
+          <mat-date-range-input [formGroup]="form" [rangePicker]="picker" [dateFilter]="filters$ | push">
+            <input matStartDate formControlName="from" [placeholder]="t('rent.from')">
+            <input matEndDate formControlName="to" [placeholder]="t('rent.to')">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+          <mat-error *ngIf="form.hasError('matStartDateInvalid', 'from')">{{ t('rent.invalid') }}</mat-error>
+          <mat-error *ngIf="form.hasError('matEndDateInvalid', 'to')">{{ t('rent.invalid') }}</mat-error>
+        </mat-form-field>
+        <button mat-flat-button color="primary" type="submit">{{ t('rent.submit') }}</button>
+      </form>
+    </header>
+
+    <section>
+      <img class="main" [path]="painting.image" asset="fallback_painting"/>
       <article>
         <h2>{{ painting.title }}</h2>
         <static-tags scope="painting" [value]="painting" [keys]="['style', 'size', 'type']"></static-tags>
-        <form [formGroup]="form" (ngSubmit)="rent(painting)">
-          <p>{{ t('rent.title') }} </p>
-          <mat-form-field>
-            <mat-label>{{ t('rent.label') }}</mat-label>
-            <mat-date-range-input [formGroup]="form" [rangePicker]="picker" [dateFilter]="filters$ | push">
-              <input matStartDate formControlName="from" [placeholder]="t('rent.from')">
-              <input matEndDate formControlName="to" [placeholder]="t('rent.to')">
-            </mat-date-range-input>
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-date-range-picker #picker></mat-date-range-picker>
-            <mat-error *ngIf="form.hasError('matStartDateInvalid', 'from')">{{ t('rent.invalid') }}</mat-error>
-            <mat-error *ngIf="form.hasError('matEndDateInvalid', 'to')">{{ t('rent.invalid') }}</mat-error>
-          </mat-form-field>
-          <button mat-flat-button color="primary" type="submit">{{ t('rent.submit') }}</button>
-        </form>
+        <div class="img-grid">
+          <img *ngFor="let img of painting.carousel" [path]="img" asset="fallback_carousel" />
+        </div>
       </article>
     </section>
 
-    <section id="carousel" *ngIf="painting.carousel.length">
-      <h3>{{ t('carousel') }}</h3>
-      <img-carousel [imgs]="painting.carousel"></img-carousel>
-    </section>
-    
     <ng-template #success>{{ t('success') }}</ng-template>
   </ng-container>
 

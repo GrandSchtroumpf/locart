@@ -46,14 +46,16 @@ aside {
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    button {
-      border: none;
-      background-color: transparent;
-      color: var(--accent);
-      text-decoration: underline;
-      text-align: start;
-      padding: 0;
-      cursor: pointer;
+  }
+  footer button {
+    cursor: pointer;
+    padding: 0 space.$md;
+    height: 56px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    span {
+      margin-left: space.$md;
     }
   }
 }

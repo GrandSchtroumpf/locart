@@ -4,11 +4,7 @@
     "signout": "Se déconnecter",
     "home": "Locart",
     "search": "Trouver une oeuvre",
-    "rent": "Missing value for 'sidenav.rent'",
+    "rent": "Mes Locations",
     "dashboard": "Mon atelier"
-  },
-  "rent": {
-    "title": "Missing value for 'rent.title'",
-    "painting": "Missing value for 'rent.painting'"
   }
 }

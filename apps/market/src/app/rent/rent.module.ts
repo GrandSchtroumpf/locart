@@ -4,6 +4,7 @@ import { PageModule } from '@locart/utils';
 import { MatRippleModule } from '@angular/material/core';
 import { ImgModule } from '@locart/media/img';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { TRANSLOCO_SCOPE } from '@ngneat/transloco';
 
 
 
@@ -16,6 +17,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     ImgModule,
     MatRippleModule,
     MatToolbarModule,
-  ]
+  ],
+  providers: [{
+    provide: TRANSLOCO_SCOPE,
+    useValue: 'rent'
+  }]
 })
 export class RentModule { }

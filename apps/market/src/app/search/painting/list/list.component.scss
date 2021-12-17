@@ -9,6 +9,9 @@ form {
   grid-auto-flow: column;
   gap: space.$md;
   padding: space.$sm space.$md;
+  margin: space.$sm space.$md;
+  border-radius: space.$xs;
+  background-color: var(--surface);
 }
 
 section {

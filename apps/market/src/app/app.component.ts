@@ -13,8 +13,7 @@ export class AppComponent {
   profile$ = this.auth.profile$;
   constructor(private auth: AuthService, private router: Router) {}
 
-  async signout(event: Event) {
-    event.stopPropagation();
+  async signout() {
     await this.auth.signout();
     this.router.navigate(['/']);
   }

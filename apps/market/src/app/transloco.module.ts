@@ -17,7 +17,7 @@ export class TranslocoImportLoader implements TranslocoLoader {
 
   async getTranslation(lang: string) {
     // Prevent network call to root file
-    if (lang === 'fr' || lang === 'en') return Promise.resolve({});
+    // if (lang === 'fr' || lang === 'en') return Promise.resolve({});
     const fromServer = this.stateTransfer?.get(lang);
     if (fromServer) return fromServer;
     const data = await import(`../assets/i18n/${lang}.json`);

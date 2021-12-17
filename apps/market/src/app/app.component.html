@@ -7,7 +7,6 @@
             <img [path]="profile.avatar" asset="fallback_avatar" width="40" height="40"/>
             <p>{{ profile.name ?? t('profile') }}</p>
             <p class="mat-caption">{{ profile.email }}</p>
-            <button (click)="signout($event)">{{ t('signout') }}</button>
           </a>
         </header>
         <mat-nav-list>
@@ -23,7 +22,7 @@
             <mat-icon mat-list-icon>storefront</mat-icon>
             <p matLine>{{ t('rent') }}</p>  
           </a>
-  
+          
           <ng-container *ngIf="profile.isSeller">
             <mat-divider></mat-divider>
             <a mat-list-item routerLink="/dashboard" routerLinkActive="active">
@@ -31,8 +30,14 @@
               <p matLine>{{ t('dashboard') }}</p>  
             </a>
           </ng-container>
-  
+          
         </mat-nav-list>
+        <footer>
+          <button (click)="signout()" class="mat-body-2">
+            <mat-icon>logout</mat-icon>
+            <span>{{ t('signout') }}</span>
+          </button>
+        </footer>
       </ng-container>
     </aside>
   </mat-sidenav>

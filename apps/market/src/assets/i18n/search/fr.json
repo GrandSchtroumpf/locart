@@ -10,6 +10,12 @@
       "style": {
         "label": "Style"
       },
+      "rent": {
+        "label": "Durée de location",
+        "from": "Début de location",
+        "to": "Fin de location",
+        "invalid": "Les dates ne sont pas valides"
+      },
       "empty": "Nous n'avons trouvé aucune oeuvres correspondant à votre recherche"
     },
     "view": {
@@ -22,7 +28,6 @@
         "invalid": "Les dates ne sont pas valides",
         "submit": "Louer cette oeuvre"
       },
-      "carousel": "Autres images",
       "success": "Votre location est prise en compte ╰(*°▽°*)╯"
     },
     "title": "Peintures"
