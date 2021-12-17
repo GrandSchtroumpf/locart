@@ -16,7 +16,7 @@ export class PathToIdPipe implements PipeTransform {
 }
 
 @Component({
-  selector: 'la-carousel',
+  selector: 'img-carousel',
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.scss'],
     animations: [fade],

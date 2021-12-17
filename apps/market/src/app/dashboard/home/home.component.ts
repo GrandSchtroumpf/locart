@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { AuthService } from '@locart/auth';
 import { PaintingService } from '@locart/painting';
+import { where } from 'firebase/firestore';
 
 @Component({
   selector: 'la-home',
@@ -10,7 +11,7 @@ import { PaintingService } from '@locart/painting';
 })
 export class HomeComponent {
   uid = this.auth.user!.uid;
-  paintings$ = this.paintingService.valueChanges({ userId: this.uid });
+  paintings$ = this.paintingService.valueChanges([where('owner', '==', this.uid)]);
   
   constructor(
     private auth: AuthService,

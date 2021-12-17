@@ -1,8 +1,38 @@
 @use "space";
+@use "@angular/material" as mat;
+
 :host {
-  display: block;
+  display: block
 }
 
-header {
-  padding: space.$md;
+header, section {
+  padding: space.$sm space.$md;
+}
+
+#main {
+  padding: space.$sm space.$md;
+  display: flex;
+  img {
+    width: 300px;
+    border-radius: space.$md;
+    margin-right: space.$md;
+    @include mat.elevation(2);
+  }
+  article {
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    gap: space.$sm;
+    h2 {
+      margin: 0;
+    }
+    footer {
+      align-self: flex-end;
+    }
+  }
+}
+
+#carousel {
+  h3 {
+    margin-bottom: 0;
+  }
 }

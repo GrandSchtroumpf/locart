@@ -1,4 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { PaintingService } from '@locart/painting';
 
 @Component({
   selector: 'la-painting-view',
@@ -7,5 +9,13 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaintingViewComponent {
+  id = this.routes.snapshot.paramMap.get('paintingId');
+  painting$ = this.service.valueChanges(this.id);
+
+  constructor(
+    private service: PaintingService,
+    private routes: ActivatedRoute,
+  ) {}
+
 
 }

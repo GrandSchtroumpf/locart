@@ -64,7 +64,7 @@ export class PaintingComponent implements OnInit, FormComponent {
 
   async ngOnInit() {
     if (this.isCreateForm) return;
-    this.current = await this.service.load(this.id, { userId: this.uid });
+    this.current = await this.service.load(this.id);
     this.form.reset(this.current);
   }
 
@@ -76,12 +76,12 @@ export class PaintingComponent implements OnInit, FormComponent {
 
   async save() {
     if (this.form.invalid) return this.form.markAsTouched();
-    const params = { userId: this.uid };
+    const content = { owner: this.uid, ...this.form.value };
     await this.mediaService.upload();
     if (this.isCreateForm) {
-      await this.service.add(this.form.value, { params });
+      await this.service.add(content);
     } else {
-      await this.service.update(this.id, this.form.value, { params });
+      await this.service.update(this.id, content);
     }
     this.form.markAsPristine();
     this.snackbar.openFromTemplate(this.success, { duration: 3000 });

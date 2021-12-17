@@ -1,0 +1,16 @@
+@use 'space';
+
+:host {
+  display: grid;
+  grid-auto-flow: column;
+  gap: space.$sm;
+}
+
+span {
+  border-radius: space.$xs;
+  border: solid 1px var(--outline);
+  background-color: var(--surface);
+  text-transform: uppercase;
+  padding: space.$xs space.$sm;
+  box-sizing: border-box;
+}

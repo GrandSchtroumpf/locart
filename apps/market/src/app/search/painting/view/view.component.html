@@ -5,7 +5,21 @@
       <span>{{ t('back') }}</span>
     </a>
   </header>
-  <section>
+  <ng-container *ngIf="painting$ | async as painting">
+    <section id="main">
+      <img [path]="painting.image" asset="fallback_painting" />
+      <article>
+        <h2>{{ painting.title }}</h2>
+        <static-tags scope="painting" [value]="painting" [keys]="['style', 'size', 'type']"></static-tags>
+        <footer>
+          <button mat-flat-button>{{ t('rent') }}</button>
+        </footer>
+      </article>
+    </section>
 
-  </section>
+    <section id="carousel" *ngIf="painting.carousel.length">
+      <h3>{{ t('carousel') }}</h3>
+      <img-carousel [imgs]="painting.carousel"></img-carousel>
+    </section>
+  </ng-container>
 </ng-container>

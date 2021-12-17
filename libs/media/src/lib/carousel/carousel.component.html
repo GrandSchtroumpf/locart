@@ -1,6 +1,6 @@
 <ul #slides>
   <li *ngFor="let img of imgs; let i = index">
-    <img [id]="img.path! | pathToId" [path]="img" asset="empty_carousel.svg" loading="lazy"/>
+    <img [id]="img.path! | pathToId" [path]="img" asset="fallback_carousel" loading="lazy"/>
   </li>
 </ul>
 <ng-container *ngIf="imgs.length >= rowSize">

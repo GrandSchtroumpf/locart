@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core"; 
 import { Painting } from "@locart/model";
-import { FireSubCollection } from "ngfire";
+import { FireCollection } from "ngfire";
 
 
 @Injectable({ providedIn: 'root' })
-export class PaintingService extends FireSubCollection<Painting> {
-  readonly path = 'users/:userId/paintings';
+export class PaintingService extends FireCollection<Painting> {
+  readonly path = 'paintings';
   readonly memorize = true;
 }
