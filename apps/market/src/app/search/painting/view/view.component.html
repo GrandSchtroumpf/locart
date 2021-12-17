@@ -21,8 +21,8 @@
             </mat-date-range-input>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-date-range-picker #picker></mat-date-range-picker>
-            <mat-error *ngIf="form.controls.from.hasError('matStartDateInvalid')">{{ t('rent.invalid') }}</mat-error>
-            <mat-error *ngIf="form.controls.to.hasError('matEndDateInvalid')">{{ t('rent.invalid') }}</mat-error>
+            <mat-error *ngIf="form.hasError('matStartDateInvalid', 'from')">{{ t('rent.invalid') }}</mat-error>
+            <mat-error *ngIf="form.hasError('matEndDateInvalid', 'to')">{{ t('rent.invalid') }}</mat-error>
           </mat-form-field>
           <button mat-flat-button color="primary" type="submit">{{ t('rent.submit') }}</button>
         </form>

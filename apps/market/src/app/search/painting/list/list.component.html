@@ -11,6 +11,18 @@
     <static-select name="styles" scope="painting.style" [static]="styles" multiple>
       <mat-label>{{ t('style.label') }}</mat-label>
     </static-select>
+
+    <mat-form-field>
+      <mat-label>{{ t('rent.label') }}</mat-label>
+      <mat-date-range-input formGroupName="duration" [rangePicker]="picker" [dateFilter]="dateFilter">
+        <input matStartDate formControlName="from" [placeholder]="t('rent.from')">
+        <input matEndDate formControlName="to" [placeholder]="t('rent.to')">
+      </mat-date-range-input>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+      <mat-error *ngIf="form.hasError('matStartDateInvalid', 'duration.from')">{{ t('rent.invalid') }}</mat-error>
+      <mat-error *ngIf="form.hasError('matEndDateInvalid', 'duration.to')">{{ t('rent.invalid') }}</mat-error>
+    </mat-form-field>
   </form>
 
   <ng-container *ngIf="paintings$ | async as paintings; else loading">

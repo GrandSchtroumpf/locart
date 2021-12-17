@@ -17,3 +17,7 @@ export const filterDates = (rents: Rent[]): DateFilterFn<Date> => (date: Date | 
   if (date < new Date()) return false;
   return rents.every(({duration}) => date < duration.from || date > duration.to);
 };
+
+export function notInRent(rent: Rent, duration: Duration) {
+  return duration.from < rent.duration.to || duration.to > rent.duration.from;
+}

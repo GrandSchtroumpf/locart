@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { TRANSLOCO_SCOPE } from '@ngneat/transloco';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,12 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatSnackBarModule,
     PushModule,
   ],
-  providers: [...dateAdapterProviders]
+  providers: [
+    {
+      provide: TRANSLOCO_SCOPE,
+      useValue: 'search'
+    },
+    ...dateAdapterProviders
+  ]
 })
 export class PaintingViewModule { }
