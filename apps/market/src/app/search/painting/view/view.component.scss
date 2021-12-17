@@ -22,11 +22,22 @@ header, section {
     display: grid;
     grid-template-rows: auto auto 1fr;
     gap: space.$sm;
+    justify-items: start;
     h2 {
       margin: 0;
     }
-    footer {
+    form {
       align-self: flex-end;
+      display: grid;
+      grid-auto-flow: column;
+      gap: space.$md;
+      align-items: center;
+      padding: space.$sm space.$md;
+      background-color: var(--surface);
+      border-radius: space.$xs;
+      p {
+        margin: 0;
+      }
     }
   }
 }

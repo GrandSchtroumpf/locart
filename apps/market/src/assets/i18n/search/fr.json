@@ -1,3 +1,30 @@
 {
-  "title": "Missing value for 'search.title'"
+  "painting": {
+    "list": {
+      "size": {
+        "label": "Taille"
+      },
+      "type": {
+        "label": "Type"
+      },
+      "style": {
+        "label": "Style"
+      },
+      "empty": "Nous n'avons trouvé aucune oeuvres correspondant à votre recherche"
+    },
+    "view": {
+      "back": "Retour à la recherche",
+      "rent": {
+        "title": "Sélectionner vos dates de locations:",
+        "label": "Durée de location",
+        "from": "Début de location",
+        "to": "Fin de location",
+        "invalid": "Les dates ne sont pas valides",
+        "submit": "Louer cette oeuvre"
+      },
+      "carousel": "Autres images",
+      "success": "Votre location est prise en compte ╰(*°▽°*)╯"
+    },
+    "title": "Peintures"
+  }
 }

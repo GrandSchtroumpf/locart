@@ -1,21 +1,16 @@
-@use "space";
-
+@use 'space';
 :host {
   display: block;
 }
 
-form {
-  display: grid;
-  grid-auto-flow: column;
-  gap: space.$md;
+section {
   padding: space.$sm space.$md;
 }
 
-section {
+article {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: space.$md;
-  padding: space.$sm space.$md;
 
   a {
     color: inherit;
@@ -28,13 +23,8 @@ section {
       height: calc((100vw - var(--sidenav-width) - (4 * space.$md)) / 5);
       aspect-ratio: 1;
     }
-    h3 {
+    h3, p {
       padding: 0 space.$md;
     }
   }
-}
-
-.loading, .empty {
-  padding: space.$lg;
-  place-items: center;
 }

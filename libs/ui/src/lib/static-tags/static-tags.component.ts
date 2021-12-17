@@ -1,5 +1,4 @@
 import { Component, ChangeDetectionStrategy, Input, OnInit } from '@angular/core';
-import { exist } from '@locart/utils';
 import { TRANSLOCO_SCOPE } from '@ngneat/transloco';
 
 @Component({
@@ -13,13 +12,19 @@ import { TRANSLOCO_SCOPE } from '@ngneat/transloco';
   }]
 })
 export class StaticTagsComponent<T> implements OnInit {
-  tags: (string | number)[] = [];
+  tags: Partial<Record<keyof T, string | number>> = {};
   @Input() value!: T;
   @Input() keys: (keyof T)[] = [];
   @Input() scope = ''
 
   ngOnInit(): void {
-    this.tags = this.keys.map(key => this.value[key] as any).filter(exist);
+    const fields: Partial<Record<keyof T, string | number>> = {};
+    for (const key of this.keys) {
+      const value = this.value[key];
+      if (typeof value === 'string') fields[key] = value;
+      if (typeof value === 'number') fields[key] = value;
+    }
+    this.tags = fields;
   }
 
   get read() {

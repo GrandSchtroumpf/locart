@@ -48,6 +48,10 @@ import env from '@env';
       path: 'dashboard',
       canActivate: [IsConnectedGuard],
       loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+    }, {
+      path: 'rent',
+      canActivate: [IsConnectedGuard],
+      loadChildren: () => import('./rent/rent.module').then(m => m.RentModule)
     }]),
     ServiceWorkerModule.register('ngsw-worker.js', {
       // Register the ServiceWorker as soon as the app is stable

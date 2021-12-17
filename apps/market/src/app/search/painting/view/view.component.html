@@ -11,9 +11,21 @@
       <article>
         <h2>{{ painting.title }}</h2>
         <static-tags scope="painting" [value]="painting" [keys]="['style', 'size', 'type']"></static-tags>
-        <footer>
-          <button mat-flat-button>{{ t('rent') }}</button>
-        </footer>
+        <form [formGroup]="form" (ngSubmit)="rent(painting)">
+          <p>{{ t('rent.title') }} </p>
+          <mat-form-field>
+            <mat-label>{{ t('rent.label') }}</mat-label>
+            <mat-date-range-input [formGroup]="form" [rangePicker]="picker" [dateFilter]="filters$ | push">
+              <input matStartDate formControlName="from" [placeholder]="t('rent.from')">
+              <input matEndDate formControlName="to" [placeholder]="t('rent.to')">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+            <mat-error *ngIf="form.controls.from.hasError('matStartDateInvalid')">{{ t('rent.invalid') }}</mat-error>
+            <mat-error *ngIf="form.controls.to.hasError('matEndDateInvalid')">{{ t('rent.invalid') }}</mat-error>
+          </mat-form-field>
+          <button mat-flat-button color="primary" type="submit">{{ t('rent.submit') }}</button>
+        </form>
       </article>
     </section>
 
@@ -21,5 +33,8 @@
       <h3>{{ t('carousel') }}</h3>
       <img-carousel [imgs]="painting.carousel"></img-carousel>
     </section>
+    
+    <ng-template #success>{{ t('success') }}</ng-template>
   </ng-container>
+
 </ng-container>

@@ -1,5 +1,5 @@
 <ng-container *transloco="let t; read: read">
-  <span *ngFor="let tag of tags">
-    {{ t('' + tag) }}
+  <span *ngFor="let tag of tags | keyvalue">
+    {{ t(tag.key + '.' + tag.value) }}
   </span>
 </ng-container>

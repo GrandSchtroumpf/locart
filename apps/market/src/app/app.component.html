@@ -19,6 +19,10 @@
             <mat-icon mat-list-icon>search</mat-icon>
             <p matLine>{{ t('search') }}</p>  
           </a>
+          <a mat-list-item routerLink="/rent" routerLinkActive="active">
+            <mat-icon mat-list-icon>storefront</mat-icon>
+            <p matLine>{{ t('rent') }}</p>  
+          </a>
   
           <ng-container *ngIf="profile.isSeller">
             <mat-divider></mat-divider>

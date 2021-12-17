@@ -20,6 +20,7 @@
       "@locart/media/*": ["libs/media/src/lib/*"],
       "@locart/model": ["libs/model/src/index.ts"],
       "@locart/painting": ["libs/painting/src/index.ts"],
+      "@locart/rent": ["libs/rent/src/index.ts"],
       "@locart/ui/*": ["libs/ui/src/lib/*"],
       "@locart/utils": ["libs/utils/src/index.ts"]
     }

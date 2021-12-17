@@ -260,6 +260,32 @@
       },
       "tags": []
     },
+    "rent": {
+      "projectType": "library",
+      "root": "libs/rent",
+      "sourceRoot": "libs/rent/src",
+      "prefix": "la",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/rent"],
+          "options": {
+            "jestConfig": "libs/rent/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/rent/src/**/*.ts",
+              "libs/rent/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "ui": {
       "projectType": "library",
       "root": "libs/ui",

@@ -1,0 +1,19 @@
+<ng-container *transloco="let t; read: 'rent'">
+  <mat-toolbar>
+    <h1>{{ t('title') }}</h1>
+  </mat-toolbar>
+  <section>
+    <h2>{{ t('painting') }}</h2>
+    <article *ngIf="paintings$ | async as paintings">
+      <ng-container *ngFor="let painting of paintings">
+        <a *ngIf="painting.work as work" class="surface-1 card" matRipple [routerLink]="painting.id">
+          <img [path]="work.image" asset="fallback_painting" />
+          <h3>{{ work.title }}</h3>
+          <p class="mat-caption" *ngIf="painting.duration as duration">
+            {{ duration.from | date }} - {{ duration.to | date }}
+          </p>
+        </a>
+      </ng-container>
+    </article>
+  </section>
+</ng-container>

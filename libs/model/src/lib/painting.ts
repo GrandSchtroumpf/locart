@@ -29,7 +29,6 @@ export type PaintingType = typeof paintingTypes[number];
 
 export interface Painting {
   id: string;
-  path: string;
   image: Image;
   carousel: Image[];
   title: string;
