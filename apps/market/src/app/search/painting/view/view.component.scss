@@ -1,0 +1,8 @@
+@use "space";
+:host {
+  display: block;
+}
+
+header {
+  padding: space.$md;
+}

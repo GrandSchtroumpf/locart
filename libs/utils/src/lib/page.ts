@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Route } from '@angular/compiler/src/core';
+import { Route } from '@angular/router';
 import { ModuleWithProviders, NgModule, Type } from '@angular/core';
 import { RouterModule, provideRoutes } from '@angular/router';
 import { TranslocoModule } from '@ngneat/transloco';

@@ -7,6 +7,7 @@
             <img [path]="profile.avatar" asset="fallback_avatar" width="40" height="40"/>
             <p>{{ profile.name ?? t('profile') }}</p>
             <p class="mat-caption">{{ profile.email }}</p>
+            <button (click)="signout($event)">{{ t('signout') }}</button>
           </a>
         </header>
         <mat-nav-list>
@@ -28,11 +29,6 @@
           </ng-container>
   
         </mat-nav-list>
-        <footer>
-          <button (click)="signout()">
-            {{ t('signout') }}
-          </button>
-        </footer>
       </ng-container>
     </aside>
   </mat-sidenav>

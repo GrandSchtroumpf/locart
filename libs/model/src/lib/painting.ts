@@ -21,14 +21,18 @@ export const paintingTypes = [
   'collage'
 ];
 
+export type PaintingSize = typeof paintingSizes[number];
+export type PaintingStyle = typeof paintingStyles[number];
+export type PaintingType = typeof paintingTypes[number];
+
 export interface Painting {
   id: string;
   path: string;
   image: string;
   carousel: string[];
   title: string;
-  size: typeof paintingSizes[number];
-  style: typeof paintingStyles[number];
-  type: typeof paintingTypes[number];
+  size: PaintingSize;
+  style: PaintingStyle;
+  type: PaintingType;
   color: string;
 }

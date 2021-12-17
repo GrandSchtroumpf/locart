@@ -1,0 +1,38 @@
+<ng-container *transloco="let t; read: 'search.painting.list'">
+  <form [formGroup]="form">
+    <static-select name="size" scope="painting.size" [static]="$any(sizes)" multiple>
+      <mat-label>{{ t('size.label') }}</mat-label>
+    </static-select>
+
+    <static-select name="types" scope="painting.type" [static]="types" multiple>
+      <mat-label>{{ t('type.label') }}</mat-label>
+    </static-select>
+
+    <static-select name="styles" scope="painting.style" [static]="styles" multiple>
+      <mat-label>{{ t('style.label') }}</mat-label>
+    </static-select>
+  </form>
+
+  <ng-container *ngIf="paintings$ | async as paintings; else loading">
+    <section class="list" *ngIf="paintings.length else empty">
+      <ng-container *ngFor="let painting of paintings; trackBy: trackById">
+        <a class="surface-1 card" matRipple [routerLink]="painting.id">
+          <img [path]="painting.image" asset="fallback_painting" />
+          <h3>{{ painting.title }}</h3>
+        </a>
+      </ng-container>
+    </section>
+  </ng-container>
+
+  <ng-template #loading>
+    <section class="loading">
+      <mat-spinner></mat-spinner>
+    </section>
+  </ng-template>
+
+  <ng-template #empty>
+    <section class="empty">
+      <p>{{ t('empty') }}</p>
+    </section>
+  </ng-template>
+</ng-container>

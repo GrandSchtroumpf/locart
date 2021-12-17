@@ -13,7 +13,13 @@ import { MatIconModule } from '@angular/material/icon';
     SearchComponent
   ],
   imports: [
-    PageModule.forChild(SearchComponent),
+    PageModule.forChild(SearchComponent, [{
+      path: 'painting',
+      loadChildren: () => import('./painting/list/list.module').then(m => m.PaintingListModule)
+    }, {
+      path: 'painting/:paintingId',
+      loadChildren: () => import('./painting/view/view.module').then(m => m.PaintingViewModule)
+    }]),
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,

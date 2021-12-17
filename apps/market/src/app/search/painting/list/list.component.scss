@@ -1,0 +1,38 @@
+@use "space";
+
+:host {
+  display: block;
+}
+
+form {
+  display: grid;
+  grid-auto-flow: column;
+  gap: space.$md;
+  padding: space.$sm space.$md;
+}
+
+section {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: space.$md;
+  padding: space.$sm space.$md;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    img {
+      width: calc((100vw - var(--sidenav-width) - (4 * space.$md)) / 5);
+      height: calc((100vw - var(--sidenav-width) - (4 * space.$md)) / 5);
+      aspect-ratio: 1;
+    }
+    h3 {
+      padding: space.$sm space.$md;
+      margin-bottom: 0;
+    }
+  }
+}
+
+.loading, .empty {
+  padding: space.$lg;
+  place-items: center;
+}
