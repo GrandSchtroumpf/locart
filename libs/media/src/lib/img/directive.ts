@@ -10,8 +10,8 @@ import {
 } from '@angular/core';
 import { Image } from '@locart/model';
 import { BehaviorSubject, combineLatest, Subscription } from 'rxjs';
-import { map, startWith, switchMap } from 'rxjs/operators';
-import { getImgIxUrl, getSrcset } from './imgix';
+import { map } from 'rxjs/operators';
+import { getImgIxUrl } from './imgix';
 import { cropImg } from './crop';
 import { FireStorage } from 'ngfire';
 import { getDownloadURL } from 'firebase/storage';
@@ -28,6 +28,16 @@ function getImg(img: Image | string | undefined | null) {
   if (!img) return img;
   if (typeof img === 'string') return getImgIxUrl(img, { fit: 'max', auto: ['compress', 'format'] });
   return getImgIxUrl(img.path, { fit: 'max', auto: ['compress', 'format'], rect: img.rect });
+}
+
+function getImgStorage(img: Image | string | undefined | null) {
+  if (!img) return img;
+  if (typeof img === 'string') return getImgIxUrl(img, { fit: 'max', auto: ['compress', 'format'] });
+  if (!img.path) return img;
+  const path = img.path.split('/').join('%2F');
+  const prefix = 'http://localhost:9199/v0/b/default-bucket/o';
+  const queryParams = 'alt=media';
+  return `${prefix}/${path}?${queryParams}`;
 }
 
 function hasImageDiff(
@@ -91,7 +101,7 @@ export class ImgDirective implements OnInit, OnDestroy {
         this.srcset = undefined;
       } else {
         this.src = (media || asset) as string;
-        this.srcset = media ? getSrcset(media) : '';
+        // this.srcset = media ? getSrcset(media) : '';
       }
       this.cdr.markForCheck();
     });
@@ -111,7 +121,7 @@ export class ImgDirective implements OnInit, OnDestroy {
   // If we use the emulator mock imgix
   private getMedia() {
     return env.useEmulators
-      ? this.pathId.pipe(switchMap(img => this.getImg(img)), startWith(undefined))
+      ? this.pathId.pipe(map(getImgStorage))
       : this.pathId.pipe(map(getImg))
   }
 

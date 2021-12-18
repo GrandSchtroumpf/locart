@@ -21,7 +21,7 @@ nav {
         background-size: 4px 4px;
         background-repeat: no-repeat;
         background-position: bottom center;
-        transition: background-size 0.3s easing.$ease-in-out-back;
+        transition: background-size 0.3s easing.$ease-out-back;
       }
       a.active {
         background-image: linear-gradient(var(--primary), var(--primary));

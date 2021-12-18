@@ -50,7 +50,7 @@ function createImg(img: Partial<Image> = {}) {
 export class ImgUploaderComponent implements ControlValueAccessor {
 
   private state = new BehaviorSubject<ImgState>('loading');
-  private cropperRef?: MatDialogRef<any, void>;
+  private cropperRef?: MatDialogRef<unknown, void>;
   private hasNewFile = false;
 
   /** Initial value provided by the parent form to reset meta if file is uploaded */

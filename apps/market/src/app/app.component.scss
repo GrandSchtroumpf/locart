@@ -1,4 +1,5 @@
 @use 'space';
+@use 'easing';
 
 :host {
   display: block;
@@ -45,6 +46,20 @@ aside {
       margin: 0;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+  }
+  mat-nav-list {
+    a {
+      will-change: background-size;
+      background-image: linear-gradient(var(--outline), var(--outline));
+      background-size: 4px 4px;
+      background-repeat: no-repeat;
+      background-position: 4px center;
+      transition: background-size 0.3s easing.$ease-out-back;
+      &.active {
+        background-image: linear-gradient(var(--primary), var(--primary));
+        background-size: 4px 80%;
+      }
     }
   }
   footer button {
