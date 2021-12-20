@@ -75,7 +75,6 @@ export class ImgUploaderComponent implements ControlValueAccessor {
   @Input() preview = '';
   @Output() previewChange = new EventEmitter<string>();
   @Output() orginalFileChange = new EventEmitter<File>();
-  @Output() change = new EventEmitter<Image | null>();
   @Output() delete = new EventEmitter();
 
   @HostListener('dragover', ['$event'])
@@ -96,8 +95,8 @@ export class ImgUploaderComponent implements ControlValueAccessor {
     this.readFile($event.dataTransfer?.files.item(0) || null);
   }
 
-  private onchange = () => {};
-  private ontouch = () => {};
+  private onchange: () => unknown = () => null;
+  private ontouch: () => unknown = () => null;
 
   constructor(
     private auth: AuthService,
@@ -154,9 +153,9 @@ export class ImgUploaderComponent implements ControlValueAccessor {
   }
 
   async crop(cropper: ImageCropperComponent) {
-    const cropped = cropper?.crop();
     this.cropperRef?.close();
-    if (cropped && cropped.base64) {
+    const cropped = cropper?.crop();
+    if (cropped?.base64) {
       this.base64 = cropped.base64;
       this.img.rect = imgixRect(cropped.imagePosition);
       if (!this.hasNewFile && this.rawFile) {
@@ -164,6 +163,7 @@ export class ImgUploaderComponent implements ControlValueAccessor {
         this.add(this.rawFile);
         this.orginalFileChange.emit(this.rawFile);
       } else {
+        this.updateMeta();
         this.setState('selected');
         this.ontouch();
         this.onchange();
@@ -214,13 +214,7 @@ export class ImgUploaderComponent implements ControlValueAccessor {
 
   remove() {
     // Remove current path from queue
-    if (this.img.path) {
-      if (this.img.path === this.initial.path) {
-        this.service.setPath(this.img.path, null);
-      } else {
-        this.service.removePath(this.img.path);
-      }
-    }
+    if (this.img.path) this.service.removePath(this.img.path);
     this.img = createImg();
     this.base64 = '';
     // Upadate the form with new value now
@@ -261,7 +255,6 @@ export class ImgUploaderComponent implements ControlValueAccessor {
     this.onchange = () => {
       const img = this.img;
       fn(img);
-      this.change.next(img);
       this.previewChange.emit(this.base64);
     };
   }

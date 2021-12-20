@@ -1,8 +1,6 @@
 export type UploadState = 'success' | 'paused' | 'running' | 'canceled';
 export interface UploadMedia<T> {
-  file: Blob;
-  /** @deprecated use meta.field instead */
-  field?: string;
+  file?: Blob;
   meta: T;
 }
 

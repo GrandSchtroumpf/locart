@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '@locart/auth';
 import { MediaService } from '../service';
-import { ImageMetadata } from '@locart/model';
+import { Image, ImageMetadata } from '@locart/model';
 import { imgixRect, getFilename } from '../../utils'
 import { TRANSLOCO_SCOPE } from '@ngneat/transloco';
 import { fade, FormList } from '@locart/utils';
@@ -25,7 +25,7 @@ export class ListImgUploadComponent {
   @ViewChild('cropperDialog') cropperDialog?: TemplateRef<unknown>;
   @ViewChild(ImageCropperComponent) cropper?: ImageCropperComponent;
   @ViewChild(ImgUploaderComponent) uploader?: ImgUploaderComponent;
-  @Input() form = new FormList<string>();
+  @Input() form = new FormList<Image>();
   @Input() path!: string;
   @Input() field!: string;
   @Input() ratio: number = 4/3;

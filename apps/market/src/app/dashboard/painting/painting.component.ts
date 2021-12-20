@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@locart/auth';
 import { MediaService } from '@locart/media/upload';
-import { Painting, paintingSizes, paintingStyles, paintingTypes } from '@locart/model';
+import { Image, Painting, paintingSizes, paintingStyles, paintingTypes } from '@locart/model';
 import { PaintingService } from '@locart/painting';
 import { FormEntity, FormList, trackByIndex } from '@locart/utils';
 import type { FormComponent } from '@locart/ui/confirm';
@@ -15,7 +15,7 @@ class FormPainting extends FormEntity<Painting> {
     super({
       image: new FormControl(),
       title: new FormControl(),
-      carousel: new FormList<string>(),
+      carousel: new FormList<Image>(),
       size: new FormControl(),
       style: new FormControl(),
       type: new FormControl(),
@@ -23,7 +23,7 @@ class FormPainting extends FormEntity<Painting> {
   }
 
   get carousel() {
-    return this.get('carousel') as FormList<string>;
+    return this.get('carousel') as FormList<Image>;
   }
 }
 

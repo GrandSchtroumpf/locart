@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '@locart/auth';
 import { MediaService } from '@locart/media/upload';
 import { Profile } from '@locart/model';
-import { firstValueFrom, lastValueFrom } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'la-profile',
@@ -44,6 +44,7 @@ export class ProfileComponent implements OnInit {
     if (this.form.invalid) return this.form.markAsTouched();
     await this.mediaService.upload();
     await this.auth.update(this.form.value);
+    this.current = await firstValueFrom(this.auth.profile$);
     this.form.markAsPristine();
     this.snackbar.openFromTemplate(this.success, { duration: 3000 });
   }

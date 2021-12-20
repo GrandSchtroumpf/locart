@@ -4,13 +4,13 @@ import { Injectable, Injector } from '@angular/core';
 import { UploadMedia, FileMetadata } from '@locart/model';
 import { UploadWidgetComponent } from './upload-widget/upload-widget.component';
 import { FireStorage } from 'ngfire';
-import { deleteObject, uploadBytesResumable, UploadTask } from 'firebase/storage';
+import { deleteObject, uploadBytesResumable, UploadTask, updateMetadata, FullMetadata } from 'firebase/storage';
 
 @Injectable()
 export class MediaService {
   // Files to upload
   private overlayRef: OverlayRef | null = null;
-  private tasks: UploadTask[] = [];
+  private tasks: (UploadTask | Promise<FullMetadata>)[] = [];
   uploading: string[] = [];
   queue: Record<string, UploadMedia<any> | null> = {};
 
@@ -47,11 +47,17 @@ export class MediaService {
   setMeta<T extends FileMetadata>(path: string, meta: Partial<T>) {
     if (this.queue[path]) {
       this.queue[path]!.meta = { ...this.queue[path]!.meta, ...meta };
+    } else {
+      this.queue[path] = { meta };
     }
   }
 
   removePath(path: string) {
-    delete this.queue[path];
+    if (path in this.queue) {
+      delete this.queue[path];
+    } else {
+      this.queue[path] = null;
+    }
   }
 
   isUploading(path: string) {
@@ -61,21 +67,20 @@ export class MediaService {
     });
   }
 
-  async upload<Meta extends FileMetadata>(
-    onUploaded?: (meta: Meta, path: string) => void,
-    onError?: (err: unknown, meta: Meta, path: string) => void
-  ) {
+  async upload() {
     this.uploading = [];
     for (const [path, media] of Object.entries(this.queue)) {
+      console.log({path, media});
       const ref = this.storage.ref(path);
       if (media === null) {
         deleteObject(ref);
+      } else if (!media.file) {
+        const task = updateMetadata(ref, { customMetadata: media.meta });
+        this.tasks.push(task);
       } else {
         this.uploading.push(path);
         const task = uploadBytesResumable(ref, media.file, { customMetadata: media.meta });
         this.tasks.push(task);
-        if (onUploaded) task.then(() => onUploaded(media.meta, path));
-        if (onError) task.catch((err: unknown) => onError(err, media.meta, path));
       }
     }
 

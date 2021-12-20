@@ -11,10 +11,6 @@ import {
 import { Image } from '@locart/model';
 import { BehaviorSubject, combineLatest, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { getImgIxUrl } from './imgix';
-import { cropImg } from './crop';
-import { FireStorage } from 'ngfire';
-import { getDownloadURL } from 'firebase/storage';
 import env from '@env';
 
 const extensions = ['webp', 'svg', 'jpeg', 'jpg', 'png'];
@@ -24,30 +20,41 @@ function hasExtension(assetId: string) {
   return ext && extensions.includes(ext);
 }
 
-function getImg(img: Image | string | undefined | null) {
-  if (!img) return img;
-  if (typeof img === 'string') return getImgIxUrl(img, { fit: 'max', auto: ['compress', 'format'] });
-  return getImgIxUrl(img.path, { fit: 'max', auto: ['compress', 'format'], rect: img.rect });
+
+
+function getImgUrl(img: Image, w?: number) {
+  if (!img.path) return img.path;
+  const prefix = `http://localhost:9199/v0/b/${env.firebase.options.storageBucket}/o`;
+  const queryParams = 'alt=media';
+
+  const [dirPath, extension] = img.path.split('.');
+  const path = w
+    ? `${dirPath}/${w}w_${img.rect}.${extension}`.split('/').join('%2F')
+    : `${dirPath}/${img.rect}.${extension}`.split('/').join('%2F');
+
+  return `${prefix}/${path}?${queryParams}`
 }
 
-function getImgStorage(img: Image | string | undefined | null) {
-  if (!img) return img;
-  if (typeof img === 'string') return getImgIxUrl(img, { fit: 'max', auto: ['compress', 'format'] });
-  if (!img.path) return img;
-  const path = img.path.split('/').join('%2F');
-  const prefix = 'http://localhost:9199/v0/b/default-bucket/o';
-  const queryParams = 'alt=media';
-  return `${prefix}/${path}?${queryParams}`;
+function getImgStorage(img: Image | undefined | null) {
+  if (!img) return null;
+  if (typeof img === 'string') return null;
+  if (!img.path) return null;
+  const src = getImgUrl(img);
+  const sizes: string[] = [];
+  for (let w = 40; w < 500; w = w+80) {
+    sizes.push(`${getImgUrl(img, w)} ${w}w`);
+  }
+  const srcset = sizes.join();
+  return { src, srcset };
 }
 
 function hasImageDiff(
-  a: Image | string | undefined | null,
-  b: Image | string | undefined | null,
+  a: Image | undefined | null,
+  b: Image | undefined | null,
 ) {
   if (!a && !b) return false;
   if (!a || !b) return true;
   if (typeof a !== typeof b) return true;
-  if (typeof a === 'string' || typeof b === 'string') return a !== b;
   return a.path !== b.rect || a.path !== b.path;
 }
 
@@ -55,21 +62,22 @@ function hasImageDiff(
 @Directive({ selector: 'img[path], img[asset]' })
 export class ImgDirective implements OnInit, OnDestroy {
   private sub?: Subscription;
-  private pathId = new BehaviorSubject<Image | string | undefined | null>(null);
+  private pathId = new BehaviorSubject<Image | undefined | null>(null);
   private assetId = new BehaviorSubject<string | null>('');
   private hasError = new BehaviorSubject(false);
-  private urls: Record<string, string> = {};
+  private maxRetry = 5;
+  private lastTry = 0;
   @HostBinding() src?: string;
   @HostBinding() srcset?: string;
 
   @HostListener('error')
   onError() {
     if (!this.hasError.getValue()) {
-      this.hasError.next(true);
+      this.retry();
     }
   }
 
-  @Input() set path(pathId: Image | string | undefined | null) {
+  @Input() set path(pathId: Image | undefined | null) {
     if (hasImageDiff(this.pathId.getValue(), pathId)) {
       this.pathId.next(pathId);
     }
@@ -81,10 +89,7 @@ export class ImgDirective implements OnInit, OnDestroy {
     }
   }
 
-  constructor(
-    private storage: FireStorage,
-    private cdr: ChangeDetectorRef,
-  ) {}
+  constructor(private cdr: ChangeDetectorRef) {}
 
   get extension() {
     return 'svg';
@@ -92,7 +97,7 @@ export class ImgDirective implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.sub = combineLatest([
-      this.getMedia(),
+      this.pathId.pipe(map(getImgStorage)),
       this.assetId.pipe(map((assetId) => this.fromAsset(assetId))),
       this.hasError.asObservable(),
     ]).subscribe(([media, asset, hasError]) => {
@@ -100,8 +105,8 @@ export class ImgDirective implements OnInit, OnDestroy {
         this.src = asset;
         this.srcset = undefined;
       } else {
-        this.src = (media || asset) as string;
-        // this.srcset = media ? getSrcset(media) : '';
+        this.src = (media?.src || asset) as string;
+        this.srcset = media?.srcset || '';
       }
       this.cdr.markForCheck();
     });
@@ -115,25 +120,20 @@ export class ImgDirective implements OnInit, OnDestroy {
     if (!assetId) return;
     return hasExtension(assetId)
       ? `assets/img/${assetId}`
-      : `assets/img/${assetId}.${this.extension}`; // not used
+      : `assets/img/${assetId}.${this.extension}`;
   }
 
-  // If we use the emulator mock imgix
-  private getMedia() {
-    return env.useEmulators
-      ? this.pathId.pipe(map(getImgStorage))
-      : this.pathId.pipe(map(getImg))
-  }
-
-  private async getImg(img: string | Image | null | undefined) {
-    if (!img) return img;
-    if (typeof img === 'string') return img;
-    if (!img.path || !img.rect) return '';
-    if (!this.urls[img.path]) {
-      const ref = this.storage.ref(img.path);
-      this.urls[img.path] = await getDownloadURL(ref);
-    }
-    return cropImg(this.urls[img.path], img.rect);
+  private retry() {
+    // srcet might triggers multiple errors at the same time. Prevent that
+    if (this.lastTry && (performance.now() - this.lastTry) < 200) return;
+    this.lastTry = performance.now();
+    this.src = this.fromAsset(this.assetId.getValue());
+    this.srcset = '';
+    setTimeout(() => {
+      if (!this.maxRetry) return this.hasError.next(true);
+      this.maxRetry -= 1;
+      this.pathId.next(this.pathId.getValue());
+    }, 200);
   }
 }
 

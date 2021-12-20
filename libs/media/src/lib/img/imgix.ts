@@ -1,4 +1,5 @@
 import env from '@env';
+import { Image } from '@locart/model';
 type ImgixAuto = 'compress' | 'enhance' | 'format' | 'redeye';
 type ImgixFit =
   | 'clamp'
@@ -31,6 +32,13 @@ export interface ImageParameters {
   /** Crop of the image https://docs.imgix.com/apis/rendering/size/rect */
   rect?: string | null;
 }
+
+function getImg(img: Image | string | undefined | null) {
+  if (!img) return img;
+  if (typeof img === 'string') return getImgIxUrl(img, { fit: 'max', auto: ['compress', 'format'] });
+  return getImgIxUrl(img.path, { fit: 'max', auto: ['compress', 'format'], rect: img.rect });
+}
+
 
 export function getSrcset(url: string) {
   // If base64 return empty string

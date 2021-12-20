@@ -40,6 +40,9 @@
       ]
     }
   ],
+  "functions": {
+    "source": "dist/apps/functions"
+  },
   "firestore": {
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
