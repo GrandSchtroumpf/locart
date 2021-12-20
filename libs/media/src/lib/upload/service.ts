@@ -70,7 +70,6 @@ export class MediaService {
   async upload() {
     this.uploading = [];
     for (const [path, media] of Object.entries(this.queue)) {
-      console.log({path, media});
       const ref = this.storage.ref(path);
       if (media === null) {
         deleteObject(ref);

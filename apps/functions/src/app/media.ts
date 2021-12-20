@@ -41,7 +41,6 @@ const storageBucket = env.firebase.options.storageBucket;
 // export const onImgUploaded = functions.storage.bucket(storageBucket).object().onFinalize(cropImg);
 export const onImgDeleted = functions.storage.bucket(storageBucket).object().onDelete(removeCroppedImg);
 export const onMetadataChange = functions.storage.bucket(storageBucket).object().onMetadataUpdate(async object => {
-  console.log(object);
   await removeCroppedImg(object);
   await cropImg(object);
 });
