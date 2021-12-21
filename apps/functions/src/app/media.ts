@@ -6,6 +6,7 @@ import * as os from "os";
 import * as path from "path";
 import * as sharp from "sharp";
 import env from '@env';
+import { srcsetWidths } from "@locart/model";
 
 sharp.cache(false);
 
@@ -125,10 +126,7 @@ async function cropImg(object: functions.storage.ObjectMetadata) {
       });
     }
 
-    const operations: Promise<unknown>[] = [];
-    for (let w = 40; w < 500; w = w+80) {
-      operations.push(resizeFile(w));
-    }
+    const operations: Promise<unknown>[] = srcsetWidths.map(resizeFile);
     await Promise.all(operations);
     
   } catch (err) {

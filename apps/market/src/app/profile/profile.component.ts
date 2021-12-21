@@ -42,7 +42,7 @@ export class ProfileComponent implements OnInit {
 
   async save() {
     if (this.form.invalid) return this.form.markAsTouched();
-    await this.mediaService.upload();
+    await this.mediaService.uploadFiles();
     await this.auth.update(this.form.value);
     this.current = await firstValueFrom(this.auth.profile$);
     this.form.markAsPristine();

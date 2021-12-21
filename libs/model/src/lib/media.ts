@@ -28,3 +28,12 @@ export interface FileStorage {
   title: string;
   url: string;
 }
+
+function getScrsetWidths(from: number, to: number, step: number) {
+  const widths: number[] = [];
+  for (let w = from; w < to; w += step) {
+    widths.push(w)
+  }
+  return widths;
+}
+export const srcsetWidths = getScrsetWidths(40, 1000, 120);

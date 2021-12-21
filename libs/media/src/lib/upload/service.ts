@@ -1,31 +1,24 @@
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { Inject, Injectable, Injector } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { UploadMedia, FileMetadata } from '@locart/model';
 import { UploadWidgetComponent } from './upload-widget/upload-widget.component';
-import { FireStorage, FIREBASE_APP } from 'ngfire';
-import { deleteObject, uploadBytesResumable, UploadTask, updateMetadata, FullMetadata, getStorage, ref, connectStorageEmulator } from 'firebase/storage';
-import { FirebaseApp } from 'firebase/app';
+import { FireStorage } from 'ngfire';
+import { deleteObject, uploadBytesResumable, UploadTask, updateMetadata, FullMetadata } from 'firebase/storage';
 
-function getRef(app: FirebaseApp, url: string) {
-  const storage = getStorage(app, 'upload-bucket');
-  connectStorageEmulator(storage, 'localhost', 9199);
-  return ref(storage, url);
-}
 
 @Injectable()
-export class MediaService {
+export class MediaService extends FireStorage {
   // Files to upload
   private overlayRef: OverlayRef | null = null;
   private tasks: (UploadTask | Promise<FullMetadata>)[] = [];
+  protected bucket = 'upload-bucket';
   uploading: string[] = [];
   queue: Record<string, UploadMedia<any> | null> = {};
 
-  constructor(
-    @Inject(FIREBASE_APP) private app: FirebaseApp,
-    private storage: FireStorage,
-    private overlay: Overlay,
-  ) {}
+  constructor(private overlay: Overlay) {
+    super()
+  }
 
   private attachWidget() {
     if (this.overlayRef) return;
@@ -78,10 +71,10 @@ export class MediaService {
     });
   }
 
-  async upload() {
+  async uploadFiles() {
     this.uploading = [];
     for (const [path, media] of Object.entries(this.queue)) {
-      const ref = getRef(this.app, path) // this.storage.ref(path);
+      const ref = this.ref(path) // this.storage.ref(path);
       if (media === null) {
         deleteObject(ref);
       } else if (!media.file) {

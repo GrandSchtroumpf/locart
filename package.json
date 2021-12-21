@@ -40,7 +40,7 @@
     "firebase": "^9.6.1",
     "firebase-admin": "^10.0.1",
     "firebase-functions": "^3.16.0",
-    "ngfire": "0.0.10",
+    "ngfire": "0.0.11",
     "ngx-image-cropper": "^5.0.1",
     "ngx-quicklink": "^0.2.7",
     "rxjs": "~7.4.0",

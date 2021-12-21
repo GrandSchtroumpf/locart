@@ -8,7 +8,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { Image } from '@locart/model';
+import { Image, srcsetWidths } from '@locart/model';
 import { BehaviorSubject, combineLatest, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import env from '@env';
@@ -40,11 +40,7 @@ function getImgStorage(img: Image | undefined | null) {
   if (typeof img === 'string') return null;
   if (!img.path) return null;
   const src = getImgUrl(img);
-  const sizes: string[] = [];
-  for (let w = 40; w < 500; w = w+80) {
-    sizes.push(`${getImgUrl(img, w)} ${w}w`);
-  }
-  const srcset = sizes.join();
+  const srcset = srcsetWidths.map(w => `${getImgUrl(img, w)} ${w}w`).join();
   return { src, srcset };
 }
 
@@ -125,7 +121,7 @@ export class ImgDirective implements OnInit, OnDestroy {
 
   private retry() {
     // srcet might triggers multiple errors at the same time. Prevent that
-    if (this.lastTry && (performance.now() - this.lastTry) < 200) return;
+    if (this.lastTry && (performance.now() - this.lastTry) < 500) return;
     this.lastTry = performance.now();
     this.src = this.fromAsset(this.assetId.getValue());
     this.srcset = '';
@@ -133,7 +129,7 @@ export class ImgDirective implements OnInit, OnDestroy {
       if (!this.maxRetry) return this.hasError.next(true);
       this.maxRetry -= 1;
       this.pathId.next(this.pathId.getValue());
-    }, 200);
+    }, 500);
   }
 }
 

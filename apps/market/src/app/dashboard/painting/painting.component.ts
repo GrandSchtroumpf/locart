@@ -77,7 +77,7 @@ export class PaintingComponent implements OnInit, FormComponent {
   async save() {
     if (this.form.invalid) return this.form.markAsTouched();
     const content = { owner: this.uid, ...this.form.value };
-    await this.mediaService.upload();
+    await this.mediaService.uploadFiles();
     if (this.isCreateForm) {
       await this.service.add(content);
     } else {
