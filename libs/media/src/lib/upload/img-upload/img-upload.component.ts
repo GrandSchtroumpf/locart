@@ -53,9 +53,6 @@ export class ImgUploaderComponent implements ControlValueAccessor {
   private cropperRef?: MatDialogRef<unknown, void>;
   private hasNewFile = false;
 
-  /** Initial value provided by the parent form to reset meta if file is uploaded */
-  private initial: Image = createImg();
-
   /** Current image data */
   img: Image = createImg();
   /** Raw file uploaded by the user */
@@ -230,7 +227,6 @@ export class ImgUploaderComponent implements ControlValueAccessor {
   //////////////////////////
 
   async writeValue(value: Image | null) {
-    this.initial = createImg(value || {});
     this.hasNewFile = false;
     delete this.rawFile;
 

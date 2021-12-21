@@ -1,10 +1,17 @@
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { Injectable, Injector } from '@angular/core';
+import { Inject, Injectable, Injector } from '@angular/core';
 import { UploadMedia, FileMetadata } from '@locart/model';
 import { UploadWidgetComponent } from './upload-widget/upload-widget.component';
-import { FireStorage } from 'ngfire';
-import { deleteObject, uploadBytesResumable, UploadTask, updateMetadata, FullMetadata } from 'firebase/storage';
+import { FireStorage, FIREBASE_APP } from 'ngfire';
+import { deleteObject, uploadBytesResumable, UploadTask, updateMetadata, FullMetadata, getStorage, ref, connectStorageEmulator } from 'firebase/storage';
+import { FirebaseApp } from 'firebase/app';
+
+function getRef(app: FirebaseApp, url: string) {
+  const storage = getStorage(app, 'upload-bucket');
+  connectStorageEmulator(storage, 'localhost', 9199);
+  return ref(storage, url);
+}
 
 @Injectable()
 export class MediaService {
@@ -14,7 +21,11 @@ export class MediaService {
   uploading: string[] = [];
   queue: Record<string, UploadMedia<any> | null> = {};
 
-  constructor(private storage: FireStorage, private overlay: Overlay) {}
+  constructor(
+    @Inject(FIREBASE_APP) private app: FirebaseApp,
+    private storage: FireStorage,
+    private overlay: Overlay,
+  ) {}
 
   private attachWidget() {
     if (this.overlayRef) return;
@@ -70,7 +81,7 @@ export class MediaService {
   async upload() {
     this.uploading = [];
     for (const [path, media] of Object.entries(this.queue)) {
-      const ref = this.storage.ref(path);
+      const ref = getRef(this.app, path) // this.storage.ref(path);
       if (media === null) {
         deleteObject(ref);
       } else if (!media.file) {
@@ -87,6 +98,7 @@ export class MediaService {
     // Prevent Promise.all to fails
     const tasks = this.tasks.map((task) => task.catch((err) => console.error(err)));
     await Promise.all(tasks);
+    // TODO: throw if all failed
     this.detachWidget();
     this.queue = {};
     this.uploading = []; // TODO: remove uploading keys one by one

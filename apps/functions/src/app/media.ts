@@ -35,7 +35,7 @@ function resize(path: string, width: number, output: string) {
  * When an image is uploaded in the Storage bucket, we generate a resized image automatically using
  * the Sharp image converting library.
  */
-const storageBucket = env.firebase.options.storageBucket;
+const storageBucket = 'upload-bucket' //  env.firebase.options.storageBucket;
 
 
 // export const onImgUploaded = functions.storage.bucket(storageBucket).object().onFinalize(cropImg);
@@ -59,7 +59,7 @@ async function removeCroppedImg(object: functions.storage.ObjectMetadata) {
   if (resizedImage || resizedImage === "true") return log('cropped image. Do nothing');
   if (!rect) return log('images was not cropped');
 
-  const bucket = getStorage().bucket(object.bucket);
+  const bucket = getStorage().bucket(env.firebase.options.storageBucket);
 
   const extension = path.extname(name);
   const dir = path.dirname(name);
@@ -86,46 +86,55 @@ async function cropImg(object: functions.storage.ObjectMetadata) {
   if (!rect) return log('No rect provided in metadata');
 
 
-  const bucket = getStorage().bucket(object.bucket);
+  const storage = getStorage();
   const fileDir = path.dirname(name);
   const fileExtension = path.extname(name);
   const fullName = path.basename(name);
   const baseName = path.basename(name, fileExtension);
 
-  let tempFilePath = '';
-  let tempCroppedFile = '';
+  const tempFiles: string[] = [];
   try {
-    tempFilePath = path.join(os.tmpdir(), fullName);
+    const tempOriginal = path.join(os.tmpdir(), fullName);
+    tempFiles.push(tempOriginal);
 
     log('Downloading image');
-    await bucket.file(name).download({ destination: tempFilePath, validation: false });
+    console.log('bucket', object.bucket);
+    await storage.bucket(object.bucket).file(name).download({ destination: tempOriginal, validation: false });
 
-    tempCroppedFile = path.join(os.tmpdir(), `cropped_${fullName}`);
+    const tempCropped = path.join(os.tmpdir(), `cropped_${fullName}`);
+    tempFiles.push(tempCropped);
 
     log('Cropping image');
-    await crop(tempFilePath, rect, tempCroppedFile);
+    await crop(tempOriginal, rect, tempCropped);
 
+    const defaultBucket = storage.bucket(env.firebase.options.storageBucket);
     log('Uploading images');
     const metadata = { metadata: { resizedImage: true } };
-    bucket.upload(tempCroppedFile, {
+    defaultBucket.upload(tempCropped, {
       destination: `${fileDir}/${baseName}/${rect}${fileExtension}`,
       metadata
     });
     
-    for (let w = 40; w < 500; w = w+80) {
+    const resizeFile = async (w: number) => {
       const temp = path.join(os.tmpdir(), `${w}w_${fullName}`);
-      await resize(tempCroppedFile, w, temp);
-      bucket.upload(temp, {
+      tempFiles.push(temp);
+      await resize(tempCropped, w, temp);
+      return defaultBucket.upload(temp, {
         destination: `${fileDir}/${baseName}/${w}w_${rect}${fileExtension}`,
         metadata
-      })
+      });
     }
+
+    const operations: Promise<unknown>[] = [];
+    for (let w = 40; w < 500; w = w+80) {
+      operations.push(resizeFile(w));
+    }
+    await Promise.all(operations);
     
   } catch (err) {
     functions.logger.error(err)
   } finally {
     log('remove temp files');
-    if (tempFilePath) fs.unlinkSync(tempFilePath);
-    if (tempCroppedFile) fs.unlinkSync(tempCroppedFile);
+    tempFiles.forEach(file => fs.unlinkSync(file));
   }
 }
