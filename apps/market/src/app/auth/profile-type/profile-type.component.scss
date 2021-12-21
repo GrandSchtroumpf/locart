@@ -1,0 +1,21 @@
+@use 'space';
+@use '@angular/material' as mat;
+
+:host {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 2fr;
+  gap: space.$lg;
+  padding: space.$lg;
+}
+
+h1 {
+  place-self: center;
+  grid-column: 1 / span 2;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+}

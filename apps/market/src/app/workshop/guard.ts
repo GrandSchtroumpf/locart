@@ -6,11 +6,11 @@ import { map } from "rxjs";
 
 
 @Injectable({ providedIn: 'root' })
-export class DashboardGuard implements CanActivate {
+export class WorkshopGuard implements CanActivate {
   constructor(private auth: AuthService, private router: Router) {}
   canActivate(){
     return this.auth.profile$.pipe(
-      map(profile => profile?.isSeller || this.router.parseUrl('/'))
+      map(profile => profile?.type === 'seller' || this.router.parseUrl('/'))
     );
   }
 }

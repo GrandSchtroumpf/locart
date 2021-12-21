@@ -45,9 +45,9 @@ import env from '@env';
       canActivate: [IsConnectedGuard],
       loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)
     }, {
-      path: 'dashboard',
+      path: 'workshop',
       canActivate: [IsConnectedGuard],
-      loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+      loadChildren: () => import('./workshop/workshop.module').then(m => m.WorkshopModule)
     }, {
       path: 'rent',
       canActivate: [IsConnectedGuard],

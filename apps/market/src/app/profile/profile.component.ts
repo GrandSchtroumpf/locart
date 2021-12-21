@@ -48,11 +48,4 @@ export class ProfileComponent implements OnInit {
     this.form.markAsPristine();
     this.snackbar.openFromTemplate(this.success, { duration: 3000 });
   }
-  
-  async becomeSeller() {
-    if (!this.current || this.current.isSeller) return;
-    await this.auth.update({ isSeller: true });
-    this.current.isSeller = true;
-    this.cdr.markForCheck();
-  }
 }

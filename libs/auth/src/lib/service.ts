@@ -24,7 +24,7 @@ export class AuthService extends FireAuth<Profile> {
   verificationUrl = env.baseUrl;
   redirectUrl?: string;
 
-  isSeller$ = this.profile$.pipe(map((profile) => profile?.isSeller ?? false));
+  isSeller$ = this.profile$.pipe(map((profile) => profile?.type === 'seller' ?? false));
 
   constructor() {
     super();
@@ -34,7 +34,6 @@ export class AuthService extends FireAuth<Profile> {
     return {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       email: user.email!,
-      isSeller: false,
       avatar: null,
       name: user.displayName,
       tel: user.phoneNumber,

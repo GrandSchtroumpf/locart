@@ -18,17 +18,23 @@
             <mat-icon mat-list-icon>search</mat-icon>
             <p matLine>{{ t('search') }}</p>  
           </a>
-          <a mat-list-item routerLink="/rent" routerLinkActive="active">
-            <mat-icon mat-list-icon>storefront</mat-icon>
-            <p matLine>{{ t('rent') }}</p>  
-          </a>
-          
-          <ng-container *ngIf="profile.isSeller">
+          <ng-container *ngIf="profile.type as type">
             <mat-divider></mat-divider>
-            <a mat-list-item routerLink="/dashboard" routerLinkActive="active">
-              <mat-icon mat-list-icon>palette</mat-icon>
-              <p matLine>{{ t('dashboard') }}</p>  
-            </a>
+            <ng-container [ngSwitch]="type">
+              <ng-container *ngSwitchCase="'buyer'">
+                <a mat-list-item routerLink="/rent" routerLinkActive="active">
+                  <mat-icon mat-list-icon>storefront</mat-icon>
+                  <p matLine>{{ t('rent') }}</p>  
+                </a>
+              </ng-container>
+              
+              <ng-container *ngSwitchCase="'seller'">
+                <a mat-list-item routerLink="/workshop" routerLinkActive="active">
+                  <mat-icon mat-list-icon>palette</mat-icon>
+                  <p matLine>{{ t('workshop') }}</p>  
+                </a>
+              </ng-container>
+            </ng-container>
           </ng-container>
           
         </mat-nav-list>

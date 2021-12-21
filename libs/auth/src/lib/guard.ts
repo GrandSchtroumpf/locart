@@ -64,9 +64,13 @@ export class IsConnectedGuard implements CanActivate {
       return this.router.createUrlTree([redirect]);
     }
 
+    if (!profile.type) {
+      return this.router.createUrlTree(['/auth/profile-type']);
+    }
+
     delete this.auth.redirectUrl;
-    if (state.url.startsWith('/s')) {
-      if (!profile.isSeller) {
+    if (state.url.startsWith('/workshop')) {
+      if (profile.type !== 'seller') {
         return this.router.createUrlTree(['/profile']);
       }
       return true;

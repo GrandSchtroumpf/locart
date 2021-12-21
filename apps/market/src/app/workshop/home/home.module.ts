@@ -25,7 +25,7 @@ import { MatRippleModule } from '@angular/material/core';
   ],
   providers: [{
     provide: TRANSLOCO_SCOPE,
-    useValue: 'dashboard'
+    useValue: 'workshop'
   }]
 })
 export class HomeModule { }

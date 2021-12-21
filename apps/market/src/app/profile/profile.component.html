@@ -4,10 +4,6 @@
       <mat-icon>arrow_back</mat-icon>
     </a>
     <h1>{{ t('title') }}</h1>
-
-    <button mat-flat-button color="accent" (click)="becomeSeller()" *ngIf="!current?.isSeller">
-      {{ t('become-seller') }}
-    </button>
   </mat-toolbar>
 
   <form [formGroup]="form" (ngSubmit)="save()">

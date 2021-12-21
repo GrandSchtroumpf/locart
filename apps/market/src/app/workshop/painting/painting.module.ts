@@ -43,7 +43,7 @@ import { MatSelectModule } from '@angular/material/select';
   ],
   providers: [{
     provide: TRANSLOCO_SCOPE,
-    useValue: 'dashboard'
+    useValue: 'workshop'
   }]
 })
 export class PaintingModule { }

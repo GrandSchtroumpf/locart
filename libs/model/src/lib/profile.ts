@@ -1,7 +1,7 @@
 import { Image } from "./media";
 
 export interface Profile {
-  isSeller: boolean;
+  type?: 'seller' | 'buyer';
   email: string;
   name: string | null;
   avatar: Image | null;
