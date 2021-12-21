@@ -27,6 +27,7 @@
       <article>
         <h2>{{ painting.title }}</h2>
         <static-tags scope="painting" [value]="painting" [keys]="['style', 'size', 'type']"></static-tags>
+        <p *ngIf="painting.description">{{ painting.description }}</p>
         <div class="img-grid">
           <img *ngFor="let img of painting.carousel" [path]="img" asset="fallback_carousel" />
         </div>

@@ -12,26 +12,40 @@
   <form [formGroup]="form" (ngSubmit)="save()">
     <img-upload formControlName="image" field="image" path="image"></img-upload>
 
-    <mat-form-field>
+    <list-img-upload [form]="form.carousel" field="carousel" path="carousel"></list-img-upload>
+
+    <mat-form-field class="row">
       <mat-label>{{ t('title.label') }}</mat-label>
-      <input matInput type="text" formControlName="title" />
+      <input matInput type="text" formControlName="title" required/>
+      <mat-error *ngIf="form.hasError('required', 'title')">{{ t('title.required') }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="row">
+      <mat-label>{{ t('description.label') }}</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>{{ t('price.label') }}</mat-label>
+      <input matInput type="number" formControlName="price" required/>
+      <mat-icon matSuffix>euro</mat-icon>
+      <mat-hint>{{ t('price.hint') }}</mat-hint>
+      <mat-error *ngIf="form.hasError('required', 'price')">{{ t('price.required') }}</mat-error>
     </mat-form-field>
 
     <static-select name="size" scope="painting.size" [static]="$any(sizes)">
       <mat-label>{{ t('size.label') }}</mat-label>
     </static-select>
 
-    <static-select name="style" scope="painting.style" [static]="styles">
+    <static-select name="style" scope="painting.style" [static]="styles" multiple>
       <mat-label>{{ t('style.label') }}</mat-label>
     </static-select>
 
-    <static-select name="type" scope="painting.type" [static]="types">
+    <static-select name="type" scope="painting.type" [static]="types" multiple>
       <mat-label>{{ t('type.label') }}</mat-label>
     </static-select>
 
-    <list-img-upload [form]="form.carousel" field="carousel" path="carousel"></list-img-upload>
-
-    <footer>
+    <footer class="row">
       <button type="button" mat-button (click)="reset()">{{ t('cancel') }}</button>
       <button type="submit" mat-flat-button color="primary">{{ t('save') }}</button>
     </footer>

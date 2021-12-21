@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, OnInit, ViewChild, TemplateRef } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,12 +13,14 @@ import type { FormComponent } from '@locart/ui/confirm';
 class FormPainting extends FormEntity<Painting> {
   constructor() {
     super({
-      image: new FormControl(),
-      title: new FormControl(),
+      image: new FormControl(null, Validators.required),
+      title: new FormControl(null, Validators.required),
+      price: new FormControl(null, Validators.required),
+      description: new FormControl(),
       carousel: new FormList<Image>(),
-      size: new FormControl(),
-      style: new FormControl(),
-      type: new FormControl(),
+      size: new FormControl(null, Validators.required),
+      style: new FormControl([]),
+      type: new FormControl([]),
     })
   }
 

@@ -9,7 +9,16 @@
   "painting": {
     "mainTitle": "Peinture",
     "title": {
-      "label": "Titre de l'oeuvre"
+      "label": "Titre de l'oeuvre",
+      "required": "Veuillez ajoutez un titre"
+    },
+    "description": {
+      "label": "Description"
+    },
+    "price": {
+      "label": "Prix estimé",
+      "hint": "Une oeuvre estimer à moins de 100€ est plus facile à louer.",
+      "required": "Nous avons besoin d'une estimation ."
     },
     "size": {
       "label": "Taille"

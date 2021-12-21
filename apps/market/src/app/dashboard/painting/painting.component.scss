@@ -9,12 +9,17 @@
 
 form {
   display: grid;
-  gap: space.$sm;
+  gap: space.$md;
   padding: space.$md;
+  grid-template-columns: 1fr 1fr;
 }
 
-img-upload {
-  height: 200px;
+img-upload, list-img-upload {
+  height: 300px;
+}
+
+.row {
+  grid-column: 1 / span 2;
 }
 
 footer {

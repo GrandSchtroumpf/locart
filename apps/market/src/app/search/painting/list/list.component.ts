@@ -28,9 +28,16 @@ class SearchForm extends FormEntity<PaintingSearch> {
   }
 }
 
-function includesField<T, K extends keyof T>(value: T, field: K, search?: T[K][]) {
+type Search<T, K extends keyof T> = T[K] extends Array<infer I> ? I[] : T[K][];
+
+function includesField<T, K extends keyof T>(value: T, key: K, search?: Search<T, K>) {
   if (!search?.length) return true;
-  return search.includes(value[field]);
+  const field = value[key];
+  if (Array.isArray(field)) {
+    return field.some(v => search.includes(v));
+  } else {
+    return search.includes(field);
+  }
 }
 
 function notInRent(painting: Painting, rents: Rent[], duration?: Duration) {

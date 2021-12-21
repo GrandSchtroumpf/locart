@@ -32,8 +32,10 @@ export interface Painting {
   image: Image;
   carousel: Image[];
   title: string;
+  description: string;
   size: PaintingSize;
-  style: PaintingStyle;
-  type: PaintingType;
+  style: PaintingStyle[];
+  type: PaintingType[];
   color: string;
+  price: number;
 }
