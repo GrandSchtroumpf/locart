@@ -1,9 +1,9 @@
 {
   "home": {
     "title": "Mon Atelier",
+    "add": "Ajouter une oeuvre",
     "painting": {
-      "title": "Mes Peintures",
-      "add": "Ajouter une peinture"
+      "title": "Mes Peintures"
     }
   },
   "painting": {
@@ -41,5 +41,9 @@
       "leave": "Quitter",
       "save": "Sauvegarder et quitter"
     }
+  },
+  "type": {
+    "title": "Quel type d'oeuvre souhaitez vous ajouter ?",
+    "painting": "Peinture"
   }
 }

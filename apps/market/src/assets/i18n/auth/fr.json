@@ -27,6 +27,11 @@
     "signout": "Se déconnecter",
     "mail-resent": "Nouveau mail envoyé"
   },
+  "profile-type": {
+    "title": "Choisissez votre profil",
+    "buyer": "Je veux louer des oeuvres à des artistes locaux",
+    "seller": "Je veux mettre mes oeuvres en location"
+  },
   "signin": {
     "signin": "Se connecter",
     "signup": "Créer un compte",

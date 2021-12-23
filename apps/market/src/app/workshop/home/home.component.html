@@ -1,23 +1,25 @@
 <ng-container *transloco="let t; read: 'workshop.home'">
   <header class="main">
     <h1 class="mat-display-2">{{ t('title') }}</h1>
+    <a mat-flat-button color="accent" routerLink="../type">
+      {{ t('add') }}
+    </a>
   </header>
   <section>
-    <article *ngIf="paintings$ | async as paintings">
-      <header>
-        <h2>{{ t('painting.title') }}</h2>
-        <a mat-flat-button color="primary" routerLink="../painting/create">
-          {{ t('painting.add') }}
-        </a>
-      </header>
-      <div class="card-list">
-        <ng-container *ngFor="let painting of paintings">
-          <a matRipple [routerLink]="['../painting', painting.id]" class="surface-1">
-            <img [path]="painting.image" asset="fallback_painting"/>
-            <h3>{{ painting.title }}</h3>
-          </a>
-        </ng-container>
-      </div>
-    </article>
+    <ng-container *ngIf="paintings$ | async as paintings">
+      <article *ngIf="paintings.length">
+        <header>
+          <h2>{{ t('painting.title') }}</h2>
+        </header>
+        <div class="card-list">
+          <ng-container *ngFor="let painting of paintings">
+            <a matRipple [routerLink]="['../painting', painting.id]" class="surface-1">
+              <img [path]="painting.image" asset="fallback_painting"/>
+              <h3>{{ painting.title }}</h3>
+            </a>
+          </ng-container>
+        </div>
+      </article>
+    </ng-container>
   </section>
 </ng-container>

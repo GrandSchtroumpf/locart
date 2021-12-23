@@ -13,8 +13,8 @@ export class SelectionComponent {
 
   constructor(private auth: AuthService, private router: Router) {}
 
-  async select(type: Profile['type']) {
-    await this.auth.update({ type });
+  select(type: Profile['type']) {
+    this.auth.update({ type });
     const route = type === 'seller' ? '/workshop' : '/search';
     this.router.navigate([route]);
   }

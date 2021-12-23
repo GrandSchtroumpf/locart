@@ -1,6 +1,5 @@
 {
   "title": "Mon Profil",
-  "become-seller": "Louer mes oeuvres",
   "name": {
     "label": "Nom",
     "placeholder": "GrandSchtroumpf"
@@ -13,5 +12,6 @@
   "save": "Enregistrer",
   "snackbar": {
     "success": "Votre profil est à jour 🥸"
-  }
+  },
+  "become-seller": "Louer mes oeuvres"
 }

@@ -15,6 +15,9 @@ import { WorkshopGuard } from './guard';
       path: 'home',
       loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
     }, {
+      path: 'type',
+      loadChildren: () => import('./type/type.module').then(m => m.TypeModule)
+    }, {
       path: 'painting/:paintingId',
       loadChildren: () => import('./painting/painting.module').then(m => m.PaintingModule)
     }])

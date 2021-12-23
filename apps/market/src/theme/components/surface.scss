@@ -13,8 +13,6 @@
   $background: generator.get-color($theme, 'foreground', 'text');
   a.surface-1, button.surface-1 {
     @include mat.elevation(2);
-    @include mat.elevation-transition();
-    transition: background-color 280ms ease;
     &:hover {
       @include mat.elevation(6);
       background-color: set-alpha($background, 0.08);
