@@ -24,25 +24,25 @@
     </ng-container>
   </ng-container>
 
-  <section>
-    <button class="add" type="button" (click)="fileInput.click()">
-      <mat-icon>add</mat-icon>
-      <input #fileInput hidden (change)="openCropper($event)" type="file" [accept]="types" />
-    </button>
+  <ul>
+    <li class="add">
+      <button type="button" (click)="fileInput.click()">
+        <mat-icon>add</mat-icon>
+        <input #fileInput hidden (change)="openCropper($event)" type="file" [accept]="types" />
+      </button>
+    </li>
     <ng-container *ngFor="let file of form.value$ | async; let i = index">
-      <div class="img-container"  [ngClass]="{ selected: currentIndex === i }">
-        <button @fade type="button" *ngIf="currentIndex === i" (click)="uploader?.remove()">
+      <li class="img-container"  [ngClass]="{ selected: currentIndex === i }">
+        <button *ngIf="currentIndex === i" class="remove" @fade type="button" (click)="uploader?.remove()">
           <mat-icon>delete</mat-icon>
         </button>
-        <ng-container *ngIf="preview[i] else usePath">
-          <img [src]="preview[i]" (click)="select(i)"/>
-        </ng-container>
-        <ng-template #usePath>
-          <img [path]="file" asset="fallback_carousel.svg" (click)="select(i)"/>
-        </ng-template>
-      </div>
+        <button type="button" class="select-img"  (click)="select(i)">
+          <img *ngIf="preview[i] as src" [src]="src"/>
+          <img *ngIf="!preview[i]" [path]="file" asset="fallback_carousel.svg"/>
+        </button>
+      </li>
     </ng-container>
-  </section>
+  </ul>
 
   <ng-template #cropperDialog let-file>
     <article class="cropping">

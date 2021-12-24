@@ -4,12 +4,12 @@
 $height: 64px;
 
 :host {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  gap: space.$md;
+  grid-template-rows: 1fr auto;
 }
 
 .empty {
-  height: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,58 +21,73 @@ $height: 64px;
   outline-offset: calc(-1 * space.$sm);
 }
 
-section{
+ul {
   display: flex;
-  overflow:auto;
-  margin-top: space.$md;
-}
+  overflow-x: auto;
+  padding: 0;
+  margin: 0;
+  li {
+    flex-shrink: 0;
+    list-style: none;
+    &:not(:last-of-type) {
+      margin-right: space.$md;
+    }
+  }
 
-.img-container:not(:last-of-type), .add {
-  margin-right: space.$md;
+  li.add {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    button {
+      min-width: $height;
+      width: $height;
+      height: $height;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px dashed var(--divider);
+      border-radius: space.$xs;
+      background-color: var(--surface);
+    }
+  }
+
+  li.img-container {
+    position: relative;
+    button.remove {
+      position: absolute;
+      top: 1px;
+      right: 1px;
+      border-radius: space.$xs;
+      border: 1px solid var(--divider);
+      mat-icon {
+        width: space.$md;
+        height: space.$md;
+        font-size: space.$md;
+      }
+    }
+    button.select-img {
+      height: $height;
+      border-radius: space.$xs;
+      overflow: hidden;
+      border: none;
+      padding: 0;
+    }
+    img {
+      height: 100%;
+    }
+  
+    &.selected button.select-img {
+      border: solid 1px var(--accent);
+      @include mat.elevation(2);
+    }
+  }
 }
 
 button {
   cursor: pointer;
 }
 
-.img-container {
-  position: relative;
-  button {
-    position: absolute;
-    top: 1px;
-    right: 1px;
-    border-radius: space.$xs;
-    border: 1px solid var(--divider);
-    mat-icon {
-      width: space.$md;
-      height: space.$md;
-      font-size: space.$md;
-    }
-  }
-  img {
-    height: $height;
-    border-radius: space.$xs;
-    cursor: pointer;
-    box-sizing: border-box;
-  }
 
-  &.selected img {
-    border: solid 1px var(--accent);
-    @include mat.elevation(2);
-  }
-}
-
-button.add{
-  min-width: $height;
-  width: $height;
-  height: $height;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px dashed var(--divider);
-  border-radius: space.$xs;
-  background-color: var(--surface);
-}
 
 img-upload {
   width: 100%;
