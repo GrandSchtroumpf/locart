@@ -2,7 +2,7 @@
   "painting": {
     "list": {
       "size": {
-        "label": "Taille"
+        "label": "Format"
       },
       "type": {
         "label": "Type"
@@ -21,7 +21,7 @@
     "view": {
       "back": "Retour à la recherche",
       "rent": {
-        "title": "Sélectionner vos dates de locations:",
+        "title": "Sélectionnez vos dates de locations:",
         "label": "Durée de location",
         "from": "Début de location",
         "to": "Fin de location",
