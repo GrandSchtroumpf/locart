@@ -5,7 +5,7 @@
 npm ci
 ```
 
-build cloud functions for the first time (required for firebase emulators)
+Build cloud functions for the first time (required for firebase emulators)
 ```
 npx nx build functions
 ```
