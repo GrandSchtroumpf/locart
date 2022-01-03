@@ -1,5 +1,6 @@
 {
   "file": "Ajouter une image",
+  "picture": "Image",
   "cancel": "Annuler",
   "save": "Valider",
   "crop": "Modifier",
@@ -8,6 +9,6 @@
   "list" : {
     "selection": "Cliquez sur + pour ajouter une photo, ou sur une existante pour la modifier.",
     "empty": "Cliquez sur le + pour ajouter une photo.",
-    "add": "Ajouter"
+    "add": "Ajouter une photo"
   }
 }

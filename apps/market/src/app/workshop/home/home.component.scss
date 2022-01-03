@@ -13,6 +13,9 @@ header.main {
   color: var(--background);
   min-height: 300px;
   box-sizing: border-box;
+  h1{
+    color: black;
+  }
 }
 
 section {
@@ -30,6 +33,7 @@ article {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
   }
 
   .card-list {

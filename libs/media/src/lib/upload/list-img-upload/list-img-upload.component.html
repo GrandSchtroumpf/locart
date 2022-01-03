@@ -2,7 +2,6 @@
 
   <article class="empty" *ngIf="currentIndex < 0">
     <p *ngIf="form.value?.length" class="mat-caption">{{ t("list.selection") }}</p>
-    <p *ngIf="!form.value?.length" class="mat-caption">{{ t("list.empty") }}</p>
     <button mat-flat-button type="button" (click)="fileInput.click()">
       <span>{{ t("list.add") }}</span>
       <mat-icon>add</mat-icon>
