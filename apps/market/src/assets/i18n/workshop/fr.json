@@ -21,7 +21,7 @@
       "required": "Nous avons besoin d'une estimation ."
     },
     "size": {
-      "label": "Taille"
+      "label": "Format"
     },
     "style": {
       "label": "Style"
