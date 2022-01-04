@@ -13,6 +13,8 @@
   --primary: #{map.get($primary, 'default')};
   --on-primary: #{map.get($primary, 'default-contrast')};
 
+  --secondary-text: #{map.get($foreground, 'secondary-text')};
+
   --accent: #{map.get($accent, 'default')};
   --on-accent: #{map.get($accent, 'default-contrast')};
 
