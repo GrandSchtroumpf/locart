@@ -53,6 +53,7 @@ ul {
 
   li.img-container {
     position: relative;
+    overflow-y: hidden;
     button.remove {
       position: absolute;
       top: 1px;
