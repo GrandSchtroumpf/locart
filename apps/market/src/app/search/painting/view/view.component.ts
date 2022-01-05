@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, TemplateRef, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PaintingService } from '@locart/painting';
 import { Painting } from '@locart/model';
 import { DurationForm, filterDates, RentService } from '@locart/rent';
@@ -18,9 +18,9 @@ import { map } from 'rxjs/operators';
 })
 export class PaintingViewComponent {
   @ViewChild('success') success!: TemplateRef<unknown>;
-  id = this.routes.snapshot.paramMap.get('paintingId');
+  id = this.route.snapshot.paramMap.get('paintingId');
   painting$ = this.service.valueChanges(this.id);
-  
+
   form = new DurationForm();
 
   filters$ = this.rentService.valueChanges([
@@ -35,20 +35,25 @@ export class PaintingViewComponent {
     private auth: AuthService,
     private service: PaintingService,
     private rentService: RentService,
-    private routes: ActivatedRoute,
+    private route: ActivatedRoute,
     private snackbar: MatSnackBar,
-  ) {}
+    private router: Router
+  ) { }
 
   async rent(painting: Painting) {
     const email = this.auth.user?.email;
+    const range = this.form.value;
+    if (this.form.invalid) return this.form.markAsTouched(); // stocking and reseting form value prior to calling the service prevents the datepick to display text in red
+    if (this.form.valid) this.form.reset();
     if (!email) return alert('Vous devez être connecté');
     await this.rentService.add({
       email,
-      duration: this.form.value,
+      duration: range,
       type: 'painting',
       workId: painting.id,
     });
     this.snackbar.openFromTemplate(this.success, { duration: 3000 });
+    this.router.navigate(['..'], { relativeTo: this.route })
   }
 
 }

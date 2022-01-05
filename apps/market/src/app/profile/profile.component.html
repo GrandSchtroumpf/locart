@@ -1,21 +1,23 @@
 <ng-container *transloco="let t; read: 'profile'">
   <mat-toolbar>
-    <a mat-icon-button routerLink="/" class="back" >
+    <a mat-icon-button routerLink="/" class="back">
       <mat-icon>arrow_back</mat-icon>
     </a>
     <h1>{{ t('title') }}</h1>
   </mat-toolbar>
 
   <form [formGroup]="form" (ngSubmit)="save()">
-    <mat-form-field>
-      <mat-label>{{ t('name.label') }}</mat-label>
-      <input matInput type="text" formControlName="name" [placeholder]="t('name.placeholder')">
-    </mat-form-field>
-    
-    <mat-form-field>
-      <mat-label>{{ t('tel.label') }}</mat-label>
-      <input matInput type="tel" formControlName="name" [placeholder]="t('tel.placeholder')">
-    </mat-form-field>
+    <div class="column">
+      <mat-form-field>
+        <mat-label>{{ t('name.label') }}</mat-label>
+        <input matInput type="text" formControlName="name" [placeholder]="t('name.placeholder')">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>{{ t('tel.label') }}</mat-label>
+        <input matInput type="tel" formControlName="tel" [placeholder]="t('tel.placeholder')">
+      </mat-form-field>
+    </div>
 
     <img-upload formControlName="avatar" path="avatar" field="avatar"></img-upload>
 

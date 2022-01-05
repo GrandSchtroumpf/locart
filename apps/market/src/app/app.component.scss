@@ -33,7 +33,7 @@ aside {
   }
   header a {
     display: grid;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: repeat(2, 1fr);
     grid-template-columns: 40px 1fr;
     gap: space.$xs space.$sm;
     padding: space.$sm space.$md;

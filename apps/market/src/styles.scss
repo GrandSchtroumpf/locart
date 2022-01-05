@@ -6,6 +6,7 @@
 @use './theme/components/list';
 @use './theme/components/dialog';
 @use './theme/components/surface';
+@use './theme/components/mat-form-field';
 
 
 @include mat.core();
@@ -30,6 +31,7 @@
     @include list.theme($theme);
     @include dialog.theme($theme);
     @include surface.theme($theme);
+    @include mat-form-field.theme($theme);
   }
 
   :root {

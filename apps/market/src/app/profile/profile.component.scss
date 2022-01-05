@@ -14,6 +14,11 @@ form {
   grid-template-columns: minmax(300px, 50%) auto;
 }
 
+.column{
+  display: grid;
+  gap: space.$md;
+}
+
 img-upload {
   padding: space.$md;
   border-radius: space.$sm;
