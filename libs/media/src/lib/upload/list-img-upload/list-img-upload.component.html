@@ -25,7 +25,7 @@
 
   <ul>
     <li class="add">
-      <button class="elevation" type="button" (click)="fileInput.click()">
+      <button type="button" (click)="fileInput.click()">
         <mat-icon>add</mat-icon>
         <input #fileInput hidden (change)="openCropper($event)" type="file" [accept]="types" />
       </button>
