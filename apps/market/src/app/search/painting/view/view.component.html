@@ -23,7 +23,7 @@
     </header>
 
     <section>
-      <img class="main" [path]="painting.image" asset="fallback_painting"/>
+      <img class="main" [path]="painting.image" asset="fallback_painting" />
       <article>
         <h2>{{ painting.title }}</h2>
         <static-tags scope="painting" [value]="painting" [keys]="['style', 'size', 'type']"></static-tags>
@@ -36,5 +36,7 @@
 
     <ng-template #success>{{ t('success') }}</ng-template>
   </ng-container>
+
+  <button (click)="test()">ALED</button>
 
 </ng-container>

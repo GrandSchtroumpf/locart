@@ -53,7 +53,18 @@ export class PaintingViewComponent {
       workId: painting.id,
     });
     this.snackbar.openFromTemplate(this.success, { duration: 3000 });
-    this.router.navigate(['..'], { relativeTo: this.route })
+    this.router.navigate(['..'], { relativeTo: this.route });
+  }
+
+  async test() {
+    let start = new Date
+    let end = new Date
+    const date = new Date
+    const a = await this.rentService.load('kWgyuzrZTj93ueoW53XB').then(m => {
+      start = m!.duration.from;
+      end = m!.duration.to;
+    })
+    if ( date.getTime() > start.getTime() || date.getTime() < end.getTime() ) console.log('not included')
   }
 
 }
