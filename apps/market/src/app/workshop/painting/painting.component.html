@@ -3,7 +3,8 @@
     <a mat-icon-button routerLink="../.." class="back">
       <mat-icon>arrow_back</mat-icon>
     </a>
-    <h1>{{ t('mainTitle') }}</h1>
+    <h1 *ngIf="title">{{title}}</h1>
+    <h1 *ngIf="!title">{{ t('mainTitle') }}</h1>
     <button *ngIf="!isCreateForm" mat-icon-button (click)="remove()">
       <mat-icon>delete</mat-icon>
     </button>
@@ -16,7 +17,7 @@
 
     <mat-form-field class="row">
       <mat-label>{{ t('title.label') }}</mat-label>
-      <input matInput type="text" formControlName="title" required/>
+      <input matInput type="text" formControlName="title" required />
       <mat-error *ngIf="form.hasError('required', 'title')">{{ t('title.required') }}</mat-error>
     </mat-form-field>
 
@@ -27,7 +28,7 @@
 
     <mat-form-field>
       <mat-label>{{ t('price.label') }}</mat-label>
-      <input matInput type="number" step="10" formControlName="price" required/>
+      <input matInput type="number" step="10" formControlName="price" required />
       <mat-icon matSuffix>euro</mat-icon>
       <mat-hint>{{ t('price.hint') }}</mat-hint>
       <mat-error *ngIf="form.hasError('required', 'price')">{{ t('price.required') }}</mat-error>
