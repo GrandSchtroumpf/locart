@@ -10,14 +10,13 @@ import { map, tap } from 'rxjs/operators';
 import { ValidatorFn } from '@angular/forms';
 
 function inDuration({ from, to }: Duration, time: Date): boolean {
-  if (from < time && to > time) return true;
-  if (from > time && to < time) return true;
-  return false;
+  return (from < time && to > time);
 }
 
 function rentValidator(rents: Rent[]): ValidatorFn {
   return (control) => {
-    const { from, to } = control.value as Duration;
+    const { from } = control.parent!.value as Duration; // value 'to' is not forwarded to the parent until validator returns
+    const to = control.value as Date;
     if (!from || !to) return null;
     const coverRent = rents.find(rent => {
       if (inDuration({ from, to }, rent.duration.from)) return true;
@@ -46,7 +45,7 @@ export class PaintingViewComponent {
     orderBy('duration.to', 'asc'),
     startAt(new Date())
   ]).pipe(
-    tap(rents => this.form.addValidators(rentValidator(rents))),
+    tap(rents => this.form.get('to')!.addValidators(rentValidator(rents))),
     map(filterDates)
   )
 

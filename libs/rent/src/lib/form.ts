@@ -9,7 +9,7 @@ export class DurationForm extends FormEntity<Duration> {
     super({
       from: new FormControl(),
       to: new FormControl(),
-    }, { updateOn: 'blur' })
+    })
   }
 }
 
