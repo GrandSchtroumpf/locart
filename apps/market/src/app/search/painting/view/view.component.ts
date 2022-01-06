@@ -64,7 +64,11 @@ export class PaintingViewComponent {
       start = m!.duration.from;
       end = m!.duration.to;
     })
-    if ( date.getTime() > start.getTime() || date.getTime() < end.getTime() ) console.log('not included')
+    if ( date.getTime() > start.getTime() && date.getTime() < end.getTime() ) {
+      console.log('included')
+    } else {
+      console.log('not included')
+    }
   }
 
 }
