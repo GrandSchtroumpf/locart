@@ -17,6 +17,7 @@
           <mat-date-range-picker #picker></mat-date-range-picker>
           <mat-error *ngIf="form.hasError('matStartDateInvalid', 'from')">{{ t('rent.invalid') }}</mat-error>
           <mat-error *ngIf="form.hasError('matEndDateInvalid', 'to')">{{ t('rent.invalid') }}</mat-error>
+          <mat-hint *ngIf="form.hasError('coverRent')">{{ t('rent.invalid') }}</mat-hint>
         </mat-form-field>
         <button mat-flat-button color="primary" type="submit">{{ t('rent.submit') }}</button>
       </form>
@@ -36,7 +37,5 @@
 
     <ng-template #success>{{ t('success') }}</ng-template>
   </ng-container>
-
-  <button (click)="test()">ALED</button>
 
 </ng-container>
