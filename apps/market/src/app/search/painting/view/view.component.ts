@@ -1,14 +1,32 @@
 import { Component, ChangeDetectionStrategy, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PaintingService } from '@locart/painting';
-import { Painting } from '@locart/model';
+import { Painting, Rent, Duration } from '@locart/model';
 import { DurationForm, filterDates, RentService } from '@locart/rent';
 import { AuthService } from '@locart/auth';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { orderBy, startAt, where } from 'firebase/firestore';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
+import { ValidatorFn } from '@angular/forms';
 
+function inDuration({ from, to }: Duration, time: Date): boolean {
+  if (from < time && to > time) return true;
+  if (from > time && to < time) return true;
+  return false;
+}
 
+function rentValidator(rents: Rent[]): ValidatorFn {
+  return (control) => {
+    const { from, to } = control.value as Duration;
+    if (!from || !to) return null;
+    const coverRent = rents.find(rent => {
+      if (inDuration({ from, to }, rent.duration.from)) return true;
+      if (inDuration({ from, to }, rent.duration.to)) return true;
+      return false;
+    })
+    return coverRent ? { coverRent } : null;
+  }
+}
 
 @Component({
   selector: 'la-painting-view',
@@ -28,6 +46,7 @@ export class PaintingViewComponent {
     orderBy('duration.to', 'asc'),
     startAt(new Date())
   ]).pipe(
+    tap(rents => this.form.addValidators(rentValidator(rents))),
     map(filterDates)
   )
 
@@ -53,7 +72,7 @@ export class PaintingViewComponent {
       workId: painting.id,
     });
     this.snackbar.openFromTemplate(this.success, { duration: 3000 });
-    this.router.navigate(['..'], { relativeTo: this.route })
+    this.router.navigate(['..'], { relativeTo: this.route });
   }
 
 }
