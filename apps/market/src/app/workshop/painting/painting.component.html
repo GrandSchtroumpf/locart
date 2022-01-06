@@ -3,8 +3,7 @@
     <a mat-icon-button routerLink="../.." class="back">
       <mat-icon>arrow_back</mat-icon>
     </a>
-    <h1 *ngIf="title">{{title}}</h1>
-    <h1 *ngIf="!title">{{ t('mainTitle') }}</h1>
+    <h1>{{ title || t('mainTitle') }}</h1>
     <button *ngIf="!isCreateForm" mat-icon-button (click)="remove()">
       <mat-icon>delete</mat-icon>
     </button>

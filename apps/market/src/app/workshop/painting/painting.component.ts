@@ -70,7 +70,7 @@ export class PaintingComponent implements OnInit, FormComponent {
     if (this.isCreateForm) return;
     this.current = await this.service.load(this.id);
     this.form.reset(this.current);
-    this.title = this.form.value.title
+    this.title = this.current?.title
   }
 
   reset() {
