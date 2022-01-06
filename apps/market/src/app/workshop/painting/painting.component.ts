@@ -36,29 +36,31 @@ class FormPainting extends FormEntity<Painting> {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaintingComponent implements OnInit, FormComponent {
-  private id = this.routes.snapshot.paramMap.get('paintingId')!;
+  private id = this.route.snapshot.paramMap.get('paintingId')!;
   private uid = this.auth.user!.uid;
   private current?: Painting;
-  
+
   form = new FormPainting();
   readonly sizes = paintingSizes;
   readonly styles = paintingStyles;
   readonly types = paintingTypes;
-  
+
+  title?: string
+
   @ViewChild('success') success!: TemplateRef<unknown>;
   @ViewChild('removed') removed!: TemplateRef<unknown>;
-  
+
   trackByIndex = trackByIndex;
-  
+
   constructor(
-    private routes: ActivatedRoute,
+    private route: ActivatedRoute,
     private router: Router,
     private auth: AuthService,
     private service: PaintingService,
     private mediaService: MediaService,
     private snackbar: MatSnackBar,
     public dialog: MatDialog,
-  ) {}
+  ) { }
 
   get isCreateForm() {
     return this.id === 'create';
@@ -68,11 +70,12 @@ export class PaintingComponent implements OnInit, FormComponent {
     if (this.isCreateForm) return;
     this.current = await this.service.load(this.id);
     this.form.reset(this.current);
+    this.title = this.current?.title
   }
 
   reset() {
     (this.form.untouched)
-      ? this.router.navigate(['../..'], { relativeTo: this.routes })
+      ? this.router.navigate(['../..'], { relativeTo: this.route })
       : this.form.reset(this.current);
   }
 
@@ -87,7 +90,7 @@ export class PaintingComponent implements OnInit, FormComponent {
     }
     this.form.markAsPristine();
     this.snackbar.openFromTemplate(this.success, { duration: 3000 });
-    this.router.navigate(['../..'], { relativeTo: this.routes });
+    this.router.navigate(['../..'], { relativeTo: this.route });
   }
 
   async remove() {
@@ -95,6 +98,6 @@ export class PaintingComponent implements OnInit, FormComponent {
     await this.service.remove(this.id);
     this.form.markAsPristine();
     this.snackbar.openFromTemplate(this.removed, { duration: 3000 });
-    this.router.navigate(['../..'], { relativeTo: this.routes });
+    this.router.navigate(['../..'], { relativeTo: this.route });
   }
 }
