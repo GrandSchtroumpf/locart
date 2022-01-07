@@ -26,10 +26,18 @@
     </header>
 
     <section>
-      <img class="main" [path]="painting.image" asset="fallback_painting"/>
+      <img class="main" [path]="painting.image" asset="fallback_painting" />
       <article>
         <h2>{{ painting.title }}</h2>
-        <static-tags scope="painting" [value]="painting" [keys]="['style', 'size', 'type']"></static-tags>
+        <static-tag-list>
+          <static-tag scope="painting" key="size" [value]="painting.size"></static-tag>
+          <ng-container *ngFor="let style of painting.style">
+            <static-tag scope="painting" key="style" [value]="style"></static-tag>
+          </ng-container>
+          <ng-container *ngFor="let type of painting.type">
+            <static-tag scope="painting" key="type" [value]="type"></static-tag>
+          </ng-container>
+        </static-tag-list>
         <p *ngIf="painting.description">{{ painting.description }}</p>
         <div class="img-grid">
           <img *ngFor="let img of painting.carousel" [path]="img" asset="fallback_carousel" />
