@@ -14,7 +14,7 @@
         <div class="card-list">
           <ng-container *ngFor="let painting of paintings">
             <a matRipple [routerLink]="['../painting', painting.id]" class="surface-1">
-              <img [path]="painting.image" asset="fallback_painting"/>
+              <img [path]="painting.image" asset="fallback_painting.jpg"/>
               <h3>{{ painting.title }}</h3>
             </a>
           </ng-container>

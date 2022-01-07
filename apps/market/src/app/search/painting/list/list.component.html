@@ -29,7 +29,7 @@
     <section class="list" *ngIf="paintings.length else empty">
       <ng-container *ngFor="let painting of paintings; trackBy: trackById">
         <a class="surface-1 card" matRipple [routerLink]="painting.id">
-          <img [path]="painting.image" asset="fallback_painting.png" />
+          <img [path]="painting.image" asset="fallback_painting.jpg.jpg" />
           <h3>{{ painting.title }}</h3>
         </a>
       </ng-container>

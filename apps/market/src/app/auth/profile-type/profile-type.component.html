@@ -1,11 +1,11 @@
 <ng-container *transloco="let t; read: 'auth.profile-type'">
   <h1 class="mat-display-1">{{ t('title') }}</h1>
   <button matRipple class="surface-1" (click)="select('buyer')">
-    <img asset="buyer">
-    <p class="mat-body-strong">{{ t('buyer') }}</p>
+    <img asset="fallback_painting.jpg">
+    <h2 class="mat-body-strong">{{ t('buyer') }}</h2>
   </button>
   <button matRipple class="surface-1" (click)="select('seller')">
-    <img asset="seller">
-    <p class="mat-body-strong">{{ t('seller') }}</p>
+    <img asset="fallback_painting.jpg">
+    <h2 class="mat-body-strong">{{ t('seller') }}</h2>
   </button>
 </ng-container>
