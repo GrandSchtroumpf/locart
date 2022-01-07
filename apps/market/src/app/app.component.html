@@ -4,7 +4,7 @@
       <ng-container *transloco="let t; read: 'sidenav'">
         <header>
           <a routerLink="profile">
-            <img [path]="profile.avatar" asset="fallback_avatar" width="40" height="40"/>
+            <img [path]="profile.avatar" asset="fallback_avatar" width="40" height="40" />
             <p>{{ profile.name ?? t('profile') }}</p>
             <p class="mat-caption">{{ profile.email }}</p>
           </a>
@@ -14,29 +14,29 @@
             <mat-icon mat-list-icon>home</mat-icon>
             <p matLine>{{ t('home') }}</p>
           </a>
-          <a mat-list-item routerLink="/search" routerLinkActive="active">
-            <mat-icon mat-list-icon>search</mat-icon>
-            <p matLine>{{ t('search') }}</p>  
-          </a>
           <ng-container *ngIf="profile.type as type">
             <mat-divider></mat-divider>
             <ng-container [ngSwitch]="type">
               <ng-container *ngSwitchCase="'buyer'">
+                <a mat-list-item routerLink="/search" routerLinkActive="active">
+                  <mat-icon mat-list-icon>search</mat-icon>
+                  <p matLine>{{ t('search') }}</p>
+                </a>
                 <a mat-list-item routerLink="/rent" routerLinkActive="active">
                   <mat-icon mat-list-icon>storefront</mat-icon>
-                  <p matLine>{{ t('rent') }}</p>  
+                  <p matLine>{{ t('rent') }}</p>
                 </a>
               </ng-container>
-              
+
               <ng-container *ngSwitchCase="'seller'">
                 <a mat-list-item routerLink="/workshop" routerLinkActive="active">
                   <mat-icon mat-list-icon>palette</mat-icon>
-                  <p matLine>{{ t('workshop') }}</p>  
+                  <p matLine>{{ t('workshop') }}</p>
                 </a>
               </ng-container>
             </ng-container>
           </ng-container>
-          
+
         </mat-nav-list>
         <footer>
           <button (click)="signout()" class="mat-body-2">
@@ -47,7 +47,7 @@
       </ng-container>
     </aside>
   </mat-sidenav>
-  
+
   <mat-sidenav-content>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
