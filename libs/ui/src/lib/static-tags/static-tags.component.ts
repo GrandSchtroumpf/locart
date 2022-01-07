@@ -15,7 +15,6 @@ export class StaticTagListComonent {
 @Component({
   selector: 'static-tag',
   template: `<ng-container *transloco="let t; read: 'static'">{{ t(path) }}</ng-container>`,
-  // styles: ['./static-tags.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [{
     provide: TRANSLOCO_SCOPE,
