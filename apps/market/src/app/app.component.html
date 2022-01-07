@@ -14,16 +14,14 @@
             <mat-icon mat-list-icon>home</mat-icon>
             <p matLine>{{ t('home') }}</p>
           </a>
-          <ng-container *ngIf="profile.type == 'buyer'">
-            <a mat-list-item routerLink="/search" routerLinkActive="active">
-              <mat-icon mat-list-icon>search</mat-icon>
-              <p matLine>{{ t('search') }}</p>
-            </a>
-          </ng-container>
           <ng-container *ngIf="profile.type as type">
             <mat-divider></mat-divider>
             <ng-container [ngSwitch]="type">
               <ng-container *ngSwitchCase="'buyer'">
+                <a mat-list-item routerLink="/search" routerLinkActive="active">
+                  <mat-icon mat-list-icon>search</mat-icon>
+                  <p matLine>{{ t('search') }}</p>
+                </a>
                 <a mat-list-item routerLink="/rent" routerLinkActive="active">
                   <mat-icon mat-list-icon>storefront</mat-icon>
                   <p matLine>{{ t('rent') }}</p>
