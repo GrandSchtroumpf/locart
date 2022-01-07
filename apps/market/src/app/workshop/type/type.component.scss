@@ -2,11 +2,11 @@
 
 :host {
   box-sizing: border-box;
-  height: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: space.$lg;
   padding: space.$lg;
+  justify-items: center;
 }
 
 h1 {
@@ -15,16 +15,15 @@ h1 {
 }
 
 a {
+  text-align: center;
+  width: 300px;
   color: inherit;
   text-decoration: none;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   img {
+    width: 100%;
     aspect-ratio: 1;
-    width: 50%;
-    max-width: 300px;
     margin-bottom: space.$md;
   }
 }
