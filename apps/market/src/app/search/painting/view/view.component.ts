@@ -8,6 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { orderBy, startAt, where } from 'firebase/firestore';
 import { map, tap } from 'rxjs/operators';
 import { ValidatorFn } from '@angular/forms';
+import { addWeeks } from 'date-fns'
 
 function inDuration({ from, to }: Duration, time: Date): boolean {
   return (from < time && to > time);
@@ -37,6 +38,7 @@ export class PaintingViewComponent {
   @ViewChild('success') success!: TemplateRef<unknown>;
   id = this.route.snapshot.paramMap.get('paintingId');
   painting$ = this.service.valueChanges(this.id);
+  startDate = addWeeks(new Date(), 1);
 
   form = new DurationForm();
 
