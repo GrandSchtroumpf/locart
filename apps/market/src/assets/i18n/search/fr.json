@@ -27,7 +27,7 @@
         "to": "Fin de location",
         "invalid": "Les dates ne sont pas valides",
         "submit": "Louer cette oeuvre",
-        "unavailable": "Les dates sélectionnées ne sont pas disponibles"
+        "unavailable": "Les dates sont indisponibles"
       },
       "success": "Votre location est prise en compte ╰(*°▽°*)╯"
     },
