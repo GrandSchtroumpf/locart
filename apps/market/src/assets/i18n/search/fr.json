@@ -26,7 +26,8 @@
         "from": "Début de location",
         "to": "Fin de location",
         "invalid": "Les dates ne sont pas valides",
-        "submit": "Louer cette oeuvre"
+        "submit": "Louer cette oeuvre",
+        "unavailable": "Les dates sont indisponibles"
       },
       "success": "Votre location est prise en compte ╰(*°▽°*)╯"
     },
