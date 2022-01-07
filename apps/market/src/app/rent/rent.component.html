@@ -7,7 +7,7 @@
     <article *ngIf="paintings$ | async as paintings">
       <ng-container *ngFor="let painting of paintings">
         <a *ngIf="painting.work as work" class="surface-1 card" matRipple [routerLink]="painting.id">
-          <img [path]="work.image" asset="fallback_painting" />
+          <img [path]="work.image" asset="fallback_painting.jpg" />
           <h3>{{ work.title }}</h3>
           <p class="mat-caption" *ngIf="painting.duration as duration">
             {{ duration.from | date }} - {{ duration.to | date }}
