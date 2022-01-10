@@ -77,6 +77,7 @@ export class PaintingComponent implements OnInit, FormComponent {
     (this.form.untouched)
       ? this.router.navigate(['../..'], { relativeTo: this.route })
       : this.form.reset(this.current);
+    this.mediaService.reset();
   }
 
   async save() {

@@ -6,7 +6,7 @@ $height: 64px;
 :host {
   display: grid;
   gap: space.$md;
-  grid-template-rows: 1fr auto;
+  grid-template-rows: 1fr minmax($height, auto);
 }
 
 .empty {
@@ -26,7 +26,7 @@ ul {
   overflow-x: auto;
   padding: 0;
   margin: 0;
-  align-items: center;
+  height: 100%;
   li {
     flex-shrink: 0;
     list-style: none;
@@ -37,7 +37,6 @@ ul {
 
   li.add {
     position: sticky;
-    align-self: stretch;
     left: 0;
     z-index: 1;
     button {
@@ -55,12 +54,16 @@ ul {
 
   li.img-container {
     position: relative;
+    border-radius: space.$xs;
+
     button.remove {
       position: absolute;
-      top: 1px;
-      right: 1px;
-      border-radius: space.$xs;
-      border: 1px solid var(--divider);
+      top: 0;
+      right: 0;
+      border-top-right-radius: space.$xs;
+      border-bottom-left-radius: space.$xs;
+      border: none;
+      background-color: var(--surface);
       mat-icon {
         width: space.$md;
         height: space.$md;
@@ -68,18 +71,20 @@ ul {
       }
     }
     button.select-img {
+      display: block;
       height: $height;
-      border-radius: space.$xs;
-      overflow: hidden;
       border: none;
       padding: 0;
+      background-color: transparent;
     }
     img {
+      display: block;
       height: 100%;
+      border-radius: space.$xs;
     }
   
-    &.selected button.select-img {
-      border: solid 1px var(--accent);
+    &.selected {
+      // border: solid 1px var(--accent);
       @include mat.elevation(2);
     }
   }
@@ -93,7 +98,7 @@ button {
 
 img-upload {
   width: 100%;
-  height: 200px;
+  // height: 200px;
   min-height: 200px; // We need min-height on smartphone for some reason
 }
 
@@ -116,6 +121,3 @@ img-upload {
   }
 }
 
-::-webkit-scrollbar {
-  height: space.$sm;
-}

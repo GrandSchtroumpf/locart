@@ -74,7 +74,7 @@
         <ng-container *ngIf="img.path">
           <image-cropper #cropper
             [autoCrop]="false"
-            [imageFile]="$any(img.path | original | async)"
+            [imageFile]="$any(img.path | getBlob | async)"
             [maintainAspectRatio]="true"
             [aspectRatio]="ratio"
             [roundCropper]="ratio === 1"

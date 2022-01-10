@@ -11,7 +11,7 @@ import {
 import { Image, srcsetWidths } from '@locart/model';
 import { BehaviorSubject, combineLatest, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import env from '@env';
+import { getImgUrl } from '../utils';
 
 const extensions = ['webp', 'svg', 'jpeg', 'jpg', 'png'];
 
@@ -22,18 +22,6 @@ function hasExtension(assetId: string) {
 
 
 
-function getImgUrl(img: Image, w?: number) {
-  if (!img.path) return img.path;
-  const prefix = `http://localhost:9199/v0/b/${env.firebase.options.storageBucket}/o`;
-  const queryParams = 'alt=media';
-
-  const [dirPath, extension] = img.path.split('.');
-  const path = w
-    ? `${dirPath}/${w}w_${img.rect}.${extension}`.split('/').join('%2F')
-    : `${dirPath}/${img.rect}.${extension}`.split('/').join('%2F');
-
-  return `${prefix}/${path}?${queryParams}`
-}
 
 function getImgStorage(img: Image | undefined | null) {
   if (!img) return null;

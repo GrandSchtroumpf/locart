@@ -1,0 +1,9 @@
+@use 'generator';
+
+@mixin theme($theme) {
+  $text: generator.get-color($theme, 'foreground', 'text');
+
+  .mat-icon {
+    color: $text;
+  }
+}

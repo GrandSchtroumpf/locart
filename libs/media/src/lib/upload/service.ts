@@ -48,6 +48,10 @@ export class MediaService extends FireStorage {
     this.queue[path] = uploadFile;
   }
 
+  reset() {
+    this.queue = {};
+  }
+
   setMeta<T extends FileMetadata>(path: string, meta: Partial<T>) {
     if (this.queue[path]) {
       this.queue[path]!.meta = { ...this.queue[path]!.meta, ...meta };

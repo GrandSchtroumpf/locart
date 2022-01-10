@@ -2,7 +2,9 @@
 @use "space";
 
 :host {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: space.$md;
   box-sizing: border-box;
   border-radius: space.$sm;

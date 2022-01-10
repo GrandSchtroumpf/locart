@@ -2,6 +2,7 @@ import { Image, ImageMetadata } from "@locart/model";
 import { UploadTask, UploadTaskSnapshot } from "firebase/storage";
 import type { CropperPosition } from "ngx-image-cropper";
 import { debounceTime, map, Observable } from "rxjs";
+import env from '@env';
 
 export function imgUpdate(path: string, meta: ImageMetadata): Image {
   return { path, rect: meta.rect, title: meta.title };
@@ -22,6 +23,19 @@ export function imgixRect({ x1, x2, y1, y2 }: CropperPosition) {
   return `${x1},${y1},${x2 - x1},${y2 - y1}`;
 }
 
+
+export function getImgUrl(img: Image, w?: number) {
+  if (!img.path) return img.path;
+  const prefix = `http://localhost:9199/v0/b/${env.firebase.options.storageBucket}/o`;
+  const queryParams = 'alt=media';
+
+  const [dirPath, extension] = img.path.split('.');
+  const path = w
+    ? `${dirPath}/${w}w_${img.rect}.${extension}`.split('/').join('%2F')
+    : `${dirPath}/${img.rect}.${extension}`.split('/').join('%2F');
+
+  return `${prefix}/${path}?${queryParams}`
+}
 
 export function fromTask(
   task: UploadTask,

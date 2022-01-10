@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { GetOriginalPipe } from './original.pipe';
+import { GetBlobPipe } from './pipe';
 import { ImgUploaderComponent } from './img-upload/img-upload.component';
 import {
   UploadWidgetComponent,
@@ -32,7 +32,7 @@ import { ImgModule } from '../img';
   declarations: [
     ImgUploaderComponent,
     UploadWidgetComponent,
-    GetOriginalPipe,
+    GetBlobPipe,
     TaskProgressPipe,
     TaskHasStatePipe,
     ListImgUploadComponent,

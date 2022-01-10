@@ -27,7 +27,6 @@ export class ProfileComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private mediaService: MediaService,
-    private cdr: ChangeDetectorRef,
     private snackbar: MatSnackBar,
     public dialog: MatDialog,
     private router: Router
@@ -40,6 +39,7 @@ export class ProfileComponent implements OnInit {
 
   reset() {
     this.form.reset(this.current);
+    this.mediaService.reset();
   }
 
   async save() {
