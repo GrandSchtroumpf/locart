@@ -27,6 +27,7 @@ ul {
   padding: 0;
   margin: 0;
   height: 100%;
+  padding-bottom: space.$xs;
   li {
     flex-shrink: 0;
     list-style: none;
@@ -40,8 +41,8 @@ ul {
     left: 0;
     z-index: 1;
     button {
-      min-width: $height;
-      height: 100%;
+      width: $height;
+      height: $height;
       aspect-ratio: 1;
       display: flex;
       align-items: center;
