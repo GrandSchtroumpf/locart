@@ -1,4 +1,4 @@
-<mat-sidenav-container [ngClass]="{ connected: profile$ | async }">
+<!-- <mat-sidenav-container [ngClass]="{ connected: profile$ | async }">
   <mat-sidenav [opened]="!!(profile$ | async)" [ngClass]="{ small: small }" mode="side">
     <aside *ngIf="profile$ | async as profile">
       <ng-container *transloco="let t; read: 'sidenav'">
@@ -14,6 +14,9 @@
             <mat-icon mat-list-icon>home</mat-icon>
             <p matLine>{{ t('home') }}</p>
           </a>
+
+
+
           <ng-container *ngIf="profile.type as type">
             <mat-divider></mat-divider>
             <ng-container [ngSwitch]="type">
@@ -22,6 +25,8 @@
                   <mat-icon mat-list-icon>search</mat-icon>
                   <p matLine>{{ t('search') }}</p>
                 </a>
+
+
                 <a mat-list-item routerLink="/rent" routerLinkActive="active">
                   <mat-icon mat-list-icon>storefront</mat-icon>
                   <p matLine>{{ t('rent') }}</p>
@@ -46,9 +51,71 @@
         </footer>
       </ng-container>
     </aside>
-  </mat-sidenav>
+  </mat-sidenav>  
 
   <mat-sidenav-content>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
+ -->
+
+
+<nav [ngClass]="{ connected: profile$ | async }">
+  <ng-container *ngIf="profile$ | async as profile">
+    <ng-container *transloco="let t; read: 'sidenav'">
+
+      <ul>
+        <li class="profile">
+          <a routerLink="profile">
+            <img [path]="profile.avatar" asset="fallback_avatar"/>
+            <p>{{ profile.name ?? t('profile') }}</p>
+            <p class="mat-caption">{{ profile.email }}</p>
+          </a>
+        </li>
+
+        <li>
+          <a routerLink="/home" routerLinkActive="active">
+            <mat-icon mat-list-icon>home</mat-icon>
+            <p>{{ t('home') }}</p>
+          </a>
+        </li>
+
+        <ng-container *ngIf="profile.type as type">
+          <ng-container [ngSwitch]="type">
+            <ng-container *ngSwitchCase="'buyer'">
+              <li>
+                <a routerLink="/search" routerLinkActive="active">
+                  <mat-icon mat-list-icon>search</mat-icon>
+                  <p>{{ t('search') }}</p>
+                </a>
+              </li>
+
+              <li>
+                <a routerLink="/rent" routerLinkActive="active">
+                  <mat-icon mat-list-icon>storefront</mat-icon>
+                  <p>{{ t('rent') }}</p>
+                </a>
+              </li>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'seller'">
+              <li>
+                <a routerLink="/workshop" routerLinkActive="active">
+                  <mat-icon mat-list-icon>palette</mat-icon>
+                  <p>{{ t('workshop') }}</p>
+                </a>
+              </li>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+
+      </ul>
+
+
+    </ng-container>
+  </ng-container>
+</nav>
+
+<main>
+  <router-outlet></router-outlet>
+</main>

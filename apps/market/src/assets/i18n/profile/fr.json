@@ -1,5 +1,6 @@
 {
   "title": "Mon Profil",
+  "signout": "Se déconnecter",
   "name": {
     "label": "Nom",
     "placeholder": "GrandSchtroumpf"
