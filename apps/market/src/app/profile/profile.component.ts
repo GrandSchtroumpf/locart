@@ -6,6 +6,7 @@ import { AuthService } from '@locart/auth';
 import { MediaService } from '@locart/media/upload';
 import { Profile } from '@locart/model';
 import { firstValueFrom } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'la-profile',
@@ -28,7 +29,8 @@ export class ProfileComponent implements OnInit {
     private mediaService: MediaService,
     private cdr: ChangeDetectorRef,
     private snackbar: MatSnackBar,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router
   ) { }
 
   async ngOnInit() {
@@ -47,5 +49,10 @@ export class ProfileComponent implements OnInit {
     this.current = await firstValueFrom(this.auth.profile$);
     this.form.markAsPristine();
     this.snackbar.openFromTemplate(this.success, { duration: 3000 });
+  }
+
+  async signout() {
+    await this.auth.signout();
+    this.router.navigate(['/']);
   }
 }
