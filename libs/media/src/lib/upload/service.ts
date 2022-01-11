@@ -93,8 +93,7 @@ export class MediaService extends FireStorage {
 
     this.attachWidget();
     // Prevent Promise.all to fails
-    const tasks = this.tasks.map((task) => task.catch((err) => console.error(err)));
-    await Promise.all(tasks);
+    await Promise.allSettled(this.tasks);
     // TODO: throw if all failed
     this.detachWidget();
     this.queue = {};
