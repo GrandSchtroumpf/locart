@@ -28,6 +28,10 @@ $breakpoints: (
   sm-md: (
     begin: 600px,
     end: 1279.9px
+  ),
+  sm-lg: (
+    begin: 600,
+    end: 1919.9px
   )
 ) !default;
 
