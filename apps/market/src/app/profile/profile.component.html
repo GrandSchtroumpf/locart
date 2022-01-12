@@ -11,6 +11,9 @@
   </mat-toolbar>
 
   <form [formGroup]="form" (ngSubmit)="save()">
+
+    <img-upload formControlName="avatar" path="avatar" field="avatar"></img-upload>
+    
     <div class="column">
       <mat-form-field>
         <mat-label>{{ t('name.label') }}</mat-label>
@@ -23,7 +26,6 @@
       </mat-form-field>
     </div>
 
-    <img-upload formControlName="avatar" path="avatar" field="avatar"></img-upload>
 
     <footer>
       <button type="button" mat-button (click)="reset()">{{ t('cancel') }}</button>
