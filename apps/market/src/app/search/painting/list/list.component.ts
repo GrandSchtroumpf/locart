@@ -1,12 +1,14 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
+import { FormArray, FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Painting, PaintingSize, paintingSizes, PaintingStyle, paintingStyles, PaintingType, paintingTypes, Rent, Duration } from '@locart/model';
 import { PaintingService } from '@locart/painting';
 import { DurationForm, RentService } from '@locart/rent';
 import { FormEntity, trackById } from '@locart/utils';
 import { orderBy, startAt, where } from 'firebase/firestore';
-import { combineLatest } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { combineLatest, Observable } from 'rxjs';
+import { map, startWith, shareReplay } from 'rxjs/operators';
+
 
 interface PaintingSearch {
   size: PaintingSize[];
@@ -82,13 +84,19 @@ export class PaintingListComponent {
   readonly sizes = paintingSizes;
   readonly styles = paintingStyles;
   readonly types = paintingTypes;
-  
+
   trackById = trackById;
   dateFilter = (date: Date | null) => date ? date > new Date() : false;
-  
+
   constructor(
     private service: PaintingService,
-    private rentService: RentService
+    private rentService: RentService,
+    private dialog: MatDialog,
   ) { }
+
+
+  openFilters(filters: TemplateRef<unknown>) {
+    this.dialog.open(filters, { panelClass: 'custom-dialog-container' });
+ }
 
 }
