@@ -40,13 +40,9 @@ header{
   background-color: var(--surface);
   margin: space.$sm space.$md;
   border-radius: space.$xs;
+  justify-content: flex-end;
+  padding: space.$sm space.$md;
 }
-
-.filters-button{
-  margin: space.$sm space.$md;
-  margin-left: auto;
-}
-
 
 
 @include layout.bp("gt-md"){
@@ -68,7 +64,7 @@ header{
 
 @include layout.bp("gt-sm"){
   
-  .filters-button{
+  header{
     display: none;
   }
 

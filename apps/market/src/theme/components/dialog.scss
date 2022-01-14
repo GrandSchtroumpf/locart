@@ -2,5 +2,6 @@
 @mixin theme($theme) {
   .mat-dialog-container {
     height: unset; // Required for the cropper
+    background-color: var(--surface);
   }
 }

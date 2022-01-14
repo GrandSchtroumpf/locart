@@ -42,10 +42,6 @@
   }
 }
 
-.custom-dialog-container .mat-dialog-container{
-  background-color: var(--surface);
-}
-
 
 @media (prefers-color-scheme: light) {
   $theme: generator.light(rgb(243, 243, 247));
