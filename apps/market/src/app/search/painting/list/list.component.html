@@ -1,5 +1,13 @@
 <ng-container *transloco="let t; read: 'search.painting.list'">
-  <form [formGroup]="form">
+
+  <header>
+    <button class="filters-button" mat-flat-button (click)="openFilters(filters)">
+      <span>Filters</span>
+      <mat-icon>filter_list</mat-icon>
+    </button>
+  </header>
+
+  <form class="main-filters" [formGroup]="form">
     <static-select name="size" scope="painting.size" [static]="$any(sizes)" multiple>
       <mat-label>{{ t('size.label') }}</mat-label>
     </static-select>
@@ -47,4 +55,39 @@
       <p>{{ t('empty') }}</p>
     </section>
   </ng-template>
+
+  <ng-template #filters>
+    <mat-dialog-content>
+      <h2 mat-dialog-title>Filters</h2>
+      <form [formGroup]="form">
+        <static-select name="size" scope="painting.size" [static]="$any(sizes)" multiple>
+          <mat-label>{{ t('size.label') }}</mat-label>
+        </static-select>
+
+        <static-select name="types" scope="painting.type" [static]="types" multiple>
+          <mat-label>{{ t('type.label') }}</mat-label>
+        </static-select>
+
+        <static-select name="styles" scope="painting.style" [static]="styles" multiple>
+          <mat-label>{{ t('style.label') }}</mat-label>
+        </static-select>
+
+        <mat-form-field>
+          <mat-label>{{ t('rent.label') }}</mat-label>
+          <mat-date-range-input formGroupName="duration" [rangePicker]="picker" [dateFilter]="dateFilter">
+            <input matStartDate formControlName="from" [placeholder]="t('rent.from')">
+            <input matEndDate formControlName="to" [placeholder]="t('rent.to')">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+          <mat-error *ngIf="form.hasError('matStartDateInvalid', 'duration.from')">{{ t('rent.invalid') }}</mat-error>
+          <mat-error *ngIf="form.hasError('matEndDateInvalid', 'duration.to')">{{ t('rent.invalid') }}</mat-error>
+        </mat-form-field>
+      </form>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Close</button>
+    </mat-dialog-actions>
+  </ng-template>
+
 </ng-container>
