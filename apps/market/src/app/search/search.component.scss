@@ -5,14 +5,6 @@
   display: block;
 }
 
-//Allow for title 'Painting ' to be centered accordingly with the filters button
-mat-toolbar{
-  display: flex;
-  .back{
-    flex: 0;
-  }
-}
-
 nav {
   margin: auto;
   ul {
